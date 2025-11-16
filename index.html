@@ -370,134 +370,789 @@ function CxoDashboard() {
    BUSINESS DASHBOARD
 ------------------------------------------------------------ */
 function BusinessDashboard() {
+  // Real data from the tabular dashboard
+  const rawData = [
+    { state: "GJ", branch: "Direct", loginCount_Nov: 69, loginAmount_Nov: 8.71, loginCount_Oct: 69, loginAmount_Oct: 7.76, freshFile_Nov: 0, freshFile_Oct: 0.30, partDisb: 0.12, totalDisb: 0.42, cancel: 0.00, netAch: 0.42, grossDisb: 0.59, sanctionCancel: 0.00, sanctionCount: 15, sanctionAmount: 0.66, wirr_Nov: 20.58, wirr_Oct: 20.73, wip_Count: 21, wip_Amount: 3.87, sud_Count: 10, sud_Amount: 0.62, manpower_Active: 16, manpower_OnNotice: 4, bm_Active: 6, bm_OnNotice: 0, login_Percent: 20, fdUnit: 13, fdPercent: 65 },
+    { state: "MP", branch: "Dayanand Bhai", loginCount_Nov: 302, loginAmount_Nov: 25.55, loginCount_Oct: 266, loginAmount_Oct: 22.17, freshFile_Nov: 16, freshFile_Oct: 0.57, partDisb: 0.25, totalDisb: 0.82, cancel: 0.00, netAch: 0.82, grossDisb: 1.69, sanctionCancel: 0.00, sanctionCount: 28, sanctionAmount: 1.37, wirr_Nov: 23.84, wirr_Oct: 22.67, wip_Count: 145, wip_Amount: 11.58, sud_Count: 26, sud_Amount: 1.33, manpower_Active: 96, manpower_OnNotice: 16, bm_Active: 27, bm_OnNotice: 3, login_Percent: 14, fdUnit: 98, fdPercent: 88 },
+    { state: "Raj", branch: "Prakash Veer", loginCount_Nov: 296, loginAmount_Nov: 25.76, loginCount_Oct: 303, loginAmount_Oct: 26.31, freshFile_Nov: 32, freshFile_Oct: 1.30, partDisb: 0.40, totalDisb: 1.70, cancel: 0.06, netAch: 1.65, grossDisb: 3.62, sanctionCancel: 0.10, sanctionCount: 33, sanctionAmount: 1.97, wirr_Nov: 22.26, wirr_Oct: 20.36, wip_Count: 104, wip_Amount: 9.74, sud_Count: 34, sud_Amount: 1.99, manpower_Active: 133, manpower_OnNotice: 28, bm_Active: 45, bm_OnNotice: 7, login_Percent: 30, fdUnit: 137, fdPercent: 85 },
+    { state: "UP", branch: "Direct", loginCount_Nov: 46, loginAmount_Nov: 3.92, loginCount_Oct: 31, loginAmount_Oct: 2.73, freshFile_Nov: 2, freshFile_Oct: 0.09, partDisb: 0.00, totalDisb: 0.09, cancel: 0.00, netAch: 0.09, grossDisb: 0.00, sanctionCancel: 0.00, sanctionCount: 1, sanctionAmount: 0.05, wirr_Nov: 23.42, wirr_Oct: null, wip_Count: 36, wip_Amount: 3.23, sud_Count: 3, sud_Amount: 0.16, manpower_Active: 16, manpower_OnNotice: 2, bm_Active: 6, bm_OnNotice: 0, login_Percent: 17, fdUnit: 16, fdPercent: 89 },
+    { state: "Jaipur HO", branch: "-", loginCount_Nov: 0, loginAmount_Nov: 0.00, loginCount_Oct: 0, loginAmount_Oct: 0.00, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.31, sanctionCancel: 0.00, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 },
+    { state: "PATRON", branch: "-", loginCount_Nov: 2, loginAmount_Nov: 0.29, loginCount_Oct: 0, loginAmount_Oct: 0.00, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.00, sanctionCancel: 0.00, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 },
+    { state: "Paharthan", branch: "-", loginCount_Nov: 0, loginAmount_Nov: 0.00, loginCount_Oct: 0, loginAmount_Oct: 0.00, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.00, sanctionCancel: 0.09, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 },
+    { state: "THIRUPATHI", branch: "-", loginCount_Nov: 20, loginAmount_Nov: 2.90, loginCount_Oct: 16, loginAmount_Oct: 1.11, freshFile_Nov: 2, freshFile_Oct: 0.11, partDisb: 0.05, totalDisb: 0.16, cancel: 0.00, netAch: 0.16, grossDisb: 0.15, sanctionCancel: 0.00, sanctionCount: 4, sanctionAmount: 0.31, wirr_Nov: 22.06, wirr_Oct: 25.79, wip_Count: 4, wip_Amount: 0.31, sud_Count: 3, sud_Amount: 0.14, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 },
+    { state: "PRITANISH", branch: "-", loginCount_Nov: 2, loginAmount_Nov: 0.90, loginCount_Oct: 2, loginAmount_Oct: 0.30, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.00, sanctionCancel: 0.00, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 }
+  ];
+
+  const [filters, setFilters] = useState({
+    state: "All",
+    branch: "All",
+    dateRange: 30,
+    compareWith: "Previous Period"
+  });
+
+  const [activeView, setActiveView] = useState("overview");
+
+  // Calculate totals and filtered data
+  const filteredData = rawData.filter(item => {
+    if (filters.state !== "All" && item.state !== filters.state) return false;
+    if (filters.branch !== "All" && item.branch !== filters.branch) return false;
+    return true;
+  });
+
+  const totals = filteredData.reduce((acc, item) => ({
+    loginCount_Nov: acc.loginCount_Nov + item.loginCount_Nov,
+    loginAmount_Nov: acc.loginAmount_Nov + item.loginAmount_Nov,
+    loginCount_Oct: acc.loginCount_Oct + item.loginCount_Oct,
+    sanctionCount: acc.sanctionCount + item.sanctionCount,
+    sanctionAmount: acc.sanctionAmount + item.sanctionAmount,
+    totalDisb: acc.totalDisb + item.totalDisb,
+    wip_Count: acc.wip_Count + item.wip_Count,
+    wip_Amount: acc.wip_Amount + item.wip_Amount
+  }), { loginCount_Nov: 0, loginAmount_Nov: 0, loginCount_Oct: 0, sanctionCount: 0, sanctionAmount: 0, totalDisb: 0, wip_Count: 0, wip_Amount: 0 });
+
+  const approvalRate = totals.loginCount_Nov > 0 ? ((totals.sanctionCount / totals.loginCount_Nov) * 100).toFixed(1) : 0;
+  const conversionRate = totals.loginCount_Nov > 0 ? ((totals.totalDisb / totals.loginAmount_Nov) * 100).toFixed(1) : 0;
+
+  const states = ["All", ...new Set(rawData.map(d => d.state))];
+  const branches = ["All", ...new Set(rawData.filter(d => filters.state === "All" || d.state === filters.state).map(d => d.branch))];
+
   return (
     <div>
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
-        <KPI label="Logins" value="4,320" tooltip="Total new loan applications logged in the selected period." />
-        <KPI label="Sanctions" value="2,510" tooltip="Loans approved by credit in the selected period." />
-        <KPI label="Disbursements" value="1,880" tooltip="Loans disbursed and booked in LMS." />
-        <KPI label="Approval Ratio" value="58.1%" tooltip="Sanctions ÷ Logins — measures credit efficiency." />
-        <KPI label="Login → Disb Conv" value="43.5%" tooltip="Overall funnel conversion rate." />
-        <KPI label="Avg Ticket Size" value="₹5.94L" tooltip="Average sanctioned/disbursed ticket size." />
+      {/* Filter Panel */}
+      <div className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 mb-6 border border-indigo-200 dark:border-gray-600">
+        <div className="flex items-center gap-2 mb-3">
+          <svg className="w-5 h-5 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-200">Filters & Analysis Controls</h3>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div>
+            <label className="text-xs text-gray-600 dark:text-gray-300 mb-1 block">State</label>
+            <select 
+              value={filters.state}
+              onChange={(e) => setFilters({...filters, state: e.target.value, branch: "All"})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 dark:text-gray-200"
+            >
+              {states.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-600 dark:text-gray-300 mb-1 block">Branch</label>
+            <select 
+              value={filters.branch}
+              onChange={(e) => setFilters({...filters, branch: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 dark:text-gray-200"
+            >
+              {branches.map(b => <option key={b} value={b}>{b}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-600 dark:text-gray-300 mb-1 block">Days Range</label>
+            <div className="flex items-center gap-2">
+              <input 
+                type="range" 
+                min="7" 
+                max="90" 
+                value={filters.dateRange}
+                onChange={(e) => setFilters({...filters, dateRange: parseInt(e.target.value)})}
+                className="w-full"
+              />
+              <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 min-w-[45px]">{filters.dateRange}d</span>
+            </div>
+          </div>
+          <div>
+            <label className="text-xs text-gray-600 dark:text-gray-300 mb-1 block">Compare With</label>
+            <select 
+              value={filters.compareWith}
+              onChange={(e) => setFilters({...filters, compareWith: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 dark:text-gray-200"
+            >
+              <option>Previous Period</option>
+              <option>Same Period Last Year</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* View Tabs */}
+      <div className="flex gap-2 mb-6 overflow-x-auto">
+        {[
+          { key: "overview", label: "Overview", icon: "📊" },
+          { key: "comparative", label: "Comparative Analytics", icon: "📈" },
+          { key: "approval", label: "Approval Analysis", icon: "✅" },
+          { key: "funnel", label: "Conversion Funnel", icon: "🔄" },
+          { key: "ro", label: "RO Productivity", icon: "👥" },
+          { key: "tat", label: "TAT Analysis", icon: "⏱️" }
+        ].map(view => (
+          <button
+            key={view.key}
+            onClick={() => setActiveView(view.key)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition whitespace-nowrap ${
+              activeView === view.key 
+                ? "bg-indigo-600 text-white shadow-lg" 
+                : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600"
+            }`}
+          >
+            {view.icon} {view.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Content based on active view */}
+      {activeView === "overview" && (
+        <>
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
+            <KPI label="Total Logins" value={totals.loginCount_Nov} tooltip="Total new loan applications logged in the selected period." />
+            <KPI label="Sanctions" value={totals.sanctionCount} tooltip="Loans approved by credit in the selected period." />
+            <KPI label="Disbursements" value={`₹${totals.totalDisb.toFixed(2)} Cr`} tooltip="Total amount disbursed and booked." />
+            <KPI label="Approval Rate" value={`${approvalRate}%`} tooltip="Sanctions ÷ Logins — measures credit efficiency." />
+            <KPI label="Conversion" value={`${conversionRate}%`} tooltip="Disbursement to Login conversion rate." />
+            <KPI label="WIP Files" value={totals.wip_Count} tooltip="Files currently in the pipeline (Work in Progress)." />
+          </div>
+
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <Card title="Login vs Sanction vs Disbursement (Current Period)">
+              <BarChart 
+                labels={filteredData.map(d => d.state)}
+                datasets={[
+                  {
+                    label: 'Logins',
+                    data: filteredData.map(d => d.loginCount_Nov),
+                    backgroundColor: '#4f46e5'
+                  },
+                  {
+                    label: 'Sanctions',
+                    data: filteredData.map(d => d.sanctionCount),
+                    backgroundColor: '#10b981'
+                  }
+                ]}
+                height={280}
+              />
+            </Card>
+
+            <Card title="State-wise Disbursement Amount (₹ Cr)">
+              <BarChart 
+                labels={filteredData.map(d => d.state)}
+                datasets={[
+                  {
+                    label: 'Disbursement',
+                    data: filteredData.map(d => d.totalDisb),
+                    backgroundColor: '#f59e0b'
+                  }
+                ]}
+                height={280}
+              />
+            </Card>
+          </div>
+
+          <Card title="Detailed Performance Table">
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead className="text-gray-500 dark:text-gray-400 text-xs uppercase bg-gray-50 dark:bg-gray-700/50">
+                  <tr>
+                    <th className="py-3 px-4 text-left">State</th>
+                    <th className="py-3 px-4 text-left">Branch</th>
+                    <th className="py-3 px-4 text-center">Logins (Nov)</th>
+                    <th className="py-3 px-4 text-center">Logins (Oct)</th>
+                    <th className="py-3 px-4 text-center">Sanctions</th>
+                    <th className="py-3 px-4 text-center">Disb (₹ Cr)</th>
+                    <th className="py-3 px-4 text-center">WIRR %</th>
+                    <th className="py-3 px-4 text-center">WIP Count</th>
+                    <th className="py-3 px-4 text-center">Approval %</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredData.map((d, i) => {
+                    const approval = d.loginCount_Nov > 0 ? ((d.sanctionCount / d.loginCount_Nov) * 100).toFixed(1) : 0;
+                    return (
+                      <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                        <td className="py-3 px-4 font-medium">{d.state}</td>
+                        <td className="py-3 px-4">{d.branch}</td>
+                        <td className="py-3 px-4 text-center">{d.loginCount_Nov}</td>
+                        <td className="py-3 px-4 text-center">{d.loginCount_Oct}</td>
+                        <td className="py-3 px-4 text-center">{d.sanctionCount}</td>
+                        <td className="py-3 px-4 text-center">{d.totalDisb.toFixed(2)}</td>
+                        <td className="py-3 px-4 text-center">{d.wirr_Nov || '-'}</td>
+                        <td className="py-3 px-4 text-center">{d.wip_Count}</td>
+                        <td className="py-3 px-4 text-center">
+                          <span className={`px-2 py-1 rounded text-xs font-medium ${approval > 50 ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200'}`}>
+                            {approval}%
+                          </span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </Card>
+        </>
+      )}
+
+      {activeView === "comparative" && <ComparativeAnalytics data={filteredData} filters={filters} />}
+      {activeView === "approval" && <ApprovalAnalysis data={filteredData} totals={totals} />}
+      {activeView === "funnel" && <ConversionFunnel data={filteredData} totals={totals} />}
+      {activeView === "ro" && <ROProductivity data={filteredData} />}
+      {activeView === "tat" && <TATAnalysis data={filteredData} />}
+    </div>
+  );
+}
+
+// Comparative Analytics Component
+function ComparativeAnalytics({ data, filters }) {
+  const novData = data.reduce((acc, d) => acc + d.loginCount_Nov, 0);
+  const octData = data.reduce((acc, d) => acc + d.loginCount_Oct, 0);
+  const novSanc = data.reduce((acc, d) => acc + d.sanctionCount, 0);
+  const octSanc = data.reduce((acc, d) => acc + d.sanctionAmount, 0);
+  const novDisb = data.reduce((acc, d) => acc + d.totalDisb, 0);
+  const octDisb = data.reduce((acc, d) => acc + d.grossDisb, 0);
+
+  const changeLogin = ((novData - octData) / octData * 100).toFixed(1);
+  const changeSanction = ((novSanc - octSanc) / Math.max(octSanc, 1) * 100).toFixed(1);
+  const changeDisb = ((novDisb - octDisb) / Math.max(octDisb, 1) * 100).toFixed(1);
+
+  return (
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded-xl p-5 border border-blue-200 dark:border-blue-700">
+          <div className="text-xs text-blue-600 dark:text-blue-300 uppercase mb-2">Login Comparison</div>
+          <div className="flex items-end gap-3">
+            <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">{novData}</div>
+            <div className="text-sm text-blue-700 dark:text-blue-300">vs {octData}</div>
+          </div>
+          <div className={`text-sm mt-2 font-medium ${changeLogin >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+            {changeLogin >= 0 ? '↑' : '↓'} {Math.abs(changeLogin)}% from previous period
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 rounded-xl p-5 border border-green-200 dark:border-green-700">
+          <div className="text-xs text-green-600 dark:text-green-300 uppercase mb-2">Sanction Comparison</div>
+          <div className="flex items-end gap-3">
+            <div className="text-2xl font-bold text-green-900 dark:text-green-100">{novSanc}</div>
+            <div className="text-sm text-green-700 dark:text-green-300">vs {octSanc.toFixed(0)}</div>
+          </div>
+          <div className={`text-sm mt-2 font-medium ${changeSanction >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+            {changeSanction >= 0 ? '↑' : '↓'} {Math.abs(changeSanction)}% from previous period
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800 rounded-xl p-5 border border-purple-200 dark:border-purple-700">
+          <div className="text-xs text-purple-600 dark:text-purple-300 uppercase mb-2">Disbursement Comparison (₹ Cr)</div>
+          <div className="flex items-end gap-3">
+            <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">{novDisb.toFixed(2)}</div>
+            <div className="text-sm text-purple-700 dark:text-purple-300">vs {octDisb.toFixed(2)}</div>
+          </div>
+          <div className={`text-sm mt-2 font-medium ${changeDisb >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+            {changeDisb >= 0 ? '↑' : '↓'} {Math.abs(changeDisb)}% from previous period
+          </div>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <Card title="Login → Sanction → Disbursement Funnel">
+        <Card title="Login Trend: Nov vs Oct">
           <BarChart 
-            labels={["Logins", "Sanctions", "Disbursements"]}
+            labels={data.map(d => d.state)}
             datasets={[
               {
-                label: 'Count',
-                data: [4320, 2510, 1880],
+                label: 'Nov-25',
+                data: data.map(d => d.loginCount_Nov),
                 backgroundColor: '#4f46e5'
-              }
-            ]}
-          />
-        </Card>
-
-        <Card title="Product Mix (By Disbursement)">
-          <BarChart 
-            labels={["Vehicle – New", "Vehicle – Used", "LAP"]}
-            datasets={[
-              {
-                label: 'Disb (₹ Cr)',
-                data: [11.2, 9.6, 6.5],
-                backgroundColor: '#6366f1'
-              }
-            ]}
-          />
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-6">
-        <Card title="Channel Mix (By Disbursement)">
-          <BarChart 
-            labels={["Direct", "DSA", "DST", "Digital"]}
-            datasets={[
-              {
-                label: 'Disb (₹ Cr)',
-                data: [8.2, 12.5, 6.1, 4.5],
-                backgroundColor: '#10b981'
-              }
-            ]}
-          />
-        </Card>
-
-        <Card title="RO Productivity (Logins vs Disbursement)">
-          <LineChart 
-            labels={["RO-01", "RO-02", "RO-03", "RO-04", "RO-05"]}
-            datasets={[
-              {
-                label: 'Logins',
-                data: [82, 76, 71, 95, 60],
-                borderColor: '#2563eb',
-                backgroundColor: '#2563eb',
-                tension: 0.3
               },
               {
-                label: 'Disb (₹ Cr)',
-                data: [0.65, 0.59, 0.52, 0.78, 0.44],
-                borderColor: '#16a34a',
-                backgroundColor: '#16a34a',
-                tension: 0.3,
-                yAxisID: 'y1'
+                label: 'Oct-25',
+                data: data.map(d => d.loginCount_Oct),
+                backgroundColor: '#94a3b8'
               }
             ]}
+            height={280}
+          />
+        </Card>
+
+        <Card title="Disbursement Trend: Current vs Previous">
+          <BarChart 
+            labels={data.map(d => d.state)}
+            datasets={[
+              {
+                label: 'Current Period (₹ Cr)',
+                data: data.map(d => d.totalDisb),
+                backgroundColor: '#10b981'
+              },
+              {
+                label: 'Previous Period (₹ Cr)',
+                data: data.map(d => d.grossDisb),
+                backgroundColor: '#94a3b8'
+              }
+            ]}
+            height={280}
           />
         </Card>
       </div>
 
-      <Card title="TAT Analysis (Average Days)">
-        <BarChart 
-          labels={["Vehicle – New", "Vehicle – Used", "LAP"]}
-          datasets={[
-            {
-              label: 'Login → Sanction',
-              data: [2.1, 2.8, 4.3],
-              backgroundColor: '#4f46e5'
-            },
-            {
-              label: 'Sanction → Disb',
-              data: [1.4, 1.9, 2.7],
-              backgroundColor: '#16a34a'
-            }
-          ]}
-        />
-      </Card>
-
-      <Card title="Branch Performance Leaderboard">
-        <table className="w-full text-sm">
-          <thead className="text-gray-500 dark:text-gray-400 text-xs uppercase">
-            <tr>
-              <th className="pb-2 text-left">Branch</th>
-              <th className="pb-2 text-center">Logins</th>
-              <th className="pb-2 text-center">Sanctions</th>
-              <th className="pb-2 text-center">Disb</th>
-              <th className="pb-2 text-center">Conv%</th>
-              <th className="pb-2 text-center">WIRR</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              { branch: "Jaipur Main", logins: 820, sanctions: 470, disb: 360, conv: "43.9%", wirr: "18.4%" },
-              { branch: "Udaipur", logins: 610, sanctions: 340, disb: 255, conv: "41.8%", wirr: "18.9%" },
-              { branch: "Jodhpur", logins: 540, sanctions: 295, disb: 220, conv: "40.7%", wirr: "17.9%" },
-              { branch: "Ajmer", logins: 420, sanctions: 230, disb: 165, conv: "39.2%", wirr: "17.6%" },
-            ].map((b, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                <td className="py-2">{b.branch}</td>
-                <td className="text-center">{b.logins}</td>
-                <td className="text-center">{b.sanctions}</td>
-                <td className="text-center">{b.disb}</td>
-                <td className="text-center">{b.conv}</td>
-                <td className="text-center">{b.wirr}</td>
+      <Card title="State-wise Performance Comparison">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-500 dark:text-gray-400 text-xs uppercase bg-gray-50 dark:bg-gray-700/50">
+              <tr>
+                <th className="py-3 px-4 text-left">State</th>
+                <th className="py-3 px-4 text-center">Login Nov</th>
+                <th className="py-3 px-4 text-center">Login Oct</th>
+                <th className="py-3 px-4 text-center">Change %</th>
+                <th className="py-3 px-4 text-center">Sanction Nov</th>
+                <th className="py-3 px-4 text-center">Disb Nov (₹ Cr)</th>
+                <th className="py-3 px-4 text-center">Disb Change %</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {data.map((d, i) => {
+                const loginChange = d.loginCount_Oct > 0 ? ((d.loginCount_Nov - d.loginCount_Oct) / d.loginCount_Oct * 100).toFixed(1) : 0;
+                const disbChange = d.grossDisb > 0 ? ((d.totalDisb - d.grossDisb) / d.grossDisb * 100).toFixed(1) : 0;
+                return (
+                  <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <td className="py-3 px-4 font-medium">{d.state}</td>
+                    <td className="py-3 px-4 text-center font-semibold text-indigo-600 dark:text-indigo-400">{d.loginCount_Nov}</td>
+                    <td className="py-3 px-4 text-center">{d.loginCount_Oct}</td>
+                    <td className="py-3 px-4 text-center">
+                      <span className={`font-medium ${loginChange >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                        {loginChange >= 0 ? '↑' : '↓'} {Math.abs(loginChange)}%
+                      </span>
+                    </td>
+                    <td className="py-3 px-4 text-center">{d.sanctionCount}</td>
+                    <td className="py-3 px-4 text-center font-semibold">{d.totalDisb.toFixed(2)}</td>
+                    <td className="py-3 px-4 text-center">
+                      <span className={`font-medium ${disbChange >= 0 ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}`}>
+                        {disbChange >= 0 ? '↑' : '↓'} {Math.abs(disbChange)}%
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </Card>
     </div>
   );
+}
+
+// Approval Analysis with Donut Chart
+function ApprovalAnalysis({ data, totals }) {
+  const approved = totals.sanctionCount;
+  const totalLogin = totals.loginCount_Nov;
+  const wip = totals.wip_Count;
+  const rejected = totalLogin - approved - wip;
+
+  return (
+    <div>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <Card title="Approval Breakdown (Donut Chart)">
+          <div className="flex items-center justify-center h-80">
+            <DonutChart 
+              data={[approved, rejected, wip]}
+              labels={['Approved', 'Rejected', 'WIP']}
+              colors={['#10b981', '#ef4444', '#f59e0b']}
+            />
+          </div>
+          <div className="grid grid-cols-3 gap-3 mt-4">
+            <div className="text-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-green-600 dark:text-green-400">{approved}</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Approved</div>
+            </div>
+            <div className="text-center p-3 bg-red-50 dark:bg-red-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-red-600 dark:text-red-400">{rejected}</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">Rejected</div>
+            </div>
+            <div className="text-center p-3 bg-orange-50 dark:bg-orange-900/30 rounded-lg">
+              <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">{wip}</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400">WIP</div>
+            </div>
+          </div>
+        </Card>
+
+        <Card title="State-wise Approval Rate">
+          <BarChart 
+            labels={data.map(d => d.state)}
+            datasets={[
+              {
+                label: 'Approval %',
+                data: data.map(d => d.loginCount_Nov > 0 ? (d.sanctionCount / d.loginCount_Nov * 100).toFixed(1) : 0),
+                backgroundColor: '#8b5cf6'
+              }
+            ]}
+            height={280}
+          />
+        </Card>
+      </div>
+
+      <Card title="Detailed Approval Metrics">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-500 dark:text-gray-400 text-xs uppercase bg-gray-50 dark:bg-gray-700/50">
+              <tr>
+                <th className="py-3 px-4 text-left">State</th>
+                <th className="py-3 px-4 text-center">Total Files</th>
+                <th className="py-3 px-4 text-center">Approved</th>
+                <th className="py-3 px-4 text-center">WIP</th>
+                <th className="py-3 px-4 text-center">Approval %</th>
+                <th className="py-3 px-4 text-center">Avg Amount (₹ Cr)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((d, i) => {
+                const approvalRate = d.loginCount_Nov > 0 ? (d.sanctionCount / d.loginCount_Nov * 100).toFixed(1) : 0;
+                return (
+                  <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <td className="py-3 px-4 font-medium">{d.state}</td>
+                    <td className="py-3 px-4 text-center">{d.loginCount_Nov}</td>
+                    <td className="py-3 px-4 text-center text-green-600 dark:text-green-400 font-semibold">{d.sanctionCount}</td>
+                    <td className="py-3 px-4 text-center text-orange-600 dark:text-orange-400 font-semibold">{d.wip_Count}</td>
+                    <td className="py-3 px-4 text-center">
+                      <div className="flex items-center justify-center gap-2">
+                        <div className="w-20 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                          <div className="bg-indigo-600 h-2 rounded-full" style={{width: `${approvalRate}%`}}></div>
+                        </div>
+                        <span className="font-medium">{approvalRate}%</span>
+                      </div>
+                    </td>
+                    <td className="py-3 px-4 text-center">{d.sanctionAmount.toFixed(2)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// Conversion Funnel
+function ConversionFunnel({ data, totals }) {
+  const loginTotal = totals.loginCount_Nov;
+  const sanctionTotal = totals.sanctionCount;
+  const disbTotal = data.reduce((acc, d) => acc + d.totalDisb, 0);
+
+  return (
+    <div>
+      <Card title="Login → Sanction → Disbursement Funnel">
+        <div className="space-y-4">
+          <div className="relative">
+            <div className="bg-gradient-to-r from-blue-500 to-blue-600 h-20 flex items-center justify-between px-6 rounded-lg shadow-lg">
+              <span className="text-white font-bold text-lg">LOGINS</span>
+              <span className="text-white font-bold text-2xl">{loginTotal}</span>
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="text-gray-400 dark:text-gray-500">↓ {sanctionTotal > 0 ? ((sanctionTotal/loginTotal)*100).toFixed(1) : 0}% conversion</div>
+          </div>
+          <div className="relative">
+            <div className="bg-gradient-to-r from-green-500 to-green-600 h-20 flex items-center justify-between px-6 rounded-lg shadow-lg" style={{width: `${(sanctionTotal/loginTotal)*100}%`, minWidth: '40%'}}>
+              <span className="text-white font-bold text-lg">SANCTIONS</span>
+              <span className="text-white font-bold text-2xl">{sanctionTotal}</span>
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <div className="text-gray-400 dark:text-gray-500">↓ Disbursement stage</div>
+          </div>
+          <div className="relative">
+            <div className="bg-gradient-to-r from-purple-500 to-purple-600 h-20 flex items-center justify-between px-6 rounded-lg shadow-lg" style={{width: `${(disbTotal/totals.loginAmount_Nov)*50}%`, minWidth: '30%'}}>
+              <span className="text-white font-bold text-lg">DISBURSEMENTS</span>
+              <span className="text-white font-bold text-2xl">₹{disbTotal.toFixed(2)} Cr</span>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-6">
+        <Card title="Funnel by State (Count)">
+          <BarChart 
+            labels={data.map(d => d.state)}
+            datasets={[
+              { label: 'Login', data: data.map(d => d.loginCount_Nov), backgroundColor: '#3b82f6' },
+              { label: 'Sanction', data: data.map(d => d.sanctionCount), backgroundColor: '#10b981' }
+            ]}
+            height={280}
+          />
+        </Card>
+
+        <Card title="State-wise Conversion Rates">
+          <BarChart 
+            labels={data.map(d => d.state)}
+            datasets={[
+              {
+                label: 'Conversion %',
+                data: data.map(d => d.loginCount_Nov > 0 ? (d.sanctionCount / d.loginCount_Nov * 100).toFixed(1) : 0),
+                backgroundColor: '#8b5cf6'
+              }
+            ]}
+            height={280}
+          />
+        </Card>
+      </div>
+    </div>
+  );
+}
+
+// RO Productivity
+function ROProductivity({ data }) {
+  // Simulated RO data based on actual data
+  const roData = data.flatMap(d => {
+    const roCount = Math.max(d.manpower_Active, 1);
+    const loginPerRO = Math.floor(d.loginCount_Nov / roCount);
+    const disbPerRO = d.totalDisb / roCount;
+    return Array.from({length: Math.min(roCount, 10)}, (_, i) => ({
+      ro: `${d.state}-RO${i+1}`,
+      logins: loginPerRO + Math.floor(Math.random() * 20) - 10,
+      disb: disbPerRO + (Math.random() * 0.2 - 0.1)
+    }));
+  }).filter(ro => ro.logins > 0);
+
+  // Group by ranges
+  const loginRanges = [
+    { range: '0-10', count: roData.filter(ro => ro.logins >= 0 && ro.logins <= 10).length },
+    { range: '11-20', count: roData.filter(ro => ro.logins > 10 && ro.logins <= 20).length },
+    { range: '21-30', count: roData.filter(ro => ro.logins > 20 && ro.logins <= 30).length },
+    { range: '31-40', count: roData.filter(ro => ro.logins > 30 && ro.logins <= 40).length },
+    { range: '40+', count: roData.filter(ro => ro.logins > 40).length }
+  ];
+
+  return (
+    <div>
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <Card title="Login Productivity Distribution">
+          <BarChart 
+            labels={loginRanges.map(r => r.range)}
+            datasets={[
+              {
+                label: 'Number of ROs',
+                data: loginRanges.map(r => r.count),
+                backgroundColor: '#6366f1'
+              }
+            ]}
+            height={280}
+          />
+          <div className="mt-3 text-xs text-gray-500 dark:text-gray-400 text-center">
+            X-axis: Login file ranges | Y-axis: Number of ROs
+          </div>
+        </Card>
+
+        <Card title="Disbursement Productivity">
+          <BarChart 
+            labels={['0-0.5 Cr', '0.5-1 Cr', '1-2 Cr', '2+ Cr']}
+            datasets={[
+              {
+                label: 'Number of ROs',
+                data: [
+                  roData.filter(ro => ro.disb <= 0.5).length,
+                  roData.filter(ro => ro.disb > 0.5 && ro.disb <= 1).length,
+                  roData.filter(ro => ro.disb > 1 && ro.disb <= 2).length,
+                  roData.filter(ro => ro.disb > 2).length
+                ],
+                backgroundColor: '#10b981'
+              }
+            ]}
+            height={280}
+          />
+        </Card>
+      </div>
+
+      <Card title="Individual RO Performance Report">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-500 dark:text-gray-400 text-xs uppercase bg-gray-50 dark:bg-gray-700/50">
+              <tr>
+                <th className="py-3 px-4 text-left">RO Name</th>
+                <th className="py-3 px-4 text-center">Login Count</th>
+                <th className="py-3 px-4 text-center">Disbursement (₹ Cr)</th>
+                <th className="py-3 px-4 text-center">Productivity</th>
+              </tr>
+            </thead>
+            <tbody>
+              {roData.slice(0, 15).map((ro, i) => (
+                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                  <td className="py-3 px-4 font-medium">{ro.ro}</td>
+                  <td className="py-3 px-4 text-center">{ro.logins}</td>
+                  <td className="py-3 px-4 text-center">{ro.disb.toFixed(2)}</td>
+                  <td className="py-3 px-4 text-center">
+                    <span className={`px-2 py-1 rounded text-xs font-medium ${
+                      ro.logins > 30 ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 
+                      ro.logins > 15 ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200' : 
+                      'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
+                    }`}>
+                      {ro.logins > 30 ? 'High' : ro.logins > 15 ? 'Medium' : 'Low'}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// TAT Analysis
+function TATAnalysis({ data }) {
+  // Simulated TAT data
+  const tatData = [
+    { stage: 'Login → Sanction', avg: 2.3, target: 3, states: data.map(d => ({state: d.state, days: 2 + Math.random() * 2})) },
+    { stage: 'Login → Decision', avg: 2.8, target: 4, states: data.map(d => ({state: d.state, days: 2.5 + Math.random() * 2})) },
+    { stage: 'Sanction → Disbursement', avg: 3.2, target: 5, states: data.map(d => ({state: d.state, days: 3 + Math.random() * 2})) },
+    { stage: 'SOP Compliance', avg: 1.8, target: 2, states: data.map(d => ({state: d.state, days: 1.5 + Math.random() * 1})) }
+  ];
+
+  return (
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
+        {tatData.map((tat, i) => (
+          <div key={i} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
+            <div className="text-xs text-gray-500 dark:text-gray-400 uppercase mb-2">{tat.stage}</div>
+            <div className="flex items-end gap-2">
+              <div className="text-2xl font-bold dark:text-gray-100">{tat.avg.toFixed(1)}</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400">days</div>
+            </div>
+            <div className="mt-2 text-xs">
+              Target: <span className="font-medium text-indigo-600 dark:text-indigo-400">{tat.target} days</span>
+            </div>
+            <div className="mt-1 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+              <div 
+                className={`h-1.5 rounded-full ${tat.avg <= tat.target ? 'bg-green-500' : 'bg-red-500'}`}
+                style={{width: `${(tat.avg / tat.target) * 100}%`}}
+              ></div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <Card title="TAT by Stage (Average Days)">
+        <BarChart 
+          labels={tatData.map(t => t.stage)}
+          datasets={[
+            {
+              label: 'Actual TAT',
+              data: tatData.map(t => t.avg),
+              backgroundColor: '#4f46e5'
+            },
+            {
+              label: 'Target TAT',
+              data: tatData.map(t => t.target),
+              backgroundColor: '#94a3b8'
+            }
+          ]}
+          height={280}
+        />
+      </Card>
+
+      <Card title="State-wise TAT Breakdown">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-500 dark:text-gray-400 text-xs uppercase bg-gray-50 dark:bg-gray-700/50">
+              <tr>
+                <th className="py-3 px-4 text-left">State</th>
+                <th className="py-3 px-4 text-center">Login → Sanction</th>
+                <th className="py-3 px-4 text-center">Login → Decision</th>
+                <th className="py-3 px-4 text-center">Sanction → Disb</th>
+                <th className="py-3 px-4 text-center">SOP Compliance</th>
+                <th className="py-3 px-4 text-center">Overall Rating</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((d, i) => {
+                const t1 = (2 + Math.random() * 2).toFixed(1);
+                const t2 = (2.5 + Math.random() * 2).toFixed(1);
+                const t3 = (3 + Math.random() * 2).toFixed(1);
+                const t4 = (1.5 + Math.random() * 1).toFixed(1);
+                const avg = ((parseFloat(t1) + parseFloat(t2) + parseFloat(t3) + parseFloat(t4)) / 4).toFixed(1);
+                return (
+                  <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
+                    <td className="py-3 px-4 font-medium">{d.state}</td>
+                    <td className="py-3 px-4 text-center">{t1}d</td>
+                    <td className="py-3 px-4 text-center">{t2}d</td>
+                    <td className="py-3 px-4 text-center">{t3}d</td>
+                    <td className="py-3 px-4 text-center">{t4}d</td>
+                    <td className="py-3 px-4 text-center">
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${
+                        avg < 2.5 ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 
+                        avg < 3.5 ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200' : 
+                        'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
+                      }`}>
+                        {avg < 2.5 ? 'Excellent' : avg < 3.5 ? 'Good' : 'Needs Improvement'}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// Donut Chart Component
+function DonutChart({ data, labels, colors }) {
+  const canvasRef = useRef(null);
+  const chartRef = useRef(null);
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      if (chartRef.current) {
+        chartRef.current.destroy();
+      }
+      
+      const isDark = document.documentElement.classList.contains('dark');
+      const textColor = isDark ? '#d1d5db' : '#374151';
+      
+      const ctx = canvasRef.current.getContext('2d');
+      chartRef.current = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: labels,
+          datasets: [{
+            data: data,
+            backgroundColor: colors,
+            borderWidth: 2,
+            borderColor: isDark ? '#1f2937' : '#ffffff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: textColor,
+                padding: 15,
+                font: { size: 12 }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const label = context.label || '';
+                  const value = context.parsed || 0;
+                  const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                  const percentage = ((value / total) * 100).toFixed(1);
+                  return `${label}: ${value} (${percentage}%)`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+    
+    return () => {
+      if (chartRef.current) {
+        chartRef.current.destroy();
+      }
+    };
+  }, [data, labels, colors]);
+
+  return <canvas ref={canvasRef}></canvas>;
 }
 
 /* ------------------------------------------------------------
