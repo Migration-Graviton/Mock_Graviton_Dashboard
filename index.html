@@ -463,7 +463,8 @@ function BusinessDashboard() {
   const [filters, setFilters] = useState({
     state: "All",
     branch: "All",
-    dateRange: 30,
+    startDate: "2025-10-01",
+    endDate: "2025-11-17",
     compareWith: "Previous Period"
   });
 
@@ -503,7 +504,7 @@ function BusinessDashboard() {
           </svg>
           <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Filters & Analysis Controls</h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
           <div>
             <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">State</label>
             <select 
@@ -525,18 +526,22 @@ function BusinessDashboard() {
             </select>
           </div>
           <div>
-            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Days Range</label>
-            <div className="flex items-center gap-2">
-              <input 
-                type="range" 
-                min="7" 
-                max="90" 
-                value={filters.dateRange}
-                onChange={(e) => setFilters({...filters, dateRange: parseInt(e.target.value)})}
-                className="w-full"
-              />
-              <span className="text-sm font-bold text-indigo-700 dark:text-indigo-300 min-w-[45px]">{filters.dateRange}d</span>
-            </div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Start Date</label>
+            <input 
+              type="date" 
+              value={filters.startDate}
+              onChange={(e) => setFilters({...filters, startDate: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            />
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">End Date</label>
+            <input 
+              type="date" 
+              value={filters.endDate}
+              onChange={(e) => setFilters({...filters, endDate: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            />
           </div>
           <div>
             <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Compare With</label>
@@ -548,6 +553,67 @@ function BusinessDashboard() {
               <option>Previous Period</option>
               <option>Same Period Last Year</option>
             </select>
+          </div>
+        </div>
+        
+        {/* Date Range Info & Quick Presets */}
+        <div className="mt-4 flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span className="font-semibold">Selected Period:</span>
+            <span className="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-2 py-1 rounded">
+              {new Date(filters.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} - {new Date(filters.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </span>
+            <span className="text-gray-500 dark:text-gray-400">
+              ({Math.ceil((new Date(filters.endDate) - new Date(filters.startDate)) / (1000 * 60 * 60 * 24))} days)
+            </span>
+          </div>
+          <div className="flex gap-2">
+            <button 
+              onClick={() => {
+                const today = new Date();
+                const last7Days = new Date(today);
+                last7Days.setDate(today.getDate() - 7);
+                setFilters({...filters, startDate: last7Days.toISOString().split('T')[0], endDate: today.toISOString().split('T')[0]});
+              }}
+              className="px-3 py-1 text-xs bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-600 transition"
+            >
+              Last 7 Days
+            </button>
+            <button 
+              onClick={() => {
+                const today = new Date();
+                const last30Days = new Date(today);
+                last30Days.setDate(today.getDate() - 30);
+                setFilters({...filters, startDate: last30Days.toISOString().split('T')[0], endDate: today.toISOString().split('T')[0]});
+              }}
+              className="px-3 py-1 text-xs bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-600 transition"
+            >
+              Last 30 Days
+            </button>
+            <button 
+              onClick={() => {
+                const today = new Date();
+                const last90Days = new Date(today);
+                last90Days.setDate(today.getDate() - 90);
+                setFilters({...filters, startDate: last90Days.toISOString().split('T')[0], endDate: today.toISOString().split('T')[0]});
+              }}
+              className="px-3 py-1 text-xs bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-600 transition"
+            >
+              Last 90 Days
+            </button>
+            <button 
+              onClick={() => {
+                const today = new Date();
+                const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+                setFilters({...filters, startDate: firstDay.toISOString().split('T')[0], endDate: today.toISOString().split('T')[0]});
+              }}
+              className="px-3 py-1 text-xs bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-600 transition"
+            >
+              This Month
+            </button>
           </div>
         </div>
       </div>
