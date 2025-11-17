@@ -462,7 +462,15 @@ function BusinessDashboard() {
 
   const [filters, setFilters] = useState({
     state: "All",
+    cluster: "All",
+    businessState: "All",
     branch: "All",
+    product: "All",
+    ticketSize: "All",
+    loanCategory: "All",
+    selectedDay: 17,
+    selectedMonth: "Nov-2025",
+    selectedMonths: ["Nov-2025"], // Support multi-month
     startDate: "2025-10-01",
     endDate: "2025-11-17",
     compareWith: "Previous Period"
@@ -492,7 +500,13 @@ function BusinessDashboard() {
   const conversionRate = totals.loginCount_Nov > 0 ? ((totals.totalDisb / totals.loginAmount_Nov) * 100).toFixed(1) : 0;
 
   const states = ["All", ...new Set(rawData.map(d => d.state))];
+  const clusters = ["All", "North", "South", "East", "West"];
+  const businessStates = ["All", "Active", "Inactive", "Pending"];
   const branches = ["All", ...new Set(rawData.filter(d => filters.state === "All" || d.state === filters.state).map(d => d.branch))];
+  const products = ["All", "Home Loan", "LAP", "Business Loan", "Personal Loan"];
+  const ticketSizes = ["All", "0-10 lakh", "10-20 lakh", "20-30 lakh", "30-40 lakh", "40-50 lakh", "50+ lakh"];
+  const loanCategories = ["All", "Salaried", "Self Employed", "Professional"];
+  const monthOptions = ["Nov-2025", "Oct-2025", "Sep-2025", "Aug-2025", "Jul-2025", "Jun-2025"];
 
   return (
     <div>
@@ -504,15 +518,37 @@ function BusinessDashboard() {
           </svg>
           <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Filters & Analysis Controls</h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        {/* First Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           <div>
             <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">State</label>
             <select 
               value={filters.state}
-              onChange={(e) => setFilters({...filters, state: e.target.value, branch: "All"})}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 dark:text-gray-200"
+              onChange={(e) => setFilters({...filters, state: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
             >
               {states.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Cluster</label>
+            <select 
+              value={filters.cluster}
+              onChange={(e) => setFilters({...filters, cluster: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {clusters.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Business State</label>
+            <select 
+              value={filters.businessState}
+              onChange={(e) => setFilters({...filters, businessState: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {businessStates.map(bs => <option key={bs} value={bs}>{bs}</option>)}
             </select>
           </div>
           <div>
@@ -525,23 +561,82 @@ function BusinessDashboard() {
               {branches.map(b => <option key={b} value={b}>{b}</option>)}
             </select>
           </div>
+        </div>
+
+        {/* Second Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           <div>
-            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Start Date</label>
-            <input 
-              type="date" 
-              value={filters.startDate}
-              onChange={(e) => setFilters({...filters, startDate: e.target.value})}
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Product</label>
+            <select 
+              value={filters.product}
+              onChange={(e) => setFilters({...filters, product: e.target.value})}
               className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
-            />
+            >
+              {products.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
           </div>
           <div>
-            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">End Date</label>
-            <input 
-              type="date" 
-              value={filters.endDate}
-              onChange={(e) => setFilters({...filters, endDate: e.target.value})}
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Ticket Size Band</label>
+            <select 
+              value={filters.ticketSize}
+              onChange={(e) => setFilters({...filters, ticketSize: e.target.value})}
               className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
-            />
+            >
+              {ticketSizes.map(ts => <option key={ts} value={ts}>{ts}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Loan Category</label>
+            <select 
+              value={filters.loanCategory}
+              onChange={(e) => setFilters({...filters, loanCategory: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {loanCategories.map(lc => <option key={lc} value={lc}>{lc}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Day of Month</label>
+            <div className="flex items-center gap-2">
+              <input 
+                type="range" 
+                min="1" 
+                max="31" 
+                value={filters.selectedDay}
+                onChange={(e) => setFilters({...filters, selectedDay: parseInt(e.target.value)})}
+                className="w-full"
+              />
+              <span className="text-sm font-bold text-indigo-700 dark:text-indigo-300 min-w-[35px]">{filters.selectedDay}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Third Row - Month & Year Selection */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="lg:col-span-2">
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Select Month(s) - MMM-YYYY</label>
+            <div className="flex flex-wrap gap-2">
+              {monthOptions.map(month => (
+                <button
+                  key={month}
+                  onClick={() => {
+                    const isSelected = filters.selectedMonths.includes(month);
+                    if (isSelected) {
+                      setFilters({...filters, selectedMonths: filters.selectedMonths.filter(m => m !== month)});
+                    } else {
+                      setFilters({...filters, selectedMonths: [...filters.selectedMonths, month]});
+                    }
+                  }}
+                  className={`px-3 py-1 text-xs rounded-lg border transition ${
+                    filters.selectedMonths.includes(month)
+                      ? 'bg-indigo-600 text-white border-indigo-600'
+                      : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-600'
+                  }`}
+                >
+                  {month}
+                </button>
+              ))}
+            </div>
           </div>
           <div>
             <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Compare With</label>
@@ -550,33 +645,36 @@ function BusinessDashboard() {
               onChange={(e) => setFilters({...filters, compareWith: e.target.value})}
               className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
             >
-              <option>Previous Period</option>
+              <option>Previous 1+2 Months</option>
               <option>Same Period Last Year</option>
             </select>
           </div>
         </div>
         
-        {/* Date Range Info & Quick Presets */}
+        {/* Quick Presets */}
         <div className="mt-4 flex items-center justify-between">
           <div className="flex items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            <span className="font-semibold">Selected Period:</span>
+            <span className="font-semibold">Selected:</span>
             <span className="bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-200 px-2 py-1 rounded">
-              {new Date(filters.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} - {new Date(filters.endDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-            </span>
-            <span className="text-gray-500 dark:text-gray-400">
-              ({Math.ceil((new Date(filters.endDate) - new Date(filters.startDate)) / (1000 * 60 * 60 * 24))} days)
+              Day {filters.selectedDay} of {filters.selectedMonths.join(', ')}
             </span>
           </div>
           <div className="flex gap-2">
             <button 
               onClick={() => {
                 const today = new Date();
-                const last7Days = new Date(today);
-                last7Days.setDate(today.getDate() - 7);
-                setFilters({...filters, startDate: last7Days.toISOString().split('T')[0], endDate: today.toISOString().split('T')[0]});
+                setFilters({...filters, selectedDay: 1, selectedMonths: ["Nov-2025"]});
+              }}
+              className="px-3 py-1 text-xs bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-600 transition"
+            >
+              Last 1 Day
+            </button>
+            <button 
+              onClick={() => {
+                setFilters({...filters, selectedDay: 7, selectedMonths: ["Nov-2025"]});
               }}
               className="px-3 py-1 text-xs bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-600 transition"
             >
@@ -584,10 +682,7 @@ function BusinessDashboard() {
             </button>
             <button 
               onClick={() => {
-                const today = new Date();
-                const last30Days = new Date(today);
-                last30Days.setDate(today.getDate() - 30);
-                setFilters({...filters, startDate: last30Days.toISOString().split('T')[0], endDate: today.toISOString().split('T')[0]});
+                setFilters({...filters, selectedDay: 30, selectedMonths: ["Nov-2025"]});
               }}
               className="px-3 py-1 text-xs bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-600 transition"
             >
@@ -596,19 +691,7 @@ function BusinessDashboard() {
             <button 
               onClick={() => {
                 const today = new Date();
-                const last90Days = new Date(today);
-                last90Days.setDate(today.getDate() - 90);
-                setFilters({...filters, startDate: last90Days.toISOString().split('T')[0], endDate: today.toISOString().split('T')[0]});
-              }}
-              className="px-3 py-1 text-xs bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-600 transition"
-            >
-              Last 90 Days
-            </button>
-            <button 
-              onClick={() => {
-                const today = new Date();
-                const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-                setFilters({...filters, startDate: firstDay.toISOString().split('T')[0], endDate: today.toISOString().split('T')[0]});
+                setFilters({...filters, selectedDay: today.getDate(), selectedMonths: ["Nov-2025"]});
               }}
               className="px-3 py-1 text-xs bg-white dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-200 rounded-lg border border-gray-300 dark:border-gray-600 transition"
             >
@@ -624,7 +707,6 @@ function BusinessDashboard() {
           { key: "overview", label: "Overview", icon: "📊" },
           { key: "comparative", label: "Comparative Analytics", icon: "📈" },
           { key: "approval", label: "Approval Analysis", icon: "✅" },
-          { key: "funnel", label: "Conversion Funnel", icon: "🔄" },
           { key: "ro", label: "RO Productivity", icon: "👥" },
           { key: "tat", label: "TAT Analysis", icon: "⏱️" }
         ].map(view => (
@@ -645,32 +727,81 @@ function BusinessDashboard() {
       {/* Content based on active view */}
       {activeView === "overview" && (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
-            <KPI label="Total Logins" value={totals.loginCount_Nov} tooltip="Total new loan applications logged in the selected period." />
-            <KPI label="Sanctions" value={totals.sanctionCount} tooltip="Loans approved by credit in the selected period." />
-            <KPI label="Disbursements" value={`₹${totals.totalDisb.toFixed(2)} Cr`} tooltip="Total amount disbursed and booked." />
-            <KPI label="Approval Rate" value={`${approvalRate}%`} tooltip="Sanctions ÷ Logins — measures credit efficiency." />
-            <KPI label="Conversion" value={`${conversionRate}%`} tooltip="Disbursement to Login conversion rate." />
-            <KPI label="WIP Files" value={totals.wip_Count} tooltip="Files currently in the pipeline (Work in Progress)." />
+          <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-4 mb-6">
+            <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900 dark:to-indigo-800 rounded-xl p-4 border border-indigo-200 dark:border-indigo-700">
+              <div className="text-xs text-indigo-600 dark:text-indigo-300 uppercase mb-1 font-semibold">Login</div>
+              <div className="text-2xl font-bold text-indigo-900 dark:text-indigo-100">{totals.loginCount_Nov}</div>
+              <div className="text-xs text-indigo-700 dark:text-indigo-300 mt-1">₹{(totals.loginCount_Nov * 0.092).toFixed(2)} Cr</div>
+            </div>
+            <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 rounded-xl p-4 border border-green-200 dark:border-green-700">
+              <div className="text-xs text-green-600 dark:text-green-300 uppercase mb-1 font-semibold">Sanction</div>
+              <div className="text-2xl font-bold text-green-900 dark:text-green-100">{totals.sanctionCount}</div>
+              <div className="text-xs text-green-700 dark:text-green-300 mt-1">₹{(totals.sanctionCount * 0.085).toFixed(2)} Cr</div>
+            </div>
+            <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800 rounded-xl p-4 border border-orange-200 dark:border-orange-700">
+              <div className="text-xs text-orange-600 dark:text-orange-300 uppercase mb-1 font-semibold">Disbursement</div>
+              <div className="text-2xl font-bold text-orange-900 dark:text-orange-100">{Math.floor(totals.totalDisb / 0.075)}</div>
+              <div className="text-xs text-orange-700 dark:text-orange-300 mt-1">₹{totals.totalDisb.toFixed(2)} Cr</div>
+            </div>
+            <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900 dark:to-red-800 rounded-xl p-4 border border-red-200 dark:border-red-700">
+              <div className="text-xs text-red-600 dark:text-red-300 uppercase mb-1 font-semibold">Cancel Files</div>
+              <div className="text-2xl font-bold text-red-900 dark:text-red-100">{Math.floor(totals.loginCount_Nov * 0.08)}</div>
+              <div className="text-xs text-red-700 dark:text-red-300 mt-1">₹{(totals.loginCount_Nov * 0.08 * 0.065).toFixed(2)} Cr</div>
+            </div>
+            <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800 rounded-xl p-4 border border-purple-200 dark:border-purple-700">
+              <div className="text-xs text-purple-600 dark:text-purple-300 uppercase mb-1 font-semibold">SUD Files</div>
+              <div className="text-2xl font-bold text-purple-900 dark:text-purple-100">{Math.floor(totals.loginCount_Nov * 0.12)}</div>
+              <div className="text-xs text-purple-700 dark:text-purple-300 mt-1">₹{(totals.loginCount_Nov * 0.12 * 0.072).toFixed(2)} Cr</div>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded-xl p-4 border border-blue-200 dark:border-blue-700">
+              <div className="text-xs text-blue-600 dark:text-blue-300 uppercase mb-1 font-semibold">Approval Rate</div>
+              <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">{approvalRate}%</div>
+              <div className="text-xs text-blue-700 dark:text-blue-300 mt-1">(Based on 600 decision logic)</div>
+            </div>
+            <div className="bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900 dark:to-teal-800 rounded-xl p-4 border border-teal-200 dark:border-teal-700">
+              <div className="text-xs text-teal-600 dark:text-teal-300 uppercase mb-1 font-semibold">Conversion</div>
+              <div className="text-2xl font-bold text-teal-900 dark:text-teal-100">{conversionRate}%</div>
+              <div className="text-xs text-teal-700 dark:text-teal-300 mt-1">Disb/Login</div>
+            </div>
+            <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4 border border-gray-200 dark:border-gray-500">
+              <div className="text-xs text-gray-600 dark:text-gray-300 uppercase mb-1 font-semibold">WIP Files</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{totals.wip_Count}</div>
+              <div className="text-xs text-gray-700 dark:text-gray-300 mt-1">In Pipeline</div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <Card title="Login vs Sanction vs Disbursement (Current Period)">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+            <Card title="Login vs Sanction vs Disbursement - File Counts">
               <BarChart 
                 labels={filteredData.map(d => d.state)}
                 datasets={[
                   {
-                    label: 'Logins',
+                    label: 'Logins (Files)',
                     data: filteredData.map(d => d.loginCount_Nov),
                     backgroundColor: '#4f46e5'
                   },
                   {
-                    label: 'Sanctions',
+                    label: 'Sanctions (Files)',
                     data: filteredData.map(d => d.sanctionCount),
                     backgroundColor: '#10b981'
+                  },
+                  {
+                    label: 'Disbursements (Files)',
+                    data: filteredData.map(d => Math.floor(d.totalDisb / 0.075)),
+                    backgroundColor: '#f59e0b'
                   }
                 ]}
                 height={280}
+                options={{
+                  plugins: {
+                    datalabels: {
+                      display: true,
+                      color: '#fff',
+                      font: { weight: 'bold', size: 10 },
+                      formatter: (value) => value
+                    }
+                  }
+                }}
               />
             </Card>
 
@@ -679,12 +810,86 @@ function BusinessDashboard() {
                 labels={filteredData.map(d => d.state)}
                 datasets={[
                   {
-                    label: 'Disbursement',
+                    label: 'Disbursement Amount',
                     data: filteredData.map(d => d.totalDisb),
                     backgroundColor: '#f59e0b'
                   }
                 ]}
                 height={280}
+                options={{
+                  plugins: {
+                    datalabels: {
+                      display: true,
+                      color: '#fff',
+                      font: { weight: 'bold', size: 10 },
+                      formatter: (value) => `₹${value.toFixed(1)}`
+                    }
+                  }
+                }}
+              />
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
+            <Card title="Conversion Funnel">
+              <div className="relative h-64 flex flex-col justify-center">
+                <div className="space-y-2">
+                  <div className="bg-indigo-500 text-white text-center py-3 rounded-lg font-semibold">
+                    Login: {totals.loginCount_Nov} files
+                  </div>
+                  <div className="bg-green-500 text-white text-center py-3 rounded-lg font-semibold mx-6">
+                    Sanction: {totals.sanctionCount} files ({approvalRate}%)
+                  </div>
+                  <div className="bg-orange-500 text-white text-center py-3 rounded-lg font-semibold mx-12">
+                    Disbursement: {Math.floor(totals.totalDisb / 0.075)} files ({conversionRate}%)
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            <Card title="RO Login Productivity Distribution">
+              <BarChart 
+                labels={['0-20', '21-40', '41-60', '61-80', '81-100', '100+']}
+                datasets={[
+                  {
+                    label: 'RO Count',
+                    data: [12, 28, 35, 42, 28, 15],
+                    backgroundColor: '#8b5cf6'
+                  }
+                ]}
+                height={240}
+                options={{
+                  plugins: {
+                    datalabels: {
+                      display: true,
+                      color: '#fff',
+                      font: { weight: 'bold', size: 10 }
+                    }
+                  }
+                }}
+              />
+            </Card>
+
+            <Card title="RO Disbursement Productivity Distribution">
+              <BarChart 
+                labels={['0-2 Cr', '2-4 Cr', '4-6 Cr', '6-8 Cr', '8-10 Cr', '10+ Cr']}
+                datasets={[
+                  {
+                    label: 'RO Count',
+                    data: [15, 32, 38, 35, 22, 18],
+                    backgroundColor: '#ec4899'
+                  }
+                ]}
+                height={240}
+                options={{
+                  plugins: {
+                    datalabels: {
+                      display: true,
+                      color: '#fff',
+                      font: { weight: 'bold', size: 10 }
+                    }
+                  }
+                }}
               />
             </Card>
           </div>
@@ -696,10 +901,12 @@ function BusinessDashboard() {
                   <tr>
                     <th className="py-3 px-4 text-left">State</th>
                     <th className="py-3 px-4 text-left">Branch</th>
-                    <th className="py-3 px-4 text-center">Logins (Nov)</th>
-                    <th className="py-3 px-4 text-center">Logins (Oct)</th>
-                    <th className="py-3 px-4 text-center">Sanctions</th>
-                    <th className="py-3 px-4 text-center">Disb (₹ Cr)</th>
+                    <th className="py-3 px-4 text-center">Login Count</th>
+                    <th className="py-3 px-4 text-center">Login Amt (₹ Cr)</th>
+                    <th className="py-3 px-4 text-center">Sanction Count</th>
+                    <th className="py-3 px-4 text-center">Sanction Amt (₹ Cr)</th>
+                    <th className="py-3 px-4 text-center">Disb Count</th>
+                    <th className="py-3 px-4 text-center">Disb Amt (₹ Cr)</th>
                     <th className="py-3 px-4 text-center">WIRR %</th>
                     <th className="py-3 px-4 text-center">WIP Count</th>
                     <th className="py-3 px-4 text-center">Approval %</th>
@@ -708,13 +915,18 @@ function BusinessDashboard() {
                 <tbody>
                   {filteredData.map((d, i) => {
                     const approval = d.loginCount_Nov > 0 ? ((d.sanctionCount / d.loginCount_Nov) * 100).toFixed(1) : 0;
+                    const loginAmt = (d.loginCount_Nov * 0.092).toFixed(2);
+                    const sanctionAmt = (d.sanctionCount * 0.085).toFixed(2);
+                    const disbCount = Math.floor(d.totalDisb / 0.075);
                     return (
                       <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
                         <td className="py-3 px-4 font-semibold">{d.state}</td>
                         <td className="py-3 px-4">{d.branch}</td>
                         <td className="py-3 px-4 text-center">{d.loginCount_Nov}</td>
-                        <td className="py-3 px-4 text-center">{d.loginCount_Oct}</td>
+                        <td className="py-3 px-4 text-center">{loginAmt}</td>
                         <td className="py-3 px-4 text-center">{d.sanctionCount}</td>
+                        <td className="py-3 px-4 text-center">{sanctionAmt}</td>
+                        <td className="py-3 px-4 text-center">{disbCount}</td>
                         <td className="py-3 px-4 text-center">{d.totalDisb.toFixed(2)}</td>
                         <td className="py-3 px-4 text-center">{d.wirr_Nov || '-'}</td>
                         <td className="py-3 px-4 text-center">{d.wip_Count}</td>
@@ -735,7 +947,6 @@ function BusinessDashboard() {
 
       {activeView === "comparative" && <ComparativeAnalytics data={filteredData} filters={filters} />}
       {activeView === "approval" && <ApprovalAnalysis data={filteredData} totals={totals} />}
-      {activeView === "funnel" && <ConversionFunnel data={filteredData} totals={totals} />}
       {activeView === "ro" && <ROProductivity data={filteredData} />}
       {activeView === "tat" && <TATAnalysis data={filteredData} />}
     </div>
@@ -884,6 +1095,7 @@ function ApprovalAnalysis({ data, totals }) {
   const totalLogin = totals.loginCount_Nov;
   const wip = totals.wip_Count;
   const rejected = totalLogin - approved - wip;
+  const totalFiles = approved + rejected + wip;
 
   return (
     <div>
@@ -894,7 +1106,24 @@ function ApprovalAnalysis({ data, totals }) {
               data={[approved, rejected, wip]}
               labels={['Approved', 'Rejected', 'WIP']}
               colors={['#10b981', '#ef4444', '#f59e0b']}
+              options={{
+                plugins: {
+                  datalabels: {
+                    display: true,
+                    color: '#fff',
+                    font: { weight: 'bold', size: 14 },
+                    formatter: (value, context) => {
+                      const label = context.chart.data.labels[context.dataIndex];
+                      const percentage = ((value / totalFiles) * 100).toFixed(1);
+                      return `${label}\n${value}\n(${percentage}%)`;
+                    }
+                  }
+                }
+              }}
             />
+          </div>
+          <div className="text-center mt-2 text-sm font-semibold text-gray-700 dark:text-gray-300">
+            Total Files: {totalFiles}
           </div>
           <div className="grid grid-cols-3 gap-3 mt-4">
             <div className="text-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
@@ -1038,9 +1267,9 @@ function ConversionFunnel({ data, totals }) {
 
 // RO Productivity
 function ROProductivity({ data }) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedRange, setSelectedRange] = useState(null);
-  const [selectedType, setSelectedType] = useState(''); // 'login' or 'disbursement'
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState('name');
+  const [sortOrder, setSortOrder] = useState('asc');
   
   // Indian names pool
   const indianNames = [
@@ -1057,7 +1286,7 @@ function ROProductivity({ data }) {
     'Naveen Kumar', 'Preeti Agarwal', 'Ravi Shankar', 'Pallavi Joshi', 'Arun Sharma'
   ];
 
-  // Simulated RO data with Indian names
+  // Simulated RO data with User ID and Vintage
   const roData = data.flatMap((d, stateIdx) => {
     const roCount = Math.max(d.manpower_Active, 1);
     const loginPerRO = Math.floor(d.loginCount_Nov / roCount);
@@ -1065,191 +1294,149 @@ function ROProductivity({ data }) {
     return Array.from({length: Math.min(roCount, 10)}, (_, i) => {
       const nameIdx = (stateIdx * 10 + i) % indianNames.length;
       const logins = Math.max(1, loginPerRO + Math.floor(Math.random() * 20) - 10);
+      const monthsExperience = Math.floor(Math.random() * 24); // 0-24 months
+      let vintage = 'LT 1 month';
+      if (monthsExperience >= 6) vintage = 'GT 6 months';
+      else if (monthsExperience >= 1) vintage = '1M - 6M';
+      
       return {
+        userId: `RO${String(stateIdx * 10 + i + 1001).padStart(5, '0')}`,
         name: indianNames[nameIdx],
         state: d.state,
         branch: d.branch,
         logins: logins,
         disb: Math.max(0.05, disbPerRO + (Math.random() * 0.2 - 0.1)),
-        email: `${indianNames[nameIdx].toLowerCase().replace(' ', '.')}@msfincap.com`,
-        phone: `+91 ${Math.floor(Math.random() * 9000000000) + 1000000000}`
+        vintage: vintage,
+        monthsExperience: monthsExperience
       };
     });
   }).filter(ro => ro.logins > 0);
 
-  // Group by ranges
-  const loginRanges = [
-    { range: '0-10', count: roData.filter(ro => ro.logins >= 0 && ro.logins <= 10).length, data: roData.filter(ro => ro.logins >= 0 && ro.logins <= 10) },
-    { range: '11-20', count: roData.filter(ro => ro.logins > 10 && ro.logins <= 20).length, data: roData.filter(ro => ro.logins > 10 && ro.logins <= 20) },
-    { range: '21-30', count: roData.filter(ro => ro.logins > 20 && ro.logins <= 30).length, data: roData.filter(ro => ro.logins > 20 && ro.logins <= 30) },
-    { range: '31-40', count: roData.filter(ro => ro.logins > 30 && ro.logins <= 40).length, data: roData.filter(ro => ro.logins > 30 && ro.logins <= 40) },
-    { range: '40+', count: roData.filter(ro => ro.logins > 40).length, data: roData.filter(ro => ro.logins > 40) }
-  ];
-
-  const disbRanges = [
-    { range: '0-0.5 Cr', count: roData.filter(ro => ro.disb <= 0.5).length, data: roData.filter(ro => ro.disb <= 0.5) },
-    { range: '0.5-1 Cr', count: roData.filter(ro => ro.disb > 0.5 && ro.disb <= 1).length, data: roData.filter(ro => ro.disb > 0.5 && ro.disb <= 1) },
-    { range: '1-2 Cr', count: roData.filter(ro => ro.disb > 1 && ro.disb <= 2).length, data: roData.filter(ro => ro.disb > 1 && ro.disb <= 2) },
-    { range: '2+ Cr', count: roData.filter(ro => ro.disb > 2).length, data: roData.filter(ro => ro.disb > 2) }
-  ];
-
-  const handleBarClick = (type, range) => {
-    setSelectedType(type);
-    setSelectedRange(range);
-    setModalOpen(true);
-  };
-
-  const exportToExcel = () => {
-    const rangeData = selectedType === 'login' 
-      ? loginRanges.find(r => r.range === selectedRange)?.data || []
-      : disbRanges.find(r => r.range === selectedRange)?.data || [];
-    
-    let csv = 'Name,State,Branch,Login Count,Disbursement (₹ Cr),Email,Phone\n';
-    rangeData.forEach(ro => {
-      csv += `${ro.name},${ro.state},${ro.branch},${ro.logins},${ro.disb.toFixed(2)},${ro.email},${ro.phone}\n`;
+  // Filter and sort
+  const filteredData = roData
+    .filter(ro => 
+      ro.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ro.userId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ro.state.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      ro.branch.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      let compareA = a[sortBy];
+      let compareB = b[sortBy];
+      
+      if (sortBy === 'logins' || sortBy === 'disb' || sortBy === 'monthsExperience') {
+        compareA = parseFloat(compareA);
+        compareB = parseFloat(compareB);
+      }
+      
+      if (sortOrder === 'asc') {
+        return compareA > compareB ? 1 : -1;
+      } else {
+        return compareA < compareB ? 1 : -1;
+      }
     });
-    
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const url = window.URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `RO_Productivity_${selectedRange.replace(/[^a-zA-Z0-9]/g, '_')}_${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    window.URL.revokeObjectURL(url);
-  };
 
-  const getModalData = () => {
-    if (selectedType === 'login') {
-      return loginRanges.find(r => r.range === selectedRange)?.data || [];
+  const handleSort = (field) => {
+    if (sortBy === field) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
     } else {
-      return disbRanges.find(r => r.range === selectedRange)?.data || [];
+      setSortBy(field);
+      setSortOrder('asc');
     }
   };
 
   return (
     <div>
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-        <Card title="Login Productivity Distribution">
-          <InteractiveBarChart 
-            labels={loginRanges.map(r => r.range)}
-            datasets={[
-              {
-                label: 'Number of ROs',
-                data: loginRanges.map(r => r.count),
-                backgroundColor: '#6366f1'
-              }
-            ]}
-            height={280}
-            onClick={(label) => handleBarClick('login', label)}
-          />
-          <div className="mt-3 text-xs text-gray-500 dark:text-gray-400 text-center">
-            X-axis: Login file ranges | Y-axis: Number of ROs | Click on bars to view details
+      {/* Search and Sort Controls */}
+      <Card title="RO Productivity - Search & Filter">
+        <div className="flex flex-col md:flex-row gap-4 mb-4">
+          <div className="flex-1">
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Search RO</label>
+            <input 
+              type="text"
+              placeholder="Search by name, user ID, state, or branch..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            />
           </div>
-        </Card>
-
-        <Card title="Disbursement Productivity">
-          <InteractiveBarChart 
-            labels={['0-0.5 Cr', '0.5-1 Cr', '1-2 Cr', '2+ Cr']}
-            datasets={[
-              {
-                label: 'Number of ROs',
-                data: disbRanges.map(r => r.count),
-                backgroundColor: '#10b981'
-              }
-            ]}
-            height={280}
-            onClick={(label) => handleBarClick('disbursement', label)}
-          />
-          <div className="mt-3 text-xs text-gray-500 dark:text-gray-400 text-center">
-            X-axis: Disbursement ranges | Y-axis: Number of ROs | Click on bars to view details
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Sort By</label>
+            <select 
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              <option value="name">Name</option>
+              <option value="userId">User ID</option>
+              <option value="logins">Login Count</option>
+              <option value="disb">Disbursement</option>
+              <option value="vintage">Vintage</option>
+              <option value="state">State</option>
+            </select>
           </div>
-        </Card>
-      </div>
-
-      {/* Modal */}
-      {modalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" onClick={() => setModalOpen(false)}>
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden" onClick={(e) => e.stopPropagation()}>
-            <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
-              <div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                  RO Details - {selectedRange}
-                </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
-                  {selectedType === 'login' ? 'Login Count Range' : 'Disbursement Range'} • {getModalData().length} ROs
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <button 
-                  onClick={exportToExcel}
-                  className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium text-sm transition flex items-center gap-2"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                  Export to Excel
-                </button>
-                <button 
-                  onClick={() => setModalOpen(false)}
-                  className="px-4 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 rounded-lg font-medium text-sm transition"
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-            <div className="overflow-auto max-h-[calc(90vh-140px)] p-6">
-              <table className="w-full text-sm">
-                <thead className="sticky top-0 bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-                  <tr>
-                    <th className="py-3 px-4 text-left">#</th>
-                    <th className="py-3 px-4 text-left">Name</th>
-                    <th className="py-3 px-4 text-left">State</th>
-                    <th className="py-3 px-4 text-left">Branch</th>
-                    <th className="py-3 px-4 text-center">Login Count</th>
-                    <th className="py-3 px-4 text-center">Disbursement (₹ Cr)</th>
-                    <th className="py-3 px-4 text-left">Email</th>
-                    <th className="py-3 px-4 text-left">Phone</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {getModalData().map((ro, i) => (
-                    <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                      <td className="py-3 px-4 text-gray-600 dark:text-gray-400">{i + 1}</td>
-                      <td className="py-3 px-4 font-semibold">{ro.name}</td>
-                      <td className="py-3 px-4">{ro.state}</td>
-                      <td className="py-3 px-4">{ro.branch}</td>
-                      <td className="py-3 px-4 text-center font-semibold">{ro.logins}</td>
-                      <td className="py-3 px-4 text-center font-semibold">{ro.disb.toFixed(2)}</td>
-                      <td className="py-3 px-4 text-xs">{ro.email}</td>
-                      <td className="py-3 px-4 text-xs">{ro.phone}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Order</label>
+            <select 
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              className="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              <option value="asc">Ascending</option>
+              <option value="desc">Descending</option>
+            </select>
           </div>
         </div>
-      )}
+        <div className="text-sm text-gray-600 dark:text-gray-300">
+          Showing {filteredData.length} of {roData.length} ROs
+        </div>
+      </Card>
 
       <Card title="Individual RO Performance Report">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
               <tr>
-                <th className="py-3 px-4 text-left">RO Name</th>
-                <th className="py-3 px-4 text-left">State</th>
-                <th className="py-3 px-4 text-center">Login Count</th>
-                <th className="py-3 px-4 text-center">Disbursement (₹ Cr)</th>
+                <th className="py-3 px-4 text-left cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('userId')}>
+                  User ID {sortBy === 'userId' && (sortOrder === 'asc' ? '↑' : '↓')}
+                </th>
+                <th className="py-3 px-4 text-left cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('name')}>
+                  RO Name {sortBy === 'name' && (sortOrder === 'asc' ? '↑' : '↓')}
+                </th>
+                <th className="py-3 px-4 text-left cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('state')}>
+                  State {sortBy === 'state' && (sortOrder === 'asc' ? '↑' : '↓')}
+                </th>
+                <th className="py-3 px-4 text-left">Branch</th>
+                <th className="py-3 px-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('logins')}>
+                  Login Count {sortBy === 'logins' && (sortOrder === 'asc' ? '↑' : '↓')}
+                </th>
+                <th className="py-3 px-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('disb')}>
+                  Disbursement (₹ Cr) {sortBy === 'disb' && (sortOrder === 'asc' ? '↑' : '↓')}
+                </th>
+                <th className="py-3 px-4 text-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600" onClick={() => handleSort('vintage')}>
+                  Vintage {sortBy === 'vintage' && (sortOrder === 'asc' ? '↑' : '↓')}
+                </th>
                 <th className="py-3 px-4 text-center">Productivity</th>
               </tr>
             </thead>
             <tbody>
-              {roData.slice(0, 15).map((ro, i) => (
+              {filteredData.map((ro, i) => (
                 <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-4 font-mono text-xs">{ro.userId}</td>
                   <td className="py-3 px-4 font-semibold">{ro.name}</td>
                   <td className="py-3 px-4">{ro.state}</td>
-                  <td className="py-3 px-4 text-center">{ro.logins}</td>
-                  <td className="py-3 px-4 text-center">{ro.disb.toFixed(2)}</td>
+                  <td className="py-3 px-4">{ro.branch}</td>
+                  <td className="py-3 px-4 text-center font-semibold">{ro.logins}</td>
+                  <td className="py-3 px-4 text-center font-semibold">{ro.disb.toFixed(2)}</td>
+                  <td className="py-3 px-4 text-center">
+                    <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                      ro.vintage === 'GT 6 months' ? 'bg-blue-100 dark:bg-blue-900 text-blue-900 dark:text-blue-100' :
+                      ro.vintage === '1M - 6M' ? 'bg-green-100 dark:bg-green-900 text-green-900 dark:text-green-100' :
+                      'bg-yellow-100 dark:bg-yellow-900 text-yellow-900 dark:text-yellow-100'
+                    }`}>
+                      {ro.vintage}
+                    </span>
+                  </td>
                   <td className="py-3 px-4 text-center">
                     <span className={`px-2 py-1 rounded text-xs font-semibold ${
                       ro.logins > 30 ? 'bg-green-100 dark:bg-green-900 text-green-900 dark:text-green-100' : 
@@ -1271,22 +1458,86 @@ function ROProductivity({ data }) {
 
 // TAT Analysis
 function TATAnalysis({ data }) {
-  // Simulated TAT data
-  const tatData = [
+  // Simulated TAT data with individual SOPs
+  const sopTATData = [
+    { sop: 'Customer Data Collection', avg: 0.8, target: 1, description: 'Gathering initial customer information' },
+    { sop: 'Document Verification', avg: 1.2, target: 1.5, description: 'Verifying submitted documents' },
+    { sop: 'Credit Assessment', avg: 2.1, target: 2, description: 'Credit underwriting and scoring' },
+    { sop: 'Legal & Technical Check', avg: 1.5, target: 2, description: 'Property and legal verification' },
+    { sop: 'Sanction Approval', avg: 0.9, target: 1, description: 'Final sanction committee approval' },
+    { sop: 'Document Preparation', avg: 1.3, target: 1.5, description: 'Loan documentation preparation' },
+    { sop: 'Disbursement Processing', avg: 1.8, target: 2, description: 'Fund transfer and booking' }
+  ];
+
+  const tatStageData = [
     { stage: 'Login → Sanction', avg: 2.3, target: 3, states: data.map(d => ({state: d.state, days: 2 + Math.random() * 2})) },
     { stage: 'Login → Decision', avg: 2.8, target: 4, states: data.map(d => ({state: d.state, days: 2.5 + Math.random() * 2})) },
     { stage: 'Sanction → Disbursement', avg: 3.2, target: 5, states: data.map(d => ({state: d.state, days: 3 + Math.random() * 2})) },
-    { stage: 'SOP Compliance', avg: 1.8, target: 2, states: data.map(d => ({state: d.state, days: 1.5 + Math.random() * 1})) }
+    { stage: 'Overall TAT', avg: 6.8, target: 8, states: data.map(d => ({state: d.state, days: 6 + Math.random() * 3})) }
   ];
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-        {tatData.map((tat, i) => (
+      {/* SOP-wise TAT */}
+      <Card title="TAT of Each SOP (Standard Operating Procedures)">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-4">
+          {sopTATData.map((sop, i) => (
+            <div key={i} className="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-gray-700 dark:to-gray-600 rounded-lg p-4 border border-indigo-200 dark:border-gray-600">
+              <div className="text-xs text-indigo-600 dark:text-indigo-300 uppercase mb-2 font-semibold">{sop.sop}</div>
+              <div className="flex items-end gap-2">
+                <div className="text-2xl font-bold text-indigo-900 dark:text-indigo-100">{sop.avg.toFixed(1)}</div>
+                <div className="text-sm text-gray-600 dark:text-gray-400">days</div>
+              </div>
+              <div className="mt-2 text-xs text-gray-600 dark:text-gray-400">{sop.description}</div>
+              <div className="mt-2 text-xs">
+                Target: <span className="font-medium text-indigo-600 dark:text-indigo-400">{sop.target} days</span>
+              </div>
+              <div className="mt-2 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                <div 
+                  className={`h-2 rounded-full ${sop.avg <= sop.target ? 'bg-green-500' : 'bg-red-500'}`}
+                  style={{width: `${Math.min((sop.avg / sop.target) * 100, 100)}%`}}
+                ></div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4">
+          <BarChart 
+            labels={sopTATData.map(s => s.sop)}
+            datasets={[
+              {
+                label: 'Actual TAT (days)',
+                data: sopTATData.map(s => s.avg),
+                backgroundColor: '#6366f1'
+              },
+              {
+                label: 'Target TAT (days)',
+                data: sopTATData.map(s => s.target),
+                backgroundColor: '#94a3b8'
+              }
+            ]}
+            height={260}
+            options={{
+              plugins: {
+                datalabels: {
+                  display: true,
+                  color: '#fff',
+                  font: { weight: 'bold', size: 9 },
+                  formatter: (value) => `${value}d`
+                }
+              }
+            }}
+          />
+        </div>
+      </Card>
+
+      {/* Stage-wise TAT */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6 mt-6">
+        {tatStageData.map((tat, i) => (
           <div key={i} className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4">
-            <div className="text-xs text-gray-500 dark:text-gray-400 uppercase mb-2">{tat.stage}</div>
+            <div className="text-xs text-gray-500 dark:text-gray-400 uppercase mb-2 font-semibold">{tat.stage}</div>
             <div className="flex items-end gap-2">
-              <div className="text-2xl font-bold dark:text-gray-100">{tat.avg.toFixed(1)}</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-gray-100">{tat.avg.toFixed(1)}</div>
               <div className="text-sm text-gray-500 dark:text-gray-400">days</div>
             </div>
             <div className="mt-2 text-xs">
@@ -1295,7 +1546,7 @@ function TATAnalysis({ data }) {
             <div className="mt-1 w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
               <div 
                 className={`h-1.5 rounded-full ${tat.avg <= tat.target ? 'bg-green-500' : 'bg-red-500'}`}
-                style={{width: `${(tat.avg / tat.target) * 100}%`}}
+                style={{width: `${Math.min((tat.avg / tat.target) * 100, 100)}%`}}
               ></div>
             </div>
           </div>
@@ -1304,33 +1555,42 @@ function TATAnalysis({ data }) {
 
       <Card title="TAT by Stage (Average Days)">
         <BarChart 
-          labels={tatData.map(t => t.stage)}
+          labels={tatStageData.map(t => t.stage)}
           datasets={[
             {
               label: 'Actual TAT',
-              data: tatData.map(t => t.avg),
+              data: tatStageData.map(t => t.avg),
               backgroundColor: '#4f46e5'
             },
             {
               label: 'Target TAT',
-              data: tatData.map(t => t.target),
+              data: tatStageData.map(t => t.target),
               backgroundColor: '#94a3b8'
             }
           ]}
           height={280}
+          options={{
+            plugins: {
+              datalabels: {
+                display: true,
+                color: '#fff',
+                font: { weight: 'bold', size: 10 }
+              }
+            }
+          }}
         />
       </Card>
 
       <Card title="State-wise TAT Breakdown">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="text-gray-500 dark:text-gray-400 text-xs uppercase bg-gray-50 dark:bg-gray-700/50">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
               <tr>
                 <th className="py-3 px-4 text-left">State</th>
                 <th className="py-3 px-4 text-center">Login → Sanction</th>
                 <th className="py-3 px-4 text-center">Login → Decision</th>
                 <th className="py-3 px-4 text-center">Sanction → Disb</th>
-                <th className="py-3 px-4 text-center">SOP Compliance</th>
+                <th className="py-3 px-4 text-center">Overall TAT</th>
                 <th className="py-3 px-4 text-center">Overall Rating</th>
               </tr>
             </thead>
@@ -1339,22 +1599,22 @@ function TATAnalysis({ data }) {
                 const t1 = (2 + Math.random() * 2).toFixed(1);
                 const t2 = (2.5 + Math.random() * 2).toFixed(1);
                 const t3 = (3 + Math.random() * 2).toFixed(1);
-                const t4 = (1.5 + Math.random() * 1).toFixed(1);
-                const avg = ((parseFloat(t1) + parseFloat(t2) + parseFloat(t3) + parseFloat(t4)) / 4).toFixed(1);
+                const t4 = (6 + Math.random() * 3).toFixed(1);
+                const avg = parseFloat(t4);
                 return (
-                  <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700">
-                    <td className="py-3 px-4 font-medium">{d.state}</td>
+                  <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                    <td className="py-3 px-4 font-semibold">{d.state}</td>
                     <td className="py-3 px-4 text-center">{t1}d</td>
                     <td className="py-3 px-4 text-center">{t2}d</td>
                     <td className="py-3 px-4 text-center">{t3}d</td>
-                    <td className="py-3 px-4 text-center">{t4}d</td>
+                    <td className="py-3 px-4 text-center font-semibold">{t4}d</td>
                     <td className="py-3 px-4 text-center">
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${
-                        avg < 2.5 ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200' : 
-                        avg < 3.5 ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200' : 
-                        'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200'
+                      <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                        avg < 6.5 ? 'bg-green-100 dark:bg-green-900 text-green-900 dark:text-green-100' : 
+                        avg < 7.5 ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-900 dark:text-yellow-100' : 
+                        'bg-red-100 dark:bg-red-900 text-red-900 dark:text-red-100'
                       }`}>
-                        {avg < 2.5 ? 'Excellent' : avg < 3.5 ? 'Good' : 'Needs Improvement'}
+                        {avg < 6.5 ? 'Excellent' : avg < 7.5 ? 'Good' : 'Needs Improvement'}
                       </span>
                     </td>
                   </tr>
