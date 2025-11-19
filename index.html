@@ -1814,6 +1814,80 @@ function DonutChart({ data, labels, colors }) {
    COLLECTIONS DASHBOARD
 ------------------------------------------------------------ */
 function CollectionsDashboard() {
+  // State for filters
+  const [filters, setFilters] = useState({
+    state: "All",
+    cluster: "All",
+    businessState: "All",
+    branch: "All",
+    product: "All",
+    ticketSize: "All",
+    loanCategory: "All",
+    collectionByName: "All",
+    propertyType: "All",
+    deviation: "All",
+    bureauScore: "All",
+    selectedMonth: "Nov-2025"
+  });
+
+  // State for modals/drilldowns
+  const [showACRDrilldown, setShowACRDrilldown] = useState(false);
+  const [selectedResource, setSelectedResource] = useState(null);
+  const [showWasisSnapshot, setShowWasisSnapshot] = useState(false);
+
+  // Filter options (aligned with Business Performance)
+  const states = ["All", "GJ", "MP", "Raj", "UP", "MH"];
+  const clusters = ["All", "North", "South", "East", "West"];
+  const businessStates = ["All", "Active", "Inactive", "Pending"];
+  const branches = ["All", "Direct", "Dayanand Bhai", "Prakash Veer"];
+  const products = ["All", "Home Loan", "LAP", "Business Loan", "Personal Loan"];
+  const ticketSizes = ["All", "0-10 lakh", "10-20 lakh", "20-30 lakh", "30-40 lakh", "40-50 lakh", "50+ lakh"];
+  const loanCategories = ["All", "Salaried", "Self Employed", "Professional"];
+  
+  // New collection-specific filters
+  const collectionAgents = ["All", "Rajesh Kumar", "Priya Sharma", "Amit Patel", "Sneha Desai", "Vikram Singh", "Ravi Verma", "Meera Nair"];
+  const propertyTypes = ["All", "Residential", "Commercial", "Industrial", "Agricultural", "Plot"];
+  const deviationTypes = ["All", "No Deviation", "Critical Deviations", "Non-Critical Deviations"];
+  const bureauScoreBands = ["All", "0 to -1", "1-300", "301-600", "601-750", ">750"];
+
+  // Sample ACR data per resource
+  const acrData = [
+    { name: "Rajesh Kumar", assigned: 145, pending: 42, completed: 103, acr: "71%", amount: "₹24.5L" },
+    { name: "Priya Sharma", assigned: 132, pending: 38, completed: 94, acr: "71%", amount: "₹21.8L" },
+    { name: "Amit Patel", assigned: 128, pending: 45, completed: 83, acr: "65%", amount: "₹19.2L" },
+    { name: "Sneha Desai", assigned: 156, pending: 51, completed: 105, acr: "67%", amount: "₹26.3L" },
+    { name: "Vikram Singh", assigned: 119, pending: 33, completed: 86, acr: "72%", amount: "₹18.7L" },
+    { name: "Ravi Verma", assigned: 141, pending: 48, completed: 93, acr: "66%", amount: "₹22.1L" },
+    { name: "Meera Nair", assigned: 138, pending: 41, completed: 97, acr: "70%", amount: "₹23.4L" }
+  ];
+
+  // Wasis flow data (Opening to Closing bucket movement)
+  const wasisFlowData = [
+    { openingBucket: "Current", closingBucket: "Current", accounts: 8420, percentage: "94.2%", type: "stable" },
+    { openingBucket: "Current", closingBucket: "X1", accounts: 412, percentage: "4.6%", type: "forward" },
+    { openingBucket: "Current", closingBucket: "X2", accounts: 89, percentage: "1.0%", type: "forward" },
+    { openingBucket: "X1", closingBucket: "Current", accounts: 342, percentage: "58.1%", type: "rollback" },
+    { openingBucket: "X1", closingBucket: "X1", accounts: 156, percentage: "26.5%", type: "stable" },
+    { openingBucket: "X1", closingBucket: "X2", accounts: 91, percentage: "15.4%", type: "forward" },
+    { openingBucket: "X2", closingBucket: "Current", accounts: 98, percentage: "28.2%", type: "rollback" },
+    { openingBucket: "X2", closingBucket: "X1", accounts: 112, percentage: "32.2%", type: "rollback" },
+    { openingBucket: "X2", closingBucket: "X2", accounts: 87, percentage: "25.0%", type: "stable" },
+    { openingBucket: "X2", closingBucket: "X3", accounts: 51, percentage: "14.6%", type: "forward" },
+    { openingBucket: "X3", closingBucket: "X2", accounts: 34, percentage: "22.7%", type: "rollback" },
+    { openingBucket: "X3", closingBucket: "X3", accounts: 78, percentage: "52.0%", type: "stable" },
+    { openingBucket: "X3", closingBucket: "NPA", accounts: 38, percentage: "25.3%", type: "forward" }
+  ];
+
+  // 3-month comparative data
+  const comparativeData = {
+    months: ["Aug-2025", "Sep-2025", "Oct-2025"],
+    ce_current: [96.8, 97.4, 97.6],
+    ce_overall: [93.5, 94.1, 94.3],
+    flowRate: [5.2, 4.9, 4.8],
+    bounceRate: [7.8, 7.6, 7.4],
+    npaRecovery: [1.32, 1.41, 1.48]
+  };
+
   const resolutions = [
     { bucket: "X1", rate: "58%" },
     { bucket: "X2", rate: "41%" },
@@ -1823,6 +1897,152 @@ function CollectionsDashboard() {
 
   return (
     <div>
+      {/* Comprehensive Filter Panel */}
+      <div className="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 mb-6 border border-indigo-200 dark:border-gray-600">
+        <div className="flex items-center gap-2 mb-3">
+          <svg className="w-5 h-5 text-indigo-700 dark:text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Collection Filters & Controls</h3>
+        </div>
+        
+        {/* First Row - Business Performance Filters */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">State</label>
+            <select 
+              value={filters.state}
+              onChange={(e) => setFilters({...filters, state: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {states.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Cluster</label>
+            <select 
+              value={filters.cluster}
+              onChange={(e) => setFilters({...filters, cluster: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {clusters.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Business State</label>
+            <select 
+              value={filters.businessState}
+              onChange={(e) => setFilters({...filters, businessState: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {businessStates.map(bs => <option key={bs} value={bs}>{bs}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Branch</label>
+            <select 
+              value={filters.branch}
+              onChange={(e) => setFilters({...filters, branch: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {branches.map(b => <option key={b} value={b}>{b}</option>)}
+            </select>
+          </div>
+        </div>
+
+        {/* Second Row - Product & Size Filters */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Product</label>
+            <select 
+              value={filters.product}
+              onChange={(e) => setFilters({...filters, product: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {products.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Ticket Size Band</label>
+            <select 
+              value={filters.ticketSize}
+              onChange={(e) => setFilters({...filters, ticketSize: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {ticketSizes.map(ts => <option key={ts} value={ts}>{ts}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Loan Category</label>
+            <select 
+              value={filters.loanCategory}
+              onChange={(e) => setFilters({...filters, loanCategory: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {loanCategories.map(lc => <option key={lc} value={lc}>{lc}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Collection Agent</label>
+            <select 
+              value={filters.collectionByName}
+              onChange={(e) => setFilters({...filters, collectionByName: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {collectionAgents.map(ca => <option key={ca} value={ca}>{ca}</option>)}
+            </select>
+          </div>
+        </div>
+
+        {/* Third Row - Collection-Specific Filters */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Property Type</label>
+            <select 
+              value={filters.propertyType}
+              onChange={(e) => setFilters({...filters, propertyType: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {propertyTypes.map(pt => <option key={pt} value={pt}>{pt}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Deviation Type</label>
+            <select 
+              value={filters.deviation}
+              onChange={(e) => setFilters({...filters, deviation: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {deviationTypes.map(dt => <option key={dt} value={dt}>{dt}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Bureau Score Band</label>
+            <select 
+              value={filters.bureauScore}
+              onChange={(e) => setFilters({...filters, bureauScore: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              {bureauScoreBands.map(bs => <option key={bs} value={bs}>{bs}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Month</label>
+            <select 
+              value={filters.selectedMonth}
+              onChange={(e) => setFilters({...filters, selectedMonth: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
+            >
+              <option value="Nov-2025">Nov-2025</option>
+              <option value="Oct-2025">Oct-2025</option>
+              <option value="Sep-2025">Sep-2025</option>
+              <option value="Aug-2025">Aug-2025</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* KPI Cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
         <KPI label="CE (Current)" value="97.6%" tooltip="Current-month EMI collection vs demand." />
         <KPI label="CE (Overall)" value="94.3%" tooltip="Collections including arrears." />
@@ -1832,8 +2052,393 @@ function CollectionsDashboard() {
         <KPI label="Non-Starters" value="112" tooltip="Cases that bounced from first EMI within 3 months." />
       </div>
 
+      {/* 3-Month Comparative Analysis */}
+      <Card title="3-Month Comparative Analysis - Key Collection Metrics">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-4">
+          <div>
+            <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-200 mb-3 uppercase">Collection Efficiency Trend</h4>
+            <LineChart 
+              labels={comparativeData.months}
+              datasets={[
+                {
+                  label: 'CE Current (%)',
+                  data: comparativeData.ce_current,
+                  borderColor: '#2563eb',
+                  backgroundColor: '#2563eb',
+                  tension: 0.3
+                },
+                {
+                  label: 'CE Overall (%)',
+                  data: comparativeData.ce_overall,
+                  borderColor: '#16a34a',
+                  backgroundColor: '#16a34a',
+                  tension: 0.3
+                }
+              ]}
+              height={200}
+            />
+          </div>
+          <div>
+            <h4 className="text-xs font-semibold text-gray-700 dark:text-gray-200 mb-3 uppercase">Flow Rate & Bounce Rate</h4>
+            <LineChart 
+              labels={comparativeData.months}
+              datasets={[
+                {
+                  label: 'Flow Rate (%)',
+                  data: comparativeData.flowRate,
+                  borderColor: '#f59e0b',
+                  backgroundColor: '#f59e0b',
+                  tension: 0.3
+                },
+                {
+                  label: 'Bounce Rate (%)',
+                  data: comparativeData.bounceRate,
+                  borderColor: '#ef4444',
+                  backgroundColor: '#ef4444',
+                  tension: 0.3
+                }
+              ]}
+              height={200}
+            />
+          </div>
+        </div>
+        <div className="bg-blue-50 dark:bg-gray-700 rounded-lg p-3">
+          <p className="text-xs text-gray-700 dark:text-gray-200">
+            <strong>Insights:</strong> CE (Current) improved by 0.8% over 3 months. Flow Rate decreased from 5.2% to 4.8%, indicating better portfolio quality. 
+            NPA Recovery increased from ₹1.32 Cr to ₹1.48 Cr (+12.1% growth).
+          </p>
+        </div>
+      </Card>
+
+      {/* ACR (Accounts to be Collected per Resource) */}
+      <Card title="ACR - Accounts to be Collected per Resource (Collection Agent Performance)">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold bg-gray-100 dark:bg-gray-700">
+              <tr>
+                <th className="py-2 px-3 text-left">Collection Agent</th>
+                <th className="py-2 px-3 text-center">Assigned</th>
+                <th className="py-2 px-3 text-center">Pending</th>
+                <th className="py-2 px-3 text-center">Completed</th>
+                <th className="py-2 px-3 text-center">ACR %</th>
+                <th className="py-2 px-3 text-center">Amount Collected</th>
+                <th className="py-2 px-3 text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {acrData.map((agent, i) => (
+                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-3 font-medium">{agent.name}</td>
+                  <td className="text-center">{agent.assigned}</td>
+                  <td className="text-center text-orange-600 dark:text-orange-400 font-semibold">{agent.pending}</td>
+                  <td className="text-center text-green-600 dark:text-green-400 font-semibold">{agent.completed}</td>
+                  <td className="text-center font-bold text-indigo-600 dark:text-indigo-300">{agent.acr}</td>
+                  <td className="text-center font-semibold">{agent.amount}</td>
+                  <td className="text-center">
+                    <button
+                      onClick={() => {
+                        setSelectedResource(agent);
+                        setShowACRDrilldown(true);
+                      }}
+                      className="text-xs bg-indigo-600 hover:bg-indigo-700 text-white px-3 py-1 rounded-lg transition"
+                    >
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+
+      {/* ACR Drilldown Modal */}
+      {showACRDrilldown && selectedResource && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-auto">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-gray-800 z-10">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                ACR Drilldown - {selectedResource.name}
+              </h3>
+              <button
+                onClick={() => setShowACRDrilldown(false)}
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div className="bg-blue-50 dark:bg-gray-700 rounded-lg p-4">
+                  <div className="text-xs text-gray-600 dark:text-gray-300 uppercase mb-1">Total Assigned</div>
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white">{selectedResource.assigned}</div>
+                </div>
+                <div className="bg-orange-50 dark:bg-gray-700 rounded-lg p-4">
+                  <div className="text-xs text-gray-600 dark:text-gray-300 uppercase mb-1">Pending</div>
+                  <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">{selectedResource.pending}</div>
+                </div>
+                <div className="bg-green-50 dark:bg-gray-700 rounded-lg p-4">
+                  <div className="text-xs text-gray-600 dark:text-gray-300 uppercase mb-1">Completed</div>
+                  <div className="text-2xl font-bold text-green-600 dark:text-green-400">{selectedResource.completed}</div>
+                </div>
+                <div className="bg-indigo-50 dark:bg-gray-700 rounded-lg p-4">
+                  <div className="text-xs text-gray-600 dark:text-gray-300 uppercase mb-1">ACR Rate</div>
+                  <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-300">{selectedResource.acr}</div>
+                </div>
+              </div>
+
+              <div className="mb-6">
+                <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3 uppercase">Pending Collections Breakdown</h4>
+                <table className="w-full text-sm">
+                  <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold bg-gray-100 dark:bg-gray-700">
+                    <tr>
+                      <th className="py-2 px-3 text-left">Account ID</th>
+                      <th className="py-2 px-3 text-left">Customer Name</th>
+                      <th className="py-2 px-3 text-center">DPD Bucket</th>
+                      <th className="py-2 px-3 text-right">Amount Due</th>
+                      <th className="py-2 px-3 text-center">Last Contact</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                      <td className="py-2 px-3">ACC12453</td>
+                      <td className="py-2 px-3">Ramesh Patel</td>
+                      <td className="text-center">X1 (15 DPD)</td>
+                      <td className="text-right">₹45,230</td>
+                      <td className="text-center text-xs">2 days ago</td>
+                    </tr>
+                    <tr className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                      <td className="py-2 px-3">ACC12789</td>
+                      <td className="py-2 px-3">Sunita Verma</td>
+                      <td className="text-center">X2 (42 DPD)</td>
+                      <td className="text-right">₹67,890</td>
+                      <td className="text-center text-xs">1 day ago</td>
+                    </tr>
+                    <tr className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                      <td className="py-2 px-3">ACC13021</td>
+                      <td className="py-2 px-3">Anil Kumar</td>
+                      <td className="text-center">X1 (22 DPD)</td>
+                      <td className="text-right">₹38,120</td>
+                      <td className="text-center text-xs">Today</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div>
+                <h4 className="text-sm font-semibold text-gray-800 dark:text-gray-200 mb-3 uppercase">Recently Completed Collections</h4>
+                <table className="w-full text-sm">
+                  <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold bg-gray-100 dark:bg-gray-700">
+                    <tr>
+                      <th className="py-2 px-3 text-left">Account ID</th>
+                      <th className="py-2 px-3 text-left">Customer Name</th>
+                      <th className="py-2 px-3 text-right">Amount Collected</th>
+                      <th className="py-2 px-3 text-center">Collection Date</th>
+                      <th className="py-2 px-3 text-center">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                      <td className="py-2 px-3">ACC11987</td>
+                      <td className="py-2 px-3">Vijay Malhotra</td>
+                      <td className="text-right text-green-600 dark:text-green-400 font-semibold">₹52,340</td>
+                      <td className="text-center text-xs">Nov 18, 2025</td>
+                      <td className="text-center"><span className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">Paid</span></td>
+                    </tr>
+                    <tr className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                      <td className="py-2 px-3">ACC12234</td>
+                      <td className="py-2 px-3">Meera Shah</td>
+                      <td className="text-right text-green-600 dark:text-green-400 font-semibold">₹41,200</td>
+                      <td className="text-center text-xs">Nov 17, 2025</td>
+                      <td className="text-center"><span className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded">Paid</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Wasis Analysis */}
+      <Card title="Wasis Analysis - Bucket Flow Movement (Opening → Closing Bucket)">
+        <div className="mb-4 flex justify-between items-center">
+          <p className="text-xs text-gray-600 dark:text-gray-300">
+            Track portfolio movement across DPD buckets. Rollback indicates improvement, Forward Flow indicates deterioration.
+          </p>
+          <button
+            onClick={() => setShowWasisSnapshot(true)}
+            className="text-xs bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg transition flex items-center gap-2"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            View Snapshot
+          </button>
+        </div>
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold bg-gray-100 dark:bg-gray-700">
+              <tr>
+                <th className="py-2 px-3 text-left">Opening Bucket</th>
+                <th className="py-2 px-3 text-left">Closing Bucket</th>
+                <th className="py-2 px-3 text-center">No. of Accounts</th>
+                <th className="py-2 px-3 text-center">Percentage</th>
+                <th className="py-2 px-3 text-center">Flow Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              {wasisFlowData.map((flow, i) => (
+                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-3 font-medium">{flow.openingBucket}</td>
+                  <td className="py-3 px-3 font-medium">{flow.closingBucket}</td>
+                  <td className="text-center">{flow.accounts}</td>
+                  <td className="text-center font-semibold">{flow.percentage}</td>
+                  <td className="text-center">
+                    {flow.type === 'rollback' && <span className="text-xs bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded font-semibold">↺ Rollback</span>}
+                    {flow.type === 'stable' && <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded font-semibold">→ Stable</span>}
+                    {flow.type === 'forward' && <span className="text-xs bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-2 py-1 rounded font-semibold">↓ Forward</span>}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="mt-4 bg-yellow-50 dark:bg-gray-700 rounded-lg p-3">
+          <p className="text-xs text-gray-700 dark:text-gray-200">
+            <strong>Key Insight:</strong> 58.1% of X1 accounts rolled back to Current (good recovery). However, 25.3% of X3 accounts moved to NPA (requires focused intervention).
+          </p>
+        </div>
+      </Card>
+
+      {/* Wasis Snapshot Modal */}
+      {showWasisSnapshot && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-auto">
+            <div className="p-6 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center sticky top-0 bg-white dark:bg-gray-800 z-10">
+              <h3 className="text-lg font-bold text-gray-900 dark:text-white">
+                Wasis Flow - Visual Snapshot (Opening → Closing Bucket Movement)
+              </h3>
+              <button
+                onClick={() => setShowWasisSnapshot(false)}
+                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <div className="p-6">
+              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-800 rounded-xl p-6 border-2 border-indigo-200 dark:border-gray-600">
+                <h4 className="text-sm font-bold text-gray-800 dark:text-white mb-4 text-center uppercase">Portfolio Flow Visualization</h4>
+                
+                {/* Visual Flow Diagram */}
+                <div className="space-y-4">
+                  {/* Current Bucket */}
+                  <div className="bg-white dark:bg-gray-700 rounded-lg p-4 shadow">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-lg text-gray-900 dark:text-white">Current (Standard)</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">Opening: 8,921 accounts</span>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                      <div className="flex-1 bg-green-500 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        94.2% Stable (8,420)
+                      </div>
+                      <div className="w-20 bg-red-400 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        4.6% → X1
+                      </div>
+                      <div className="w-16 bg-red-500 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        1.0% → X2
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* X1 Bucket */}
+                  <div className="bg-white dark:bg-gray-700 rounded-lg p-4 shadow">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-lg text-orange-600 dark:text-orange-400">X1 (1-30 DPD)</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">Opening: 589 accounts</span>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                      <div className="flex-1 bg-green-500 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        58.1% ↺ Current (342)
+                      </div>
+                      <div className="w-24 bg-blue-400 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        26.5% Stable (156)
+                      </div>
+                      <div className="w-20 bg-red-400 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        15.4% → X2
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* X2 Bucket */}
+                  <div className="bg-white dark:bg-gray-700 rounded-lg p-4 shadow">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-lg text-orange-700 dark:text-orange-500">X2 (31-60 DPD)</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">Opening: 348 accounts</span>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                      <div className="w-24 bg-green-500 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        28.2% ↺ Curr
+                      </div>
+                      <div className="w-28 bg-green-400 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        32.2% ↺ X1 (112)
+                      </div>
+                      <div className="flex-1 bg-blue-400 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        25.0% Stable (87)
+                      </div>
+                      <div className="w-20 bg-red-500 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        14.6% → X3
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* X3 Bucket */}
+                  <div className="bg-white dark:bg-gray-700 rounded-lg p-4 shadow">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-bold text-lg text-red-600 dark:text-red-400">X3 (61-90 DPD)</span>
+                      <span className="text-sm text-gray-600 dark:text-gray-300">Opening: 150 accounts</span>
+                    </div>
+                    <div className="flex gap-2 items-center">
+                      <div className="w-24 bg-green-400 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        22.7% ↺ X2 (34)
+                      </div>
+                      <div className="flex-1 bg-blue-400 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        52.0% Stable (78)
+                      </div>
+                      <div className="w-28 bg-red-600 rounded h-8 flex items-center justify-center text-white text-xs font-semibold">
+                        25.3% → NPA (38)
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+                  <div className="bg-green-100 dark:bg-green-900 rounded-lg p-3">
+                    <div className="text-2xl font-bold text-green-700 dark:text-green-300">586</div>
+                    <div className="text-xs text-gray-700 dark:text-gray-200 font-semibold uppercase">Total Rollbacks</div>
+                  </div>
+                  <div className="bg-blue-100 dark:bg-blue-900 rounded-lg p-3">
+                    <div className="text-2xl font-bold text-blue-700 dark:text-blue-300">8,741</div>
+                    <div className="text-xs text-gray-700 dark:text-gray-200 font-semibold uppercase">Stable Accounts</div>
+                  </div>
+                  <div className="bg-red-100 dark:bg-red-900 rounded-lg p-3">
+                    <div className="text-2xl font-bold text-red-700 dark:text-red-300">681</div>
+                    <div className="text-xs text-gray-700 dark:text-gray-200 font-semibold uppercase">Forward Flow</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Existing Charts */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <Card title="Collection Efficiency Trend">
+        <Card title="Collection Efficiency Trend (Last 7 Months)">
           <LineChart 
             labels={["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"]}
             datasets={[
