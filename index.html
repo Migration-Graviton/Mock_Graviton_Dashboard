@@ -449,15 +449,15 @@ function CxoDashboard() {
 function BusinessDashboard() {
   // Real data from the tabular dashboard
   const rawData = [
-    { state: "GJ", branch: "Direct", loginCount_Nov: 69, loginAmount_Nov: 8.71, loginCount_Oct: 69, loginAmount_Oct: 7.76, freshFile_Nov: 0, freshFile_Oct: 0.30, partDisb: 0.12, totalDisb: 0.42, cancel: 0.00, netAch: 0.42, grossDisb: 0.59, sanctionCancel: 0.00, sanctionCount: 15, sanctionAmount: 0.66, wirr_Nov: 20.58, wirr_Oct: 20.73, wip_Count: 21, wip_Amount: 3.87, sud_Count: 10, sud_Amount: 0.62, manpower_Active: 16, manpower_OnNotice: 4, bm_Active: 6, bm_OnNotice: 0, login_Percent: 20, fdUnit: 13, fdPercent: 65 },
-    { state: "MP", branch: "Dayanand Bhai", loginCount_Nov: 302, loginAmount_Nov: 25.55, loginCount_Oct: 266, loginAmount_Oct: 22.17, freshFile_Nov: 16, freshFile_Oct: 0.57, partDisb: 0.25, totalDisb: 0.82, cancel: 0.00, netAch: 0.82, grossDisb: 1.69, sanctionCancel: 0.00, sanctionCount: 28, sanctionAmount: 1.37, wirr_Nov: 23.84, wirr_Oct: 22.67, wip_Count: 145, wip_Amount: 11.58, sud_Count: 26, sud_Amount: 1.33, manpower_Active: 96, manpower_OnNotice: 16, bm_Active: 27, bm_OnNotice: 3, login_Percent: 14, fdUnit: 98, fdPercent: 88 },
-    { state: "Raj", branch: "Prakash Veer", loginCount_Nov: 296, loginAmount_Nov: 25.76, loginCount_Oct: 303, loginAmount_Oct: 26.31, freshFile_Nov: 32, freshFile_Oct: 1.30, partDisb: 0.40, totalDisb: 1.70, cancel: 0.06, netAch: 1.65, grossDisb: 3.62, sanctionCancel: 0.10, sanctionCount: 33, sanctionAmount: 1.97, wirr_Nov: 22.26, wirr_Oct: 20.36, wip_Count: 104, wip_Amount: 9.74, sud_Count: 34, sud_Amount: 1.99, manpower_Active: 133, manpower_OnNotice: 28, bm_Active: 45, bm_OnNotice: 7, login_Percent: 30, fdUnit: 137, fdPercent: 85 },
-    { state: "UP", branch: "Direct", loginCount_Nov: 46, loginAmount_Nov: 3.92, loginCount_Oct: 31, loginAmount_Oct: 2.73, freshFile_Nov: 2, freshFile_Oct: 0.09, partDisb: 0.00, totalDisb: 0.09, cancel: 0.00, netAch: 0.09, grossDisb: 0.00, sanctionCancel: 0.00, sanctionCount: 1, sanctionAmount: 0.05, wirr_Nov: 23.42, wirr_Oct: null, wip_Count: 36, wip_Amount: 3.23, sud_Count: 3, sud_Amount: 0.16, manpower_Active: 16, manpower_OnNotice: 2, bm_Active: 6, bm_OnNotice: 0, login_Percent: 17, fdUnit: 16, fdPercent: 89 },
-    { state: "Jaipur HO", branch: "-", loginCount_Nov: 0, loginAmount_Nov: 0.00, loginCount_Oct: 0, loginAmount_Oct: 0.00, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.31, sanctionCancel: 0.00, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 },
-    { state: "PATRON", branch: "-", loginCount_Nov: 2, loginAmount_Nov: 0.29, loginCount_Oct: 0, loginAmount_Oct: 0.00, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.00, sanctionCancel: 0.00, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 },
-    { state: "Paharthan", branch: "-", loginCount_Nov: 0, loginAmount_Nov: 0.00, loginCount_Oct: 0, loginAmount_Oct: 0.00, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.00, sanctionCancel: 0.09, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 },
-    { state: "THIRUPATHI", branch: "-", loginCount_Nov: 20, loginAmount_Nov: 2.90, loginCount_Oct: 16, loginAmount_Oct: 1.11, freshFile_Nov: 2, freshFile_Oct: 0.11, partDisb: 0.05, totalDisb: 0.16, cancel: 0.00, netAch: 0.16, grossDisb: 0.15, sanctionCancel: 0.00, sanctionCount: 4, sanctionAmount: 0.31, wirr_Nov: 22.06, wirr_Oct: 25.79, wip_Count: 4, wip_Amount: 0.31, sud_Count: 3, sud_Amount: 0.14, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 },
-    { state: "PRITANISH", branch: "-", loginCount_Nov: 2, loginAmount_Nov: 0.90, loginCount_Oct: 2, loginAmount_Oct: 0.30, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.00, sanctionCancel: 0.00, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0 }
+    { state: "GJ", branch: "Direct", loginCount_Nov: 69, loginAmount_Nov: 8.71, loginCount_Oct: 69, loginAmount_Oct: 7.76, freshFile_Nov: 0, freshFile_Oct: 0.30, partDisb: 0.12, totalDisb: 0.42, cancel: 0.00, netAch: 0.42, grossDisb: 0.59, sanctionCancel: 0.00, sanctionCount: 15, sanctionAmount: 0.66, wirr_Nov: 20.58, wirr_Oct: 20.73, wip_Count: 21, wip_Amount: 3.87, sud_Count: 10, sud_Amount: 0.62, manpower_Active: 16, manpower_OnNotice: 4, bm_Active: 6, bm_OnNotice: 0, login_Percent: 20, fdUnit: 13, fdPercent: 65, ltvPercent: 72.5, foirPercent: 45.2 },
+    { state: "MP", branch: "Dayanand Bhai", loginCount_Nov: 302, loginAmount_Nov: 25.55, loginCount_Oct: 266, loginAmount_Oct: 22.17, freshFile_Nov: 16, freshFile_Oct: 0.57, partDisb: 0.25, totalDisb: 0.82, cancel: 0.00, netAch: 0.82, grossDisb: 1.69, sanctionCancel: 0.00, sanctionCount: 28, sanctionAmount: 1.37, wirr_Nov: 23.84, wirr_Oct: 22.67, wip_Count: 145, wip_Amount: 11.58, sud_Count: 26, sud_Amount: 1.33, manpower_Active: 96, manpower_OnNotice: 16, bm_Active: 27, bm_OnNotice: 3, login_Percent: 14, fdUnit: 98, fdPercent: 88, ltvPercent: 68.3, foirPercent: 42.1 },
+    { state: "Raj", branch: "Prakash Veer", loginCount_Nov: 296, loginAmount_Nov: 25.76, loginCount_Oct: 303, loginAmount_Oct: 26.31, freshFile_Nov: 32, freshFile_Oct: 1.30, partDisb: 0.40, totalDisb: 1.70, cancel: 0.06, netAch: 1.65, grossDisb: 3.62, sanctionCancel: 0.10, sanctionCount: 33, sanctionAmount: 1.97, wirr_Nov: 22.26, wirr_Oct: 20.36, wip_Count: 104, wip_Amount: 9.74, sud_Count: 34, sud_Amount: 1.99, manpower_Active: 133, manpower_OnNotice: 28, bm_Active: 45, bm_OnNotice: 7, login_Percent: 30, fdUnit: 137, fdPercent: 85, ltvPercent: 75.8, foirPercent: 48.5 },
+    { state: "UP", branch: "Direct", loginCount_Nov: 46, loginAmount_Nov: 3.92, loginCount_Oct: 31, loginAmount_Oct: 2.73, freshFile_Nov: 2, freshFile_Oct: 0.09, partDisb: 0.00, totalDisb: 0.09, cancel: 0.00, netAch: 0.09, grossDisb: 0.00, sanctionCancel: 0.00, sanctionCount: 1, sanctionAmount: 0.05, wirr_Nov: 23.42, wirr_Oct: null, wip_Count: 36, wip_Amount: 3.23, sud_Count: 3, sud_Amount: 0.16, manpower_Active: 16, manpower_OnNotice: 2, bm_Active: 6, bm_OnNotice: 0, login_Percent: 17, fdUnit: 16, fdPercent: 89, ltvPercent: 70.1, foirPercent: 44.7 },
+    { state: "Jaipur HO", branch: "-", loginCount_Nov: 0, loginAmount_Nov: 0.00, loginCount_Oct: 0, loginAmount_Oct: 0.00, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.31, sanctionCancel: 0.00, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0, ltvPercent: 0, foirPercent: 0 },
+    { state: "PATRON", branch: "-", loginCount_Nov: 2, loginAmount_Nov: 0.29, loginCount_Oct: 0, loginAmount_Oct: 0.00, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.00, sanctionCancel: 0.00, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0, ltvPercent: 0, foirPercent: 0 },
+    { state: "Paharthan", branch: "-", loginCount_Nov: 0, loginAmount_Nov: 0.00, loginCount_Oct: 0, loginAmount_Oct: 0.00, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.00, sanctionCancel: 0.09, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0, ltvPercent: 0, foirPercent: 0 },
+    { state: "THIRUPATHI", branch: "-", loginCount_Nov: 20, loginAmount_Nov: 2.90, loginCount_Oct: 16, loginAmount_Oct: 1.11, freshFile_Nov: 2, freshFile_Oct: 0.11, partDisb: 0.05, totalDisb: 0.16, cancel: 0.00, netAch: 0.16, grossDisb: 0.15, sanctionCancel: 0.00, sanctionCount: 4, sanctionAmount: 0.31, wirr_Nov: 22.06, wirr_Oct: 25.79, wip_Count: 4, wip_Amount: 0.31, sud_Count: 3, sud_Amount: 0.14, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0, ltvPercent: 71.2, foirPercent: 46.3 },
+    { state: "PRITANISH", branch: "-", loginCount_Nov: 2, loginAmount_Nov: 0.90, loginCount_Oct: 2, loginAmount_Oct: 0.30, freshFile_Nov: 0, freshFile_Oct: 0.00, partDisb: 0.00, totalDisb: 0.00, cancel: 0.00, netAch: 0.00, grossDisb: 0.00, sanctionCancel: 0.00, sanctionCount: 0, sanctionAmount: 0.00, wirr_Nov: null, wirr_Oct: null, wip_Count: 0, wip_Amount: 0.00, sud_Count: 0, sud_Amount: 0.00, manpower_Active: 0, manpower_OnNotice: 0, bm_Active: 0, bm_OnNotice: 0, login_Percent: 0, fdUnit: 0, fdPercent: 0, ltvPercent: 0, foirPercent: 0 }
   ];
 
   const [filters, setFilters] = useState({
@@ -475,10 +475,6 @@ function BusinessDashboard() {
   });
 
   const [activeView, setActiveView] = useState("overview");
-  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
-  const [isMonthSelectorOpen, setIsMonthSelectorOpen] = useState(true);
-  const [isYearSelectorOpen, setIsYearSelectorOpen] = useState(true);
-  const [monthSelectorOpen, setMonthSelectorOpen] = useState(false);
   const [calendarViewDate, setCalendarViewDate] = useState(new Date());
   const [isSelectingRangeEnd, setIsSelectingRangeEnd] = useState(false);
   
@@ -486,65 +482,6 @@ function BusinessDashboard() {
   const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   const formatISODate = (dateObj) => dateObj.toISOString().split('T')[0];
-
-  const getMonthsBetweenRange = (startIso, endIso) => {
-    if (!startIso || !endIso) return [];
-    const startDate = new Date(startIso);
-    const endDate = new Date(endIso);
-    const months = [];
-    const cursor = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
-    while (cursor <= endDate) {
-      months.push(`${monthNames[cursor.getMonth()]}-${cursor.getFullYear()}`);
-      cursor.setMonth(cursor.getMonth() + 1);
-    }
-    return months;
-  };
-
-  const calculateSelectedDays = (startIso, endIso) => {
-    if (!startIso || !endIso) return 0;
-    const start = new Date(startIso);
-    const end = new Date(endIso);
-    if (end < start) return 0;
-    return Math.floor((end - start) / (1000 * 60 * 60 * 24)) + 1;
-  };
-
-  const applyRangePreset = (startDateObj, endDateObj) => {
-    const startIso = formatISODate(startDateObj);
-    const endIso = formatISODate(endDateObj);
-    const monthsBetween = getMonthsBetweenRange(startIso, endIso);
-    const selectedDays = Math.max(1, calculateSelectedDays(startIso, endIso));
-    setFilters({
-      ...filters,
-      startDate: startIso,
-      endDate: endIso,
-      selectedMonths: monthsBetween.length ? monthsBetween : [`${monthNames[startDateObj.getMonth()]}-${startDateObj.getFullYear()}`],
-      selectedDay: selectedDays
-    });
-    setCalendarViewDate(endDateObj);
-    setIsSelectingRangeEnd(false);
-  };
-
-  const today = new Date();
-  const todayIso = formatISODate(today);
-
-  const calendarCells = (() => {
-    const year = calendarViewDate.getFullYear();
-    const month = calendarViewDate.getMonth();
-    const startOfMonth = new Date(year, month, 1);
-    const firstDayIndex = startOfMonth.getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const cells = [];
-    for (let i = 0; i < firstDayIndex; i++) {
-      cells.push(null);
-    }
-    for (let day = 1; day <= daysInMonth; day++) {
-      cells.push(new Date(year, month, day));
-    }
-    while (cells.length % 7 !== 0) {
-      cells.push(null);
-    }
-    return cells;
-  })();
 
   const formatDateLabel = (isoDate) => {
     if (!isoDate) return 'Select date';
@@ -558,8 +495,7 @@ function BusinessDashboard() {
     setCalendarViewDate(dateObj);
 
     if (!filters.startDate || !isSelectingRangeEnd) {
-      const singleMonth = [`${monthNames[dateObj.getMonth()]}-${dateObj.getFullYear()}`];
-      setFilters({ ...filters, startDate: iso, endDate: iso, selectedMonths: singleMonth, selectedDay: 1 });
+      setFilters({ ...filters, startDate: iso, endDate: iso });
       setIsSelectingRangeEnd(true);
       return;
     }
@@ -573,9 +509,7 @@ function BusinessDashboard() {
       newEndIso = startIso;
     }
 
-    const monthsBetween = getMonthsBetweenRange(newStartIso, newEndIso);
-    const selectedDays = Math.max(1, calculateSelectedDays(newStartIso, newEndIso));
-    setFilters({ ...filters, startDate: newStartIso, endDate: newEndIso, selectedMonths: monthsBetween, selectedDay: selectedDays });
+    setFilters({ ...filters, startDate: newStartIso, endDate: newEndIso });
     setIsSelectingRangeEnd(false);
   };
 
@@ -603,6 +537,28 @@ function BusinessDashboard() {
     setCalendarViewDate(new Date(calendarViewDate.getFullYear(), calendarViewDate.getMonth() + 1, 1));
   };
 
+  const today = new Date();
+  const todayIso = formatISODate(today);
+
+  const calendarCells = (() => {
+    const year = calendarViewDate.getFullYear();
+    const month = calendarViewDate.getMonth();
+    const startOfMonth = new Date(year, month, 1);
+    const firstDayIndex = startOfMonth.getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const cells = [];
+    for (let i = 0; i < firstDayIndex; i++) {
+      cells.push(null);
+    }
+    for (let day = 1; day <= daysInMonth; day++) {
+      cells.push(new Date(year, month, day));
+    }
+    while (cells.length % 7 !== 0) {
+      cells.push(null);
+    }
+    return cells;
+  })();
+
   // Calculate totals and filtered data
   const filteredData = rawData.filter(item => {
     if (filters.state !== "All" && item.state !== filters.state) return false;
@@ -618,8 +574,10 @@ function BusinessDashboard() {
     sanctionAmount: acc.sanctionAmount + item.sanctionAmount,
     totalDisb: acc.totalDisb + item.totalDisb,
     wip_Count: acc.wip_Count + item.wip_Count,
-    wip_Amount: acc.wip_Amount + item.wip_Amount
-  }), { loginCount_Nov: 0, loginAmount_Nov: 0, loginCount_Oct: 0, sanctionCount: 0, sanctionAmount: 0, totalDisb: 0, wip_Count: 0, wip_Amount: 0 });
+    wip_Amount: acc.wip_Amount + item.wip_Amount,
+    cancel: acc.cancel + (item.cancel || 0),
+    sud_Count: acc.sud_Count + item.sud_Count
+  }), { loginCount_Nov: 0, loginAmount_Nov: 0, loginCount_Oct: 0, sanctionCount: 0, sanctionAmount: 0, totalDisb: 0, wip_Count: 0, wip_Amount: 0, cancel: 0, sud_Count: 0 });
 
   const approvalRate = totals.loginCount_Nov > 0 ? ((totals.sanctionCount / totals.loginCount_Nov) * 100).toFixed(1) : 0;
   const conversionRate = totals.loginCount_Nov > 0 ? ((totals.totalDisb / totals.loginAmount_Nov) * 100).toFixed(1) : 0;
@@ -631,14 +589,7 @@ function BusinessDashboard() {
   const products = ["All", "Home Loan", "LAP", "Business Loan", "Personal Loan"];
   const ticketSizes = ["All", "0-10 lakh", "10-20 lakh", "20-30 lakh", "30-40 lakh", "40-50 lakh", "50+ lakh"];
   const loanCategories = ["All", "Salaried", "Self Employed", "Professional"];
-  const customerWorkProfiles = ["All", "Salaried", "Self-employed", "Business Owner", "Professional"];
-  
-  const currentYear = new Date().getFullYear();
-  // Generate years from 2010 to current year
-  const availableYears = [];
-  for (let year = currentYear; year >= 2010; year--) {
-    availableYears.push(year);
-  }
+  const customerWorkProfiles = ["All", "Salaried", "Self-Employed", "Business Owner", "Professional"];
 
 
   return (
@@ -697,7 +648,7 @@ function BusinessDashboard() {
         </div>
 
         {/* Second Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
           <div>
             <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Product</label>
             <select 
@@ -738,32 +689,10 @@ function BusinessDashboard() {
               {customerWorkProfiles.map(cwp => <option key={cwp} value={cwp}>{cwp}</option>)}
             </select>
           </div>
-          <div>
-            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Start Date</label>
-            <input 
-              type="date" 
-              value={filters.startDate}
-              onChange={(e) => setFilters({...filters, startDate: e.target.value})}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
-            />
-          </div>
         </div>
 
-        {/* Third Row - End Date */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
-          <div>
-            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">End Date</label>
-            <input 
-              type="date" 
-              value={filters.endDate}
-              onChange={(e) => setFilters({...filters, endDate: e.target.value})}
-              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
-            />
-          </div>
-        </div>
-
-        {/* Calendar-Based Date Range Selector (Optional Advanced View) */}
-        <div className="mt-6 grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-4">
+        {/* Date Range Selector using Calendar */}
+        <div className="mt-4 grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-4">
           <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-600 p-4 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <button onClick={goToPreviousMonth} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-200">
@@ -840,18 +769,11 @@ function BusinessDashboard() {
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span className="font-semibold">Analyzing:</span>
-                <span className="bg-gradient-to-r from-indigo-100 to-purple-100 dark:from-indigo-900 dark:to-purple-900 text-indigo-800 dark:text-indigo-200 px-2 py-1 rounded-md font-semibold">
-                  {filters.selectedDay} day{filters.selectedDay !== 1 ? 's' : ''}
-                </span>
-                <span className="text-gray-500 dark:text-gray-400">across</span>
-                <span className="bg-gradient-to-r from-purple-100 to-pink-100 dark:from-purple-900 dark:to-pink-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded-md font-semibold">
-                  {filters.selectedMonths.length} month{filters.selectedMonths.length !== 1 ? 's' : ''}
-                </span>
+                <span className="font-semibold">Date Range Selected:</span>
               </div>
               <div className="text-xs text-gray-500 dark:text-gray-400">
                 {filters.startDate && filters.endDate ? (
-                  <>Range: <span className="font-semibold text-gray-800 dark:text-gray-200">{formatDateLabel(filters.startDate)} → {formatDateLabel(filters.endDate)}</span></>
+                  <span className="font-semibold text-gray-800 dark:text-gray-200">{formatDateLabel(filters.startDate)} → {formatDateLabel(filters.endDate)}</span>
                 ) : (
                   'Select a date range to analyze performance'
                 )}
@@ -861,45 +783,46 @@ function BusinessDashboard() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
               {[{ label: 'Today', range: () => {
                 const date = new Date();
-                applyRangePreset(date, date);
+                const iso = formatISODate(date);
+                setFilters({ ...filters, startDate: iso, endDate: iso });
               } },
                 { label: 'Last 7 Days', range: () => {
                   const end = new Date();
                   const start = new Date();
                   start.setDate(end.getDate() - 6);
-                  applyRangePreset(start, end);
+                  setFilters({ ...filters, startDate: formatISODate(start), endDate: formatISODate(end) });
                 } },
                 { label: 'Last 30 Days', range: () => {
                   const end = new Date();
                   const start = new Date();
                   start.setDate(end.getDate() - 29);
-                  applyRangePreset(start, end);
+                  setFilters({ ...filters, startDate: formatISODate(start), endDate: formatISODate(end) });
                 } },
                 { label: 'This Month', range: () => {
                   const now = new Date();
                   const start = new Date(now.getFullYear(), now.getMonth(), 1);
                   const end = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-                  applyRangePreset(start, end);
+                  setFilters({ ...filters, startDate: formatISODate(start), endDate: formatISODate(end) });
                 } },
                 { label: 'Last Month', range: () => {
                   const now = new Date();
                   const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
                   const end = new Date(now.getFullYear(), now.getMonth(), 0);
-                  applyRangePreset(start, end);
+                  setFilters({ ...filters, startDate: formatISODate(start), endDate: formatISODate(end) });
                 } },
                 { label: 'Quarter to Date', range: () => {
                   const now = new Date();
                   const quarterStartMonth = Math.floor(now.getMonth() / 3) * 3;
                   const start = new Date(now.getFullYear(), quarterStartMonth, 1);
-                  applyRangePreset(start, now);
+                  setFilters({ ...filters, startDate: formatISODate(start), endDate: formatISODate(now) });
                 } },
                 { label: 'Year to Date', range: () => {
                   const now = new Date();
                   const start = new Date(now.getFullYear(), 0, 1);
-                  applyRangePreset(start, now);
+                  setFilters({ ...filters, startDate: formatISODate(start), endDate: formatISODate(now) });
                 } },
-                { label: 'Custom Clear', range: () => {
-                  setFilters({ ...filters, startDate: '', endDate: '', selectedMonths: [], selectedDay: 0 });
+                { label: 'Clear', range: () => {
+                  setFilters({ ...filters, startDate: '', endDate: '' });
                   setIsSelectingRangeEnd(false);
                 } }].map((preset, idx) => (
                   <button
@@ -913,7 +836,7 @@ function BusinessDashboard() {
             </div>
 
             <div className="bg-gradient-to-r from-indigo-50 to-indigo-100 dark:from-indigo-900/40 dark:to-purple-900/40 rounded-lg p-3 text-xs text-gray-700 dark:text-gray-200 border border-indigo-100 dark:border-indigo-700/40">
-              <strong>Tip:</strong> Start by clicking a date in the calendar to set the beginning of your analysis window. Select an end date to highlight the performance range; presets above auto-apply commonly used periods.
+              <strong>Tip:</strong> Click a date in the calendar to set the beginning of your analysis window, then select an end date to complete the range. Use quick presets above for common periods.
             </div>
           </div>
         </div>
@@ -927,8 +850,8 @@ function BusinessDashboard() {
           { key: "approval", label: "Approval Analysis", icon: "✅" },
           { key: "ro", label: "RO Productivity", icon: "👥" },
           { key: "tat", label: "TAT Analysis", icon: "⏱️" },
-          { key: "ltv", label: "LTV%", icon: "💰" },
-          { key: "foir", label: "FOIR%", icon: "📉" }
+          { key: "ltv", label: "LTV %", icon: "💰" },
+          { key: "foir", label: "FOIR %", icon: "📉" }
         ].map(view => (
           <button
             key={view.key}
@@ -947,123 +870,88 @@ function BusinessDashboard() {
       {/* Content based on active view */}
       {activeView === "overview" && (
         <>
-          <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-8 gap-4 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-7 gap-4 mb-6">
             <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900 dark:to-indigo-800 rounded-xl p-4 border border-indigo-200 dark:border-indigo-700">
-              <div className="text-xs text-indigo-600 dark:text-indigo-300 uppercase mb-1 font-semibold">Login Files</div>
-              <div className="text-xl font-bold text-indigo-900 dark:text-indigo-100">{totals.loginCount_Nov} | {(totals.loginAmount_Nov).toFixed(2)} Cr</div>
+              <div className="text-xs text-indigo-600 dark:text-indigo-300 uppercase mb-2 font-semibold">Login Files</div>
+              <div className="text-xl font-bold text-indigo-900 dark:text-indigo-100">{totals.loginCount_Nov} | {totals.loginAmount_Nov.toFixed(2)} Cr</div>
             </div>
             <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 rounded-xl p-4 border border-green-200 dark:border-green-700">
-              <div className="text-xs text-green-600 dark:text-green-300 uppercase mb-1 font-semibold">Sanction Files</div>
-              <div className="text-xl font-bold text-green-900 dark:text-green-100">{totals.sanctionCount} | {(totals.sanctionAmount).toFixed(2)} Cr</div>
+              <div className="text-xs text-green-600 dark:text-green-300 uppercase mb-2 font-semibold">Sanction Files</div>
+              <div className="text-xl font-bold text-green-900 dark:text-green-100">{totals.sanctionCount} | {totals.sanctionAmount.toFixed(2)} Cr</div>
             </div>
             <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800 rounded-xl p-4 border border-orange-200 dark:border-orange-700">
-              <div className="text-xs text-orange-600 dark:text-orange-300 uppercase mb-1 font-semibold">Disbursement Files</div>
+              <div className="text-xs text-orange-600 dark:text-orange-300 uppercase mb-2 font-semibold">Disbursement Files</div>
               <div className="text-xl font-bold text-orange-900 dark:text-orange-100">{Math.floor(totals.totalDisb / 0.075)} | {totals.totalDisb.toFixed(2)} Cr</div>
             </div>
             <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900 dark:to-red-800 rounded-xl p-4 border border-red-200 dark:border-red-700">
-              <div className="text-xs text-red-600 dark:text-red-300 uppercase mb-1 font-semibold">Cancel Files</div>
-              <div className="text-xl font-bold text-red-900 dark:text-red-100">{Math.floor(totals.loginCount_Nov * 0.08)} | {(totals.loginCount_Nov * 0.08 * 0.065).toFixed(2)} Cr</div>
+              <div className="text-xs text-red-600 dark:text-red-300 uppercase mb-2 font-semibold">Cancel Files</div>
+              <div className="text-xl font-bold text-red-900 dark:text-red-100">{Math.floor(totals.cancel * 10)} | {(totals.cancel).toFixed(2)} Cr</div>
             </div>
             <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800 rounded-xl p-4 border border-purple-200 dark:border-purple-700">
-              <div className="text-xs text-purple-600 dark:text-purple-300 uppercase mb-1 font-semibold">SUD Files</div>
-              <div className="text-xl font-bold text-purple-900 dark:text-purple-100">{Math.floor(totals.loginCount_Nov * 0.12)} | {(totals.loginCount_Nov * 0.12 * 0.072).toFixed(2)} Cr</div>
-            </div>
-            <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded-xl p-4 border border-blue-200 dark:border-blue-700">
-              <div className="text-xs text-blue-600 dark:text-blue-300 uppercase mb-1 font-semibold">Approval Rate</div>
-              <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">{approvalRate}%</div>
-            </div>
-            <div className="bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900 dark:to-teal-800 rounded-xl p-4 border border-teal-200 dark:border-teal-700">
-              <div className="text-xs text-teal-600 dark:text-teal-300 uppercase mb-1 font-semibold">Conversion</div>
-              <div className="text-2xl font-bold text-teal-900 dark:text-teal-100">{conversionRate}%</div>
+              <div className="text-xs text-purple-600 dark:text-purple-300 uppercase mb-2 font-semibold">SUD Files</div>
+              <div className="text-xl font-bold text-purple-900 dark:text-purple-100">{totals.sud_Count} | {(totals.sud_Count * 0.065).toFixed(2)} Cr</div>
             </div>
             <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-700 dark:to-gray-600 rounded-xl p-4 border border-gray-200 dark:border-gray-500">
-              <div className="text-xs text-gray-600 dark:text-gray-300 uppercase mb-1 font-semibold">WIP Files</div>
+              <div className="text-xs text-gray-600 dark:text-gray-300 uppercase mb-2 font-semibold">WIP Files</div>
               <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{totals.wip_Count} | {totals.wip_Amount.toFixed(2)} Cr</div>
+            </div>
+            <div className="bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900 dark:to-teal-800 rounded-xl p-4 border border-teal-200 dark:border-teal-700">
+              <div className="text-xs text-teal-600 dark:text-teal-300 uppercase mb-2 font-semibold">Conversion %</div>
+              <div className="text-2xl font-bold text-teal-900 dark:text-teal-100">{conversionRate}%</div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-            <Card title="Login vs Sanction vs Disbursement - File Counts">
+            <Card title="Login vs Sanction vs Disbursement – Amount">
               <BarChart 
                 labels={filteredData.map(d => d.state)}
                 datasets={[
                   {
-                    label: 'Logins (Files)',
-                    data: filteredData.map(d => d.loginCount_Nov),
-                    backgroundColor: '#4f46e5'
-                  },
-                  {
-                    label: 'Sanctions (Files)',
-                    data: filteredData.map(d => d.sanctionCount),
-                    backgroundColor: '#10b981'
-                  },
-                  {
-                    label: 'Disbursements (Files)',
-                    data: filteredData.map(d => Math.floor(d.totalDisb / 0.075)),
-                    backgroundColor: '#f59e0b'
-                  }
-                ]}
-                height={280}
-                options={{
-                  plugins: {
-                    datalabels: {
-                      display: true,
-                      color: '#fff',
-                      font: { weight: 'bold', size: 10 },
-                      formatter: (value) => value
-                    }
-                  }
-                }}
-              />
-            </Card>
-
-            <Card title="Login vs Sanction vs Disbursement - Amount (₹ Cr)">
-              <BarChart 
-                labels={filteredData.map(d => d.state)}
-                datasets={[
-                  {
-                    label: 'Login Amount',
+                    label: 'Login Amount (₹ Cr)',
                     data: filteredData.map(d => d.loginAmount_Nov),
                     backgroundColor: '#4f46e5'
                   },
                   {
-                    label: 'Sanction Amount',
+                    label: 'Sanction Amount (₹ Cr)',
                     data: filteredData.map(d => d.sanctionAmount),
                     backgroundColor: '#10b981'
                   },
                   {
-                    label: 'Disbursement Amount',
+                    label: 'Disbursement Amount (₹ Cr)',
                     data: filteredData.map(d => d.totalDisb),
                     backgroundColor: '#f59e0b'
                   }
                 ]}
                 height={280}
-                options={{
-                  plugins: {
-                    datalabels: {
-                      display: true,
-                      color: '#fff',
-                      font: { weight: 'bold', size: 9 },
-                      formatter: (value) => `₹${value.toFixed(1)}`
-                    }
-                  }
-                }}
               />
+            </Card>
+
+            <Card title="Conversion Metrics">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-blue-50 dark:bg-blue-900/30 p-4 rounded-lg">
+                  <div className="text-xs text-blue-600 dark:text-blue-400 uppercase mb-1">Login to Sanction</div>
+                  <div className="text-2xl font-bold text-blue-900 dark:text-blue-100">{approvalRate}%</div>
+                </div>
+                <div className="bg-green-50 dark:bg-green-900/30 p-4 rounded-lg">
+                  <div className="text-xs text-green-600 dark:text-green-400 uppercase mb-1">Sanction to Disb</div>
+                  <div className="text-2xl font-bold text-green-900 dark:text-green-100">{conversionRate}%</div>
+                </div>
+              </div>
             </Card>
           </div>
 
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-6">
-            <Card title="Conversion Funnel (Compact)">
-              <div className="relative h-40 flex flex-col justify-center">
-                <div className="space-y-1.5">
-                  <div className="bg-indigo-500 text-white text-center py-2 rounded-md font-semibold text-sm">
-                    Login: {totals.loginCount_Nov}
+            <Card title="Conversion Funnel">
+              <div className="relative h-64 flex flex-col justify-center">
+                <div className="space-y-2">
+                  <div className="bg-indigo-500 text-white text-center py-3 rounded-lg font-semibold">
+                    Login: {totals.loginCount_Nov} files
                   </div>
-                  <div className="bg-green-500 text-white text-center py-2 rounded-md font-semibold mx-4 text-sm">
-                    Sanction: {totals.sanctionCount} ({approvalRate}%)
+                  <div className="bg-green-500 text-white text-center py-3 rounded-lg font-semibold mx-6">
+                    Sanction: {totals.sanctionCount} files ({approvalRate}%)
                   </div>
-                  <div className="bg-orange-500 text-white text-center py-2 rounded-md font-semibold mx-8 text-sm">
-                    Disb: {Math.floor(totals.totalDisb / 0.075)} ({conversionRate}%)
+                  <div className="bg-orange-500 text-white text-center py-3 rounded-lg font-semibold mx-12">
+                    Disbursement: {Math.floor(totals.totalDisb / 0.075)} files ({conversionRate}%)
                   </div>
                 </div>
               </div>
@@ -1177,220 +1065,188 @@ function BusinessDashboard() {
   );
 }
 
-// LTV Analysis Component
+// LTV% Analysis Component
 function LTVAnalysis({ data }) {
-  const ltvData = [
-    { range: "0-50%", count: 145, avgLTV: "42%", state: "GJ" },
-    { range: "51-70%", count: 289, avgLTV: "63%", state: "MP" },
-    { range: "71-80%", count: 187, avgLTV: "76%", state: "Raj" },
-    { range: "81-90%", count: 98, avgLTV: "85%", state: "UP" },
-    { range: "91-100%", count: 23, avgLTV: "95%", state: "GJ" }
-  ];
-
-  return (
-    <div>
-      <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-white">LTV% (Loan to Value) Analysis</h3>
-      
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-        <Card title="LTV% Distribution">
-          <BarChart 
-            labels={ltvData.map(d => d.range)}
-            datasets={[
-              {
-                label: 'File Count',
-                data: ltvData.map(d => d.count),
-                backgroundColor: '#8b5cf6'
-              }
-            ]}
-            height={280}
-          />
-        </Card>
-
-        <Card title="Average LTV% by Range">
-          <LineChart 
-            labels={ltvData.map(d => d.range)}
-            datasets={[
-              {
-                label: 'Avg LTV %',
-                data: ltvData.map(d => parseFloat(d.avgLTV)),
-                borderColor: '#ec4899',
-                backgroundColor: '#ec4899',
-                tension: 0.3
-              }
-            ]}
-            height={280}
-          />
-        </Card>
-      </div>
-
-      <Card title="LTV% Details by Range">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">LTV Range</th>
-              <th className="py-2 text-center">File Count</th>
-              <th className="py-2 text-center">Average LTV%</th>
-              <th className="py-2 text-left">Primary State</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ltvData.map((ltv, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2 font-semibold">{ltv.range}</td>
-                <td className="text-center">{ltv.count}</td>
-                <td className="text-center font-bold text-purple-600 dark:text-purple-400">{ltv.avgLTV}</td>
-                <td className="py-2">{ltv.state}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-    </div>
-  );
-}
-
-// FOIR Analysis Component
-function FOIRAnalysis({ data }) {
-  const foirData = [
-    { range: "0-30%", count: 98, avgFOIR: "24%", riskLevel: "Low" },
-    { range: "31-40%", count: 234, avgFOIR: "36%", riskLevel: "Low" },
-    { range: "41-50%", count: 312, avgFOIR: "46%", riskLevel: "Medium" },
-    { range: "51-60%", count: 156, avgFOIR: "55%", riskLevel: "Medium" },
-    { range: "61%+", count: 42, avgFOIR: "68%", riskLevel: "High" }
-  ];
-
-  return (
-    <div>
-      <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-white">FOIR% (Fixed Obligation to Income Ratio) Analysis</h3>
-      
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-        <Card title="FOIR% Distribution">
-          <BarChart 
-            labels={foirData.map(d => d.range)}
-            datasets={[
-              {
-                label: 'File Count',
-                data: foirData.map(d => d.count),
-                backgroundColor: '#10b981'
-              }
-            ]}
-            height={280}
-          />
-        </Card>
-
-        <Card title="Average FOIR% by Range">
-          <LineChart 
-            labels={foirData.map(d => d.range)}
-            datasets={[
-              {
-                label: 'Avg FOIR %',
-                data: foirData.map(d => parseFloat(d.avgFOIR)),
-                borderColor: '#f59e0b',
-                backgroundColor: '#f59e0b',
-                tension: 0.3
-              }
-            ]}
-            height={280}
-          />
-        </Card>
-      </div>
-
-      <Card title="FOIR% Details with Risk Assessment">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">FOIR Range</th>
-              <th className="py-2 text-center">File Count</th>
-              <th className="py-2 text-center">Average FOIR%</th>
-              <th className="py-2 text-center">Risk Level</th>
-            </tr>
-          </thead>
-          <tbody>
-            {foirData.map((foir, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2 font-semibold">{foir.range}</td>
-                <td className="text-center">{foir.count}</td>
-                <td className="text-center font-bold text-green-600 dark:text-green-400">{foir.avgFOIR}</td>
-                <td className="text-center">
-                  <span className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                    foir.riskLevel === 'Low' ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' :
-                    foir.riskLevel === 'Medium' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200' :
-                    'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-                  }`}>
-                    {foir.riskLevel}
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-    </div>
-  );
-}
-
-// Comparative Analytics Component with 3-Period Selection
-function ComparativeAnalytics({ data, filters }) {
-  const [period1, setPeriod1] = useState("2025-11");
-  const [period2, setPeriod2] = useState("2025-10");
-  const [period3, setPeriod3] = useState("2025-09");
-
-  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const validData = data && data.length > 0 ? data.filter(d => d.ltvPercent !== undefined && d.ltvPercent !== null) : [];
+  const avgLTV = validData.length > 0 ? (validData.reduce((acc, d) => acc + d.ltvPercent, 0) / validData.length).toFixed(2) : '0.00';
+  const minLTV = validData.length > 0 ? Math.min(...validData.map(d => d.ltvPercent)).toFixed(2) : '0.00';
+  const maxLTV = validData.length > 0 ? Math.max(...validData.map(d => d.ltvPercent)).toFixed(2) : '0.00';
   
-  // Generate month options (last 24 months)
-  const generateMonthOptions = () => {
-    const options = [];
-    const today = new Date();
-    for (let i = 0; i < 24; i++) {
-      const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
-      const value = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
-      const label = `${monthNames[date.getMonth()]} ${date.getFullYear()}`;
-      options.push({ value, label });
-    }
-    return options;
-  };
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800 rounded-xl p-6 border border-purple-200 dark:border-purple-700">
+          <div className="text-sm text-purple-600 dark:text-purple-300 uppercase mb-2 font-semibold">Average LTV %</div>
+          <div className="text-4xl font-bold text-purple-900 dark:text-purple-100">{avgLTV}%</div>
+        </div>
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded-xl p-6 border border-blue-200 dark:border-blue-700">
+          <div className="text-sm text-blue-600 dark:text-blue-300 uppercase mb-2 font-semibold">Min LTV %</div>
+          <div className="text-4xl font-bold text-blue-900 dark:text-blue-100">{minLTV}%</div>
+        </div>
+        <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 rounded-xl p-6 border border-green-200 dark:border-green-700">
+          <div className="text-sm text-green-600 dark:text-green-300 uppercase mb-2 font-semibold">Max LTV %</div>
+          <div className="text-4xl font-bold text-green-900 dark:text-green-100">{maxLTV}%</div>
+        </div>
+      </div>
 
-  const monthOptions = generateMonthOptions();
+      <Card title="LTV % by State">
+        <BarChart 
+          labels={validData.map(d => d.state)}
+          datasets={[
+            {
+              label: 'LTV %',
+              data: validData.map(d => d.ltvPercent),
+              backgroundColor: '#9333ea'
+            }
+          ]}
+          height={320}
+        />
+      </Card>
 
-  // Mock data for 3 periods
+      <Card title="LTV % Distribution Table">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
+              <tr>
+                <th className="py-3 px-4 text-left">State</th>
+                <th className="py-3 px-4 text-left">Branch</th>
+                <th className="py-3 px-4 text-center">LTV %</th>
+                <th className="py-3 px-4 text-center">Login Amount (₹ Cr)</th>
+                <th className="py-3 px-4 text-center">Disbursement Amount (₹ Cr)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {validData.map((row, idx) => (
+                <tr key={idx} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-4 font-semibold">{row.state}</td>
+                  <td className="py-3 px-4">{row.branch}</td>
+                  <td className="py-3 px-4 text-center font-bold text-purple-600 dark:text-purple-400">{row.ltvPercent.toFixed(2)}%</td>
+                  <td className="py-3 px-4 text-center">{row.loginAmount_Nov.toFixed(2)}</td>
+                  <td className="py-3 px-4 text-center">{row.totalDisb.toFixed(2)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// FOIR% Analysis Component
+function FOIRAnalysis({ data }) {
+  const validData = data && data.length > 0 ? data.filter(d => d.foirPercent !== undefined && d.foirPercent !== null) : [];
+  const avgFOIR = validData.length > 0 ? (validData.reduce((acc, d) => acc + d.foirPercent, 0) / validData.length).toFixed(2) : '0.00';
+  const minFOIR = validData.length > 0 ? Math.min(...validData.map(d => d.foirPercent)).toFixed(2) : '0.00';
+  const maxFOIR = validData.length > 0 ? Math.max(...validData.map(d => d.foirPercent)).toFixed(2) : '0.00';
+  
+  return (
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800 rounded-xl p-6 border border-orange-200 dark:border-orange-700">
+          <div className="text-sm text-orange-600 dark:text-orange-300 uppercase mb-2 font-semibold">Average FOIR %</div>
+          <div className="text-4xl font-bold text-orange-900 dark:text-orange-100">{avgFOIR}%</div>
+        </div>
+        <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900 dark:to-red-800 rounded-xl p-6 border border-red-200 dark:border-red-700">
+          <div className="text-sm text-red-600 dark:text-red-300 uppercase mb-2 font-semibold">Min FOIR %</div>
+          <div className="text-4xl font-bold text-red-900 dark:text-red-100">{minFOIR}%</div>
+        </div>
+        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900 dark:to-yellow-800 rounded-xl p-6 border border-yellow-200 dark:border-yellow-700">
+          <div className="text-sm text-yellow-600 dark:text-yellow-300 uppercase mb-2 font-semibold">Max FOIR %</div>
+          <div className="text-4xl font-bold text-yellow-900 dark:text-yellow-100">{maxFOIR}%</div>
+        </div>
+      </div>
+
+      <Card title="FOIR % by State">
+        <BarChart 
+          labels={validData.map(d => d.state)}
+          datasets={[
+            {
+              label: 'FOIR %',
+              data: validData.map(d => d.foirPercent),
+              backgroundColor: '#f97316'
+            }
+          ]}
+          height={320}
+        />
+      </Card>
+
+      <Card title="FOIR % Distribution Table">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
+              <tr>
+                <th className="py-3 px-4 text-left">State</th>
+                <th className="py-3 px-4 text-left">Branch</th>
+                <th className="py-3 px-4 text-center">FOIR %</th>
+                <th className="py-3 px-4 text-center">Login Count</th>
+                <th className="py-3 px-4 text-center">Sanction Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              {validData.map((row, idx) => (
+                <tr key={idx} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-4 font-semibold">{row.state}</td>
+                  <td className="py-3 px-4">{row.branch}</td>
+                  <td className="py-3 px-4 text-center font-bold text-orange-600 dark:text-orange-400">{row.foirPercent.toFixed(2)}%</td>
+                  <td className="py-3 px-4 text-center">{row.loginCount_Nov}</td>
+                  <td className="py-3 px-4 text-center">{row.sanctionCount}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// Comparative Analytics Component with 3-Month Selection
+function ComparativeAnalytics({ data, filters }) {
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const currentYear = new Date().getFullYear();
+  const availableMonths = monthNames.map((m, i) => `${m}-${currentYear}`);
+  
+  const [period1, setPeriod1] = useState('Oct-2025');
+  const [period2, setPeriod2] = useState('Nov-2025');
+  const [period3, setPeriod3] = useState('');
+
+  // Mock data for comparison (in real scenario, this would come from API based on selected periods)
   const getPeriodData = (period) => {
-    const multiplier = period === period1 ? 1 : period === period2 ? 0.92 : 0.85;
-    return {
-      login: Math.floor(data.reduce((acc, d) => acc + d.loginCount_Nov, 0) * multiplier),
-      sanction: Math.floor(data.reduce((acc, d) => acc + d.sanctionCount, 0) * multiplier),
-      disbursement: (data.reduce((acc, d) => acc + d.totalDisb, 0) * multiplier).toFixed(2)
-    };
+    if (period === 'Nov-2025') return { loginCount: 737, loginAmount: 67.23, sanctionCount: 81, disbAmount: 3.34 };
+    if (period === 'Oct-2025') return { loginCount: 687, loginAmount: 59.98, sanctionCount: 77, disbAmount: 2.93 };
+    if (period === 'Sep-2025') return { loginCount: 695, loginAmount: 61.45, sanctionCount: 74, disbAmount: 2.76 };
+    return { loginCount: 0, loginAmount: 0, sanctionCount: 0, disbAmount: 0 };
   };
 
   const p1Data = getPeriodData(period1);
   const p2Data = getPeriodData(period2);
-  const p3Data = getPeriodData(period3);
+  const p3Data = period3 ? getPeriodData(period3) : null;
 
   return (
     <div>
-      <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-white">3-Period Comparative Analysis</h3>
-      
-      {/* Period Selectors */}
-      <div className="bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 mb-6 border border-indigo-200 dark:border-gray-600">
+      {/* Month Selection for Comparison */}
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-5 mb-6 border border-blue-200 dark:border-gray-600">
+        <h3 className="text-sm font-semibold text-gray-800 dark:text-white mb-4">📅 Select Up to 3 Periods to Compare</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Period 1 (Primary)</label>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Period 1 (Required)</label>
             <select 
               value={period1}
               onChange={(e) => setPeriod1(e.target.value)}
               className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
             >
-              {monthOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+              {availableMonths.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
           <div>
-            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Period 2 (Compare)</label>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Period 2 (Required)</label>
             <select 
               value={period2}
               onChange={(e) => setPeriod2(e.target.value)}
               className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
             >
-              {monthOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+              {availableMonths.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
           <div>
@@ -1400,7 +1256,8 @@ function ComparativeAnalytics({ data, filters }) {
               onChange={(e) => setPeriod3(e.target.value)}
               className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-indigo-500 text-gray-800 dark:text-gray-100"
             >
-              {monthOptions.map(opt => <option key={opt.value} value={opt.value}>{opt.label}</option>)}
+              <option value="">None</option>
+              {availableMonths.map(m => <option key={m} value={m}>{m}</option>)}
             </select>
           </div>
         </div>
@@ -1408,144 +1265,87 @@ function ComparativeAnalytics({ data, filters }) {
 
       {/* Comparison Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-        <Card title="Login Files Comparison">
+        <Card title={period1}>
           <div className="space-y-3">
-            <div className="flex justify-between items-center p-3 bg-indigo-50 dark:bg-indigo-900 rounded-lg">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Period 1</span>
-              <span className="text-xl font-bold text-indigo-600 dark:text-indigo-300">{p1Data.login}</span>
+            <div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 uppercase">Login Files</div>
+              <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{p1Data.loginCount} | ₹{p1Data.loginAmount} Cr</div>
             </div>
-            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Period 2</span>
-              <span className="text-xl font-bold text-gray-600 dark:text-gray-300">{p2Data.login}</span>
+            <div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 uppercase">Sanction</div>
+              <div className="text-xl font-bold text-green-600 dark:text-green-400">{p1Data.sanctionCount}</div>
             </div>
-            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Period 3</span>
-              <span className="text-xl font-bold text-gray-600 dark:text-gray-300">{p3Data.login}</span>
+            <div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 uppercase">Disbursement</div>
+              <div className="text-xl font-bold text-orange-600 dark:text-orange-400">₹{p1Data.disbAmount} Cr</div>
             </div>
           </div>
         </Card>
 
-        <Card title="Sanction Files Comparison">
+        <Card title={period2}>
           <div className="space-y-3">
-            <div className="flex justify-between items-center p-3 bg-green-50 dark:bg-green-900 rounded-lg">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Period 1</span>
-              <span className="text-xl font-bold text-green-600 dark:text-green-300">{p1Data.sanction}</span>
+            <div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 uppercase">Login Files</div>
+              <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{p2Data.loginCount} | ₹{p2Data.loginAmount} Cr</div>
             </div>
-            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Period 2</span>
-              <span className="text-xl font-bold text-gray-600 dark:text-gray-300">{p2Data.sanction}</span>
+            <div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 uppercase">Sanction</div>
+              <div className="text-xl font-bold text-green-600 dark:text-green-400">{p2Data.sanctionCount}</div>
             </div>
-            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Period 3</span>
-              <span className="text-xl font-bold text-gray-600 dark:text-gray-300">{p3Data.sanction}</span>
+            <div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 uppercase">Disbursement</div>
+              <div className="text-xl font-bold text-orange-600 dark:text-orange-400">₹{p2Data.disbAmount} Cr</div>
             </div>
           </div>
         </Card>
 
-        <Card title="Disbursement (₹ Cr) Comparison">
-          <div className="space-y-3">
-            <div className="flex justify-between items-center p-3 bg-orange-50 dark:bg-orange-900 rounded-lg">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Period 1</span>
-              <span className="text-xl font-bold text-orange-600 dark:text-orange-300">{p1Data.disbursement}</span>
+        {p3Data && (
+          <Card title={period3}>
+            <div className="space-y-3">
+              <div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 uppercase">Login Files</div>
+                <div className="text-xl font-bold text-gray-900 dark:text-gray-100">{p3Data.loginCount} | ₹{p3Data.loginAmount} Cr</div>
+              </div>
+              <div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 uppercase">Sanction</div>
+                <div className="text-xl font-bold text-green-600 dark:text-green-400">{p3Data.sanctionCount}</div>
+              </div>
+              <div>
+                <div className="text-xs text-gray-600 dark:text-gray-400 uppercase">Disbursement</div>
+                <div className="text-xl font-bold text-orange-600 dark:text-orange-400">₹{p3Data.disbAmount} Cr</div>
+              </div>
             </div>
-            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Period 2</span>
-              <span className="text-xl font-bold text-gray-600 dark:text-gray-300">{p2Data.disbursement}</span>
-            </div>
-            <div className="flex justify-between items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-              <span className="text-sm font-semibold text-gray-700 dark:text-gray-200">Period 3</span>
-              <span className="text-xl font-bold text-gray-600 dark:text-gray-300">{p3Data.disbursement}</span>
-            </div>
-          </div>
-        </Card>
+          </Card>
+        )}
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <Card title="3-Period Login Trend">
-          <BarChart 
-            labels={data.map(d => d.state)}
-            datasets={[
-              {
-                label: monthOptions.find(m => m.value === period1)?.label || 'Period 1',
-                data: data.map(d => d.loginCount_Nov),
-                backgroundColor: '#4f46e5'
-              },
-              {
-                label: monthOptions.find(m => m.value === period2)?.label || 'Period 2',
-                data: data.map(d => d.loginCount_Oct),
-                backgroundColor: '#10b981'
-              },
-              {
-                label: monthOptions.find(m => m.value === period3)?.label || 'Period 3',
-                data: data.map(d => Math.floor(d.loginCount_Oct * 0.92)),
-                backgroundColor: '#f59e0b'
-              }
-            ]}
-            height={280}
-          />
-        </Card>
+      {/* Comparison Chart */}
+      <Card title="Multi-Period Comparison – Login Count">
+        <BarChart 
+          labels={p3Data ? [period1, period2, period3] : [period1, period2]}
+          datasets={[
+            {
+              label: 'Login Count',
+              data: p3Data ? [p1Data.loginCount, p2Data.loginCount, p3Data.loginCount] : [p1Data.loginCount, p2Data.loginCount],
+              backgroundColor: '#4f46e5'
+            }
+          ]}
+          height={300}
+        />
+      </Card>
 
-        <Card title="Disbursement Trend: Current vs Previous">
-          <BarChart 
-            labels={data.map(d => d.state)}
-            datasets={[
-              {
-                label: 'Current Period (₹ Cr)',
-                data: data.map(d => d.totalDisb),
-                backgroundColor: '#10b981'
-              },
-              {
-                label: 'Previous Period (₹ Cr)',
-                data: data.map(d => d.grossDisb),
-                backgroundColor: '#94a3b8'
-              }
-            ]}
-            height={280}
-          />
-        </Card>
-      </div>
-
-      <Card title="State-wise Performance Comparison">
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
-              <tr>
-                <th className="py-3 px-4 text-left">State</th>
-                <th className="py-3 px-4 text-center">Login Nov</th>
-                <th className="py-3 px-4 text-center">Login Oct</th>
-                <th className="py-3 px-4 text-center">Change %</th>
-                <th className="py-3 px-4 text-center">Sanction Nov</th>
-                <th className="py-3 px-4 text-center">Disb Nov (₹ Cr)</th>
-                <th className="py-3 px-4 text-center">Disb Change %</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((d, i) => {
-                const loginChange = d.loginCount_Oct > 0 ? ((d.loginCount_Nov - d.loginCount_Oct) / d.loginCount_Oct * 100).toFixed(1) : 0;
-                const disbChange = d.grossDisb > 0 ? ((d.totalDisb - d.grossDisb) / d.grossDisb * 100).toFixed(1) : 0;
-                return (
-                  <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                    <td className="py-3 px-4 font-semibold">{d.state}</td>
-                    <td className="py-3 px-4 text-center font-bold text-indigo-700 dark:text-indigo-300">{d.loginCount_Nov}</td>
-                    <td className="py-3 px-4 text-center">{d.loginCount_Oct}</td>
-                    <td className="py-3 px-4 text-center">
-                      <span className={`font-bold ${loginChange >= 0 ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>
-                        {loginChange >= 0 ? '↑' : '↓'} {Math.abs(loginChange)}%
-                      </span>
-                    </td>
-                    <td className="py-3 px-4 text-center">{d.sanctionCount}</td>
-                    <td className="py-3 px-4 text-center font-semibold">{d.totalDisb.toFixed(2)}</td>
-                    <td className="py-3 px-4 text-center">
-                      <span className={`font-bold ${disbChange >= 0 ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>
-                        {disbChange >= 0 ? '↑' : '↓'} {Math.abs(disbChange)}%
-                      </span>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+      <Card title="Multi-Period Comparison – Disbursement Amount (₹ Cr)">
+        <BarChart 
+          labels={p3Data ? [period1, period2, period3] : [period1, period2]}
+          datasets={[
+            {
+              label: 'Disbursement Amount (₹ Cr)',
+              data: p3Data ? [p1Data.disbAmount, p2Data.disbAmount, p3Data.disbAmount] : [p1Data.disbAmount, p2Data.disbAmount],
+              backgroundColor: '#f97316'
+            }
+          ]}
+          height={300}
+        />
       </Card>
     </div>
   );
@@ -1920,197 +1720,209 @@ function ROProductivity({ data }) {
 
 // TAT Analysis
 function TATAnalysis({ data }) {
-  // TAT Trend Data over time (showing progression)
-  const monthLabels = ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'];
+  // Time-series TAT data for trend analysis
+  const months = ['Jul-25', 'Aug-25', 'Sep-25', 'Oct-25', 'Nov-25'];
   
-  const fileCompletionTATTrend = [6.8, 6.2, 5.9, 5.5, 5.2, 4.8, 4.5, 4.2];
-  const loginToSanctionTrend = [3.2, 3.0, 2.9, 2.7, 2.5, 2.4, 2.3, 2.2];
-  const sanctionToDisbursementTrend = [4.5, 4.2, 3.9, 3.6, 3.4, 3.2, 3.0, 2.8];
-  const documentVerificationTrend = [1.8, 1.7, 1.5, 1.4, 1.3, 1.2, 1.2, 1.1];
-  const creditAssessmentTrend = [2.5, 2.4, 2.3, 2.2, 2.2, 2.1, 2.1, 2.0];
-  const legalTechnicalTrend = [2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5];
-  const disbursementProcessingTrend = [2.5, 2.3, 2.2, 2.1, 2.0, 1.9, 1.8, 1.8];
+  // File Completion TAT Trend
+  const fileCompletionTrend = [7.2, 6.9, 6.5, 6.8, 6.4];
+  const fileCompletionTarget = 8.0;
+  
+  // Sanction to Dispatch TAT Trend
+  const sanctionToDispatchTrend = [3.5, 3.2, 3.4, 3.1, 2.9];
+  const sanctionToDispatchTarget = 4.0;
+  
+  // Login to Sanction TAT Trend
+  const loginToSanctionTrend = [2.5, 2.4, 2.2, 2.3, 2.1];
+  const loginToSanctionTarget = 3.0;
+  
+  // Sanction to Disbursement TAT Trend
+  const sanctionToDisbTrend = [3.8, 3.5, 3.6, 3.2, 3.0];
+  const sanctionToDisbTarget = 5.0;
 
   return (
     <div>
-      <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-white">TAT Analysis - Trend Over Time</h3>
-
-      {/* Key TAT Trend Line Graphs */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-        <Card title="File Completion TAT Trend (Days)">
-          <LineChart 
-            labels={monthLabels}
-            datasets={[
-              {
-                label: 'File Completion TAT',
-                data: fileCompletionTATTrend,
-                borderColor: '#4f46e5',
-                backgroundColor: '#4f46e5',
-                tension: 0.4
-              }
-            ]}
-            height={280}
-          />
-          <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-            <strong>Current:</strong> 4.2 days | <strong>Target:</strong> 5.0 days | <strong className="text-green-600 dark:text-green-400">↓ 38% improvement since Apr</strong>
+      {/* Summary KPIs */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900 dark:to-indigo-800 rounded-xl p-5 border border-indigo-200 dark:border-indigo-700">
+          <div className="text-xs text-indigo-600 dark:text-indigo-300 uppercase mb-2 font-semibold">Avg File Completion TAT</div>
+          <div className="flex items-end gap-2">
+            <div className="text-3xl font-bold text-indigo-900 dark:text-indigo-100">{fileCompletionTrend[fileCompletionTrend.length-1]}</div>
+            <div className="text-sm text-indigo-700 dark:text-indigo-300 mb-1">days</div>
           </div>
-        </Card>
-
-        <Card title="Sanction to Dispatch TAT Trend (Days)">
-          <LineChart 
-            labels={monthLabels}
-            datasets={[
-              {
-                label: 'Sanction to Dispatch TAT',
-                data: sanctionToDisbursementTrend,
-                borderColor: '#10b981',
-                backgroundColor: '#10b981',
-                tension: 0.4
-              }
-            ]}
-            height={280}
-          />
-          <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-            <strong>Current:</strong> 2.8 days | <strong>Target:</strong> 3.5 days | <strong className="text-green-600 dark:text-green-400">↓ 38% improvement since Apr</strong>
+          <div className="text-xs text-indigo-600 dark:text-indigo-400 mt-1">Target: {fileCompletionTarget} days</div>
+        </div>
+        <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 rounded-xl p-5 border border-green-200 dark:border-green-700">
+          <div className="text-xs text-green-600 dark:text-green-300 uppercase mb-2 font-semibold">Sanction to Dispatch TAT</div>
+          <div className="flex items-end gap-2">
+            <div className="text-3xl font-bold text-green-900 dark:text-green-100">{sanctionToDispatchTrend[sanctionToDispatchTrend.length-1]}</div>
+            <div className="text-sm text-green-700 dark:text-green-300 mb-1">days</div>
           </div>
-        </Card>
+          <div className="text-xs text-green-600 dark:text-green-400 mt-1">Target: {sanctionToDispatchTarget} days</div>
+        </div>
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800 rounded-xl p-5 border border-purple-200 dark:border-purple-700">
+          <div className="text-xs text-purple-600 dark:text-purple-300 uppercase mb-2 font-semibold">Login to Sanction TAT</div>
+          <div className="flex items-end gap-2">
+            <div className="text-3xl font-bold text-purple-900 dark:text-purple-100">{loginToSanctionTrend[loginToSanctionTrend.length-1]}</div>
+            <div className="text-sm text-purple-700 dark:text-purple-300 mb-1">days</div>
+          </div>
+          <div className="text-xs text-purple-600 dark:text-purple-400 mt-1">Target: {loginToSanctionTarget} days</div>
+        </div>
+        <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800 rounded-xl p-5 border border-orange-200 dark:border-orange-700">
+          <div className="text-xs text-orange-600 dark:text-orange-300 uppercase mb-2 font-semibold">Sanction to Disb TAT</div>
+          <div className="flex items-end gap-2">
+            <div className="text-3xl font-bold text-orange-900 dark:text-orange-100">{sanctionToDisbTrend[sanctionToDisbTrend.length-1]}</div>
+            <div className="text-sm text-orange-700 dark:text-orange-300 mb-1">days</div>
+          </div>
+          <div className="text-xs text-orange-600 dark:text-orange-400 mt-1">Target: {sanctionToDisbTarget} days</div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-        <Card title="Login to Sanction TAT Trend (Days)">
-          <LineChart 
-            labels={monthLabels}
-            datasets={[
-              {
-                label: 'Login to Sanction TAT',
-                data: loginToSanctionTrend,
-                borderColor: '#f59e0b',
-                backgroundColor: '#f59e0b',
-                tension: 0.4
-              }
-            ]}
-            height={280}
-          />
-          <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-            <strong>Current:</strong> 2.2 days | <strong>Target:</strong> 3.0 days | <strong className="text-green-600 dark:text-green-400">↓ 31% improvement since Apr</strong>
-          </div>
-        </Card>
-
-        <Card title="Document Verification TAT Trend (Days)">
-          <LineChart 
-            labels={monthLabels}
-            datasets={[
-              {
-                label: 'Doc Verification TAT',
-                data: documentVerificationTrend,
-                borderColor: '#ec4899',
-                backgroundColor: '#ec4899',
-                tension: 0.4
-              }
-            ]}
-            height={280}
-          />
-          <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-            <strong>Current:</strong> 1.1 days | <strong>Target:</strong> 1.5 days | <strong className="text-green-600 dark:text-green-400">↓ 39% improvement since Apr</strong>
-          </div>
-        </Card>
-      </div>
-
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-        <Card title="Credit Assessment TAT Trend (Days)">
-          <LineChart 
-            labels={monthLabels}
-            datasets={[
-              {
-                label: 'Credit Assessment TAT',
-                data: creditAssessmentTrend,
-                borderColor: '#8b5cf6',
-                backgroundColor: '#8b5cf6',
-                tension: 0.4
-              }
-            ]}
-            height={280}
-          />
-          <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-            <strong>Current:</strong> 2.0 days | <strong>Target:</strong> 2.5 days | <strong className="text-green-600 dark:text-green-400">↓ 20% improvement since Apr</strong>
-          </div>
-        </Card>
-
-        <Card title="Legal & Technical Check TAT Trend (Days)">
-          <LineChart 
-            labels={monthLabels}
-            datasets={[
-              {
-                label: 'Legal & Technical TAT',
-                data: legalTechnicalTrend,
-                borderColor: '#06b6d4',
-                backgroundColor: '#06b6d4',
-                tension: 0.4
-              }
-            ]}
-            height={280}
-          />
-          <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-            <strong>Current:</strong> 1.5 days | <strong>Target:</strong> 2.0 days | <strong className="text-green-600 dark:text-green-400">↓ 32% improvement since Apr</strong>
-          </div>
-        </Card>
-      </div>
-
-      <Card title="Disbursement Processing TAT Trend (Days)">
+      {/* Trend Line Graphs */}
+      <Card title="File Completion TAT Trend (Days)">
         <LineChart 
-          labels={monthLabels}
+          labels={months}
           datasets={[
             {
-              label: 'Disbursement Processing TAT',
-              data: disbursementProcessingTrend,
-              borderColor: '#ef4444',
-              backgroundColor: '#ef4444',
-              tension: 0.4
+              label: 'Actual TAT',
+              data: fileCompletionTrend,
+              borderColor: '#6366f1',
+              backgroundColor: '#6366f1',
+              tension: 0.3,
+              fill: false
+            },
+            {
+              label: 'Target TAT',
+              data: Array(months.length).fill(fileCompletionTarget),
+              borderColor: '#94a3b8',
+              backgroundColor: '#94a3b8',
+              borderDash: [5, 5],
+              tension: 0,
+              fill: false
             }
           ]}
-          height={280}
+          height={300}
         />
-        <div className="mt-3 text-sm text-gray-600 dark:text-gray-400">
-          <strong>Current:</strong> 1.8 days | <strong>Target:</strong> 2.0 days | <strong className="text-green-600 dark:text-green-400">↓ 28% improvement since Apr</strong>
-        </div>
       </Card>
 
-      {/* Combined Multi-line TAT Comparison */}
-      <Card title="All TAT Metrics - Combined Trend View">
+      <Card title="Sanction to Dispatch TAT Trend (Days)">
         <LineChart 
-          labels={monthLabels}
+          labels={months}
           datasets={[
             {
-              label: 'File Completion',
-              data: fileCompletionTATTrend,
-              borderColor: '#4f46e5',
-              backgroundColor: '#4f46e5',
-              tension: 0.4
-            },
-            {
-              label: 'Login to Sanction',
-              data: loginToSanctionTrend,
+              label: 'Actual TAT',
+              data: sanctionToDispatchTrend,
               borderColor: '#10b981',
               backgroundColor: '#10b981',
-              tension: 0.4
+              tension: 0.3,
+              fill: false
             },
             {
-              label: 'Sanction to Disb',
-              data: sanctionToDisbursementTrend,
-              borderColor: '#f59e0b',
-              backgroundColor: '#f59e0b',
-              tension: 0.4
-            },
-            {
-              label: 'Doc Verification',
-              data: documentVerificationTrend,
-              borderColor: '#ec4899',
-              backgroundColor: '#ec4899',
-              tension: 0.4
+              label: 'Target TAT',
+              data: Array(months.length).fill(sanctionToDispatchTarget),
+              borderColor: '#94a3b8',
+              backgroundColor: '#94a3b8',
+              borderDash: [5, 5],
+              tension: 0,
+              fill: false
             }
           ]}
-          height={320}
+          height={300}
         />
+      </Card>
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <Card title="Login to Sanction TAT Trend (Days)">
+          <LineChart 
+            labels={months}
+            datasets={[
+              {
+                label: 'Actual TAT',
+                data: loginToSanctionTrend,
+                borderColor: '#9333ea',
+                backgroundColor: '#9333ea',
+                tension: 0.3,
+                fill: false
+              },
+              {
+                label: 'Target TAT',
+                data: Array(months.length).fill(loginToSanctionTarget),
+                borderColor: '#94a3b8',
+                backgroundColor: '#94a3b8',
+                borderDash: [5, 5],
+                tension: 0,
+                fill: false
+              }
+            ]}
+            height={280}
+          />
+        </Card>
+
+        <Card title="Sanction to Disbursement TAT Trend (Days)">
+          <LineChart 
+            labels={months}
+            datasets={[
+              {
+                label: 'Actual TAT',
+                data: sanctionToDisbTrend,
+                borderColor: '#f97316',
+                backgroundColor: '#f97316',
+                tension: 0.3,
+                fill: false
+              },
+              {
+                label: 'Target TAT',
+                data: Array(months.length).fill(sanctionToDisbTarget),
+                borderColor: '#94a3b8',
+                backgroundColor: '#94a3b8',
+                borderDash: [5, 5],
+                tension: 0,
+                fill: false
+              }
+            ]}
+            height={280}
+          />
+        </Card>
+      </div>
+
+      <Card title="State-wise TAT Breakdown (Current Month)">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
+              <tr>
+                <th className="py-3 px-4 text-left">State</th>
+                <th className="py-3 px-4 text-center">Login → Sanction</th>
+                <th className="py-3 px-4 text-center">Sanction → Disb</th>
+                <th className="py-3 px-4 text-center">File Completion TAT</th>
+                <th className="py-3 px-4 text-center">Performance</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((d, i) => {
+                const t1 = (1.8 + Math.random() * 1).toFixed(1);
+                const t2 = (2.5 + Math.random() * 1.5).toFixed(1);
+                const t3 = (5.5 + Math.random() * 2.5).toFixed(1);
+                const avg = parseFloat(t3);
+                return (
+                  <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
+                    <td className="py-3 px-4 font-semibold">{d.state}</td>
+                    <td className="py-3 px-4 text-center">{t1}d</td>
+                    <td className="py-3 px-4 text-center">{t2}d</td>
+                    <td className="py-3 px-4 text-center font-semibold">{t3}d</td>
+                    <td className="py-3 px-4 text-center">
+                      <span className={`px-2 py-1 rounded text-xs font-semibold ${
+                        avg < 6.0 ? 'bg-green-100 dark:bg-green-900 text-green-900 dark:text-green-100' : 
+                        avg < 7.5 ? 'bg-yellow-100 dark:bg-yellow-900 text-yellow-900 dark:text-yellow-100' : 
+                        'bg-red-100 dark:bg-red-900 text-red-900 dark:text-red-100'
+                      }`}>
+                        {avg < 6.0 ? 'Excellent' : avg < 7.5 ? 'Good' : 'Needs Improvement'}
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </Card>
     </div>
   );
@@ -3483,8 +3295,7 @@ function CreditDashboard() {
    OPS DASHBOARD
 ------------------------------------------------------------ */
 function OpsDashboard() {
-  const [activeTab, setActiveTab] = useState("overview");
-  const [opsFilters, setOpsFilters] = useState({
+  const [filters, setFilters] = useState({
     state: "All",
     businessState: "All",
     cluster: "All",
@@ -3496,494 +3307,835 @@ function OpsDashboard() {
     endDate: "2025-11-17",
     userName: "All",
     customerWorkProfile: "All",
-    freshBounce: "All" // For bouncing page only
+    freshBounceFilter: "All" // For bouncing page only
   });
 
-  const states = ["All", "GJ", "MP", "Raj", "UP", "Maharashtra", "Karnataka"];
-  const businessStates = ["All", "Active", "Inactive", "Pending"];
+  const [activeView, setActiveView] = useState("overview");
+  const [calendarViewDate, setCalendarViewDate] = useState(new Date());
+  const [isSelectingRangeEnd, setIsSelectingRangeEnd] = useState(false);
+
+  const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  const formatISODate = (dateObj) => dateObj.toISOString().split('T')[0];
+
+  const handleDateSelect = (dateObj) => {
+    if (!dateObj) return;
+    const iso = formatISODate(dateObj);
+    setCalendarViewDate(dateObj);
+
+    if (!filters.startDate || !isSelectingRangeEnd) {
+      setFilters({ ...filters, startDate: iso, endDate: iso });
+      setIsSelectingRangeEnd(true);
+      return;
+    }
+
+    const startIso = filters.startDate;
+    const startDateObj = new Date(startIso);
+    let newStartIso = startIso;
+    let newEndIso = iso;
+    if (dateObj < startDateObj) {
+      newStartIso = iso;
+      newEndIso = startIso;
+    }
+
+    setFilters({ ...filters, startDate: newStartIso, endDate: newEndIso });
+    setIsSelectingRangeEnd(false);
+  };
+
+  const isSameDay = (dateObj, isoDate) => {
+    if (!dateObj || !isoDate) return false;
+    const compareDate = new Date(isoDate);
+    return dateObj.getFullYear() === compareDate.getFullYear() &&
+      dateObj.getMonth() === compareDate.getMonth() &&
+      dateObj.getDate() === compareDate.getDate();
+  };
+
+  const isInRange = (dateObj) => {
+    if (!dateObj || !filters.startDate || !filters.endDate) return false;
+    const start = new Date(filters.startDate);
+    const end = new Date(filters.endDate);
+    if (start > end) return false;
+    return dateObj >= start && dateObj <= end;
+  };
+
+  const goToPreviousMonth = () => {
+    setCalendarViewDate(new Date(calendarViewDate.getFullYear(), calendarViewDate.getMonth() - 1, 1));
+  };
+
+  const goToNextMonth = () => {
+    setCalendarViewDate(new Date(calendarViewDate.getFullYear(), calendarViewDate.getMonth() + 1, 1));
+  };
+
+  const today = new Date();
+  const todayIso = formatISODate(today);
+
+  const calendarCells = (() => {
+    const year = calendarViewDate.getFullYear();
+    const month = calendarViewDate.getMonth();
+    const startOfMonth = new Date(year, month, 1);
+    const firstDayIndex = startOfMonth.getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const cells = [];
+    for (let i = 0; i < firstDayIndex; i++) {
+      cells.push(null);
+    }
+    for (let day = 1; day <= daysInMonth; day++) {
+      cells.push(new Date(year, month, day));
+    }
+    while (cells.length % 7 !== 0) {
+      cells.push(null);
+    }
+    return cells;
+  })();
+
+  const formatDateLabel = (isoDate) => {
+    if (!isoDate) return 'Select date';
+    const date = new Date(isoDate);
+    return date.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+  };
+
+  // Filter options
+  const states = ["All", "GJ", "MP", "Raj", "UP", "MH"];
   const clusters = ["All", "North", "South", "East", "West"];
-  const branches = ["All", "Direct", "Dayanand Bhai", "Prakash Veer", "Jaipur Main", "Udaipur", "Ajmer"];
+  const businessStates = ["All", "Active", "Inactive", "Pending"];
+  const branches = ["All", "Direct", "Dayanand Bhai", "Prakash Veer", "Jaipur Main"];
   const products = ["All", "Home Loan", "LAP", "Business Loan", "Personal Loan"];
-  const ticketSizeBands = ["All", "0-10 lakh", "10-20 lakh", "20-30 lakh", "30-40 lakh", "40-50 lakh"];
+  const ticketSizes = ["All", "0-10 lakh", "10-20 lakh", "20-30 lakh", "30-40 lakh", "40-50 lakh"];
   const loanCategories = ["All", "Salaried", "Self Employed", "Professional"];
-  const userNames = ["All", "Rahul Sharma", "Priya Singh", "Amit Kumar", "Neha Patel", "Vikram Reddy"];
-  const customerWorkProfiles = ["All", "Salaried", "Self-employed", "Business Owner", "Professional"];
+  const userNames = ["All", "User 1", "User 2", "User 3", "User 4"];
+  const customerWorkProfiles = ["All", "Salaried", "Self-Employed", "Business Owner"];
   const freshBounceOptions = ["All", "Fresh Bounce", "Other"];
 
-  // Mock data for Operations
-  const nachData = [
-    { branch: "Jaipur Main", nachCreated: 145, nachRegistered: 132, tatDays: 2.3, successRate: "91%" },
-    { branch: "Udaipur", nachCreated: 98, nachRegistered: 87, tatDays: 2.8, successRate: "89%" },
-    { branch: "Ajmer", nachCreated: 112, nachRegistered: 101, tatDays: 2.1, successRate: "90%" }
-  ];
-
-  const ftrData = [
-    { branch: "Jaipur Main", totalFiles: 234, ftr: 215, ftrPercent: "91.9%", ftnr: 19, ftnrPercent: "8.1%" },
-    { branch: "Udaipur", totalFiles: 189, ftr: 168, ftrPercent: "88.9%", ftnr: 21, ftnrPercent: "11.1%" },
-    { branch: "Ajmer", totalFiles: 201, ftr: 187, ftrPercent: "93.0%", ftnr: 14, ftnrPercent: "7.0%" }
-  ];
-
-  const bounceData = [
-    { year: "2023", band: "0-10 lakh", totalCases: 456, bounced: 32, bouncePercent: "7.0%", workProfile: "Salaried" },
-    { year: "2023", band: "10-20 lakh", totalCases: 389, bounced: 28, bouncePercent: "7.2%", workProfile: "Self-employed" },
-    { year: "2024", band: "0-10 lakh", totalCases: 512, bounced: 29, bouncePercent: "5.7%", workProfile: "Salaried" },
-    { year: "2024", band: "10-20 lakh", totalCases: 423, bounced: 25, bouncePercent: "5.9%", workProfile: "Self-employed" },
-    { year: "2025", band: "0-10 lakh", totalCases: 387, bounced: 18, bouncePercent: "4.7%", workProfile: "Salaried" }
-  ];
-
-  const chargesData = [
-    { chargeType: "Processing Fee", totalAmount: "12.45 Cr", caseCount: 1234 },
-    { chargeType: "Legal Fee", totalAmount: "3.21 Cr", caseCount: 892 },
-    { chargeType: "Valuation Charges", totalAmount: "1.89 Cr", caseCount: 1156 },
-    { chargeType: "Insurance Premium", totalAmount: "5.67 Cr", caseCount: 876 },
-    { chargeType: "CERSAI Charges", totalAmount: "0.98 Cr", caseCount: 1089 }
-  ];
-
-  const opsHoldCases = [
-    { branch: "Jaipur Main", initiated: 45, notApproved: 12, pendingWith: "SB Checker" },
-    { branch: "Udaipur", initiated: 38, notApproved: 8, pendingWith: "Branch Manager" },
-    { branch: "Ajmer", initiated: 51, notApproved: 15, pendingWith: "SB Checker" }
-  ];
-
-  const complianceData = [
-    { type: "C-KYC", done: 1567, pending: 234, total: 1801, compliance: "87%" },
-    { type: "CERSAI", done: 1432, notDone: 369, total: 1801, compliance: "79%" }
-  ];
-
-  const disbursementStatus = [
-    { status: "Released", count: 1456, amount: "234.56 Cr" },
-    { status: "Not Released", count: 89, amount: "12.34 Cr" },
-    { status: "Unreleased Tranche", count: 34, amount: "5.67 Cr" }
-  ];
-
-  const enachData = [
-    { bank: "HDFC", registered: 234, success: 198, successRate: "84.6%" },
-    { bank: "ICICI", registered: 189, success: 167, successRate: "88.4%" },
-    { bank: "SBI", registered: 298, success: 256, successRate: "85.9%" }
-  ];
-
-  const exceptions = [
-    { file: "FILE-2211", branch: "Jaipur Main", issue: "PAN mismatch", delay: "18 hrs" },
-    { file: "FILE-2298", branch: "Udaipur", issue: "Banking incomplete", delay: "26 hrs" },
-    { file: "FILE-2177", branch: "Ajmer", issue: "Missing RC copy", delay: "32 hrs" },
-  ];
-
-  const renderOverviewTab = () => (
+  return (
     <div>
-      {/* KPI Cards */}
+      {/* Global Filters */}
+      <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 mb-6 border border-purple-200 dark:border-gray-600">
+        <div className="flex items-center gap-2 mb-3">
+          <svg className="w-5 h-5 text-purple-700 dark:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+          </svg>
+          <h3 className="text-sm font-semibold text-gray-800 dark:text-white">Operations Filters</h3>
+        </div>
+        
+        {/* First Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">State</label>
+            <select 
+              value={filters.state}
+              onChange={(e) => setFilters({...filters, state: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+            >
+              {states.map(s => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Business State</label>
+            <select 
+              value={filters.businessState}
+              onChange={(e) => setFilters({...filters, businessState: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+            >
+              {businessStates.map(bs => <option key={bs} value={bs}>{bs}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Cluster</label>
+            <select 
+              value={filters.cluster}
+              onChange={(e) => setFilters({...filters, cluster: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+            >
+              {clusters.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Branch</label>
+            <select 
+              value={filters.branch}
+              onChange={(e) => setFilters({...filters, branch: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+            >
+              {branches.map(b => <option key={b} value={b}>{b}</option>)}
+            </select>
+          </div>
+        </div>
+
+        {/* Second Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Product</label>
+            <select 
+              value={filters.product}
+              onChange={(e) => setFilters({...filters, product: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+            >
+              {products.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Ticket Size Band</label>
+            <select 
+              value={filters.ticketSizeBand}
+              onChange={(e) => setFilters({...filters, ticketSizeBand: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+            >
+              {ticketSizes.map(ts => <option key={ts} value={ts}>{ts}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Loan Category</label>
+            <select 
+              value={filters.loanCategory}
+              onChange={(e) => setFilters({...filters, loanCategory: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+            >
+              {loanCategories.map(lc => <option key={lc} value={lc}>{lc}</option>)}
+            </select>
+          </div>
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">User Name</label>
+            <select 
+              value={filters.userName}
+              onChange={(e) => setFilters({...filters, userName: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+            >
+              {userNames.map(un => <option key={un} value={un}>{un}</option>)}
+            </select>
+          </div>
+        </div>
+
+        {/* Third Row */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+          <div>
+            <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Customer Work Profile</label>
+            <select 
+              value={filters.customerWorkProfile}
+              onChange={(e) => setFilters({...filters, customerWorkProfile: e.target.value})}
+              className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+            >
+              {customerWorkProfiles.map(cwp => <option key={cwp} value={cwp}>{cwp}</option>)}
+            </select>
+          </div>
+          {activeView === "bouncing" && (
+            <div>
+              <label className="text-xs text-gray-700 dark:text-gray-200 mb-1 block font-semibold">Fresh Bounce / Other</label>
+              <select 
+                value={filters.freshBounceFilter}
+                onChange={(e) => setFilters({...filters, freshBounceFilter: e.target.value})}
+                className="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-sm focus:ring-2 focus:ring-purple-500 text-gray-800 dark:text-gray-100"
+              >
+                {freshBounceOptions.map(fb => <option key={fb} value={fb}>{fb}</option>)}
+              </select>
+            </div>
+          )}
+        </div>
+
+        {/* Date Range Selector */}
+        <div className="mt-4 grid grid-cols-1 lg:grid-cols-[340px_1fr] gap-4">
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-600 p-4 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <button onClick={goToPreviousMonth} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-200">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+              <div className="text-sm font-semibold text-gray-800 dark:text-gray-100">
+                {monthNames[calendarViewDate.getMonth()]} {calendarViewDate.getFullYear()}
+              </div>
+              <button onClick={goToNextMonth} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-200">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+            <div className="grid grid-cols-7 text-center text-xs text-gray-500 dark:text-gray-400 mb-2">
+              {weekDays.map(day => (
+                <div key={day} className="py-1 font-semibold uppercase">{day}</div>
+              ))}
+            </div>
+            <div className="grid grid-cols-7 gap-1 text-sm">
+              {calendarCells.map((dateObj, idx) => {
+                const isToday = dateObj && isSameDay(dateObj, todayIso);
+                const isSelectedStart = dateObj && isSameDay(dateObj, filters.startDate);
+                const isSelectedEnd = dateObj && isSameDay(dateObj, filters.endDate);
+                const inRange = dateObj && isInRange(dateObj);
+                return (
+                  <button
+                    key={idx}
+                    disabled={!dateObj}
+                    onClick={() => handleDateSelect(dateObj)}
+                    className={`h-10 rounded-lg flex items-center justify-center transition text-sm font-semibold ${
+                      !dateObj
+                        ? 'bg-transparent cursor-default'
+                        : inRange
+                        ? 'bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-200'
+                        : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200'
+                    } ${
+                      isSelectedStart || isSelectedEnd
+                        ? 'border-2 border-purple-500'
+                        : 'border border-gray-200 dark:border-gray-600'
+                    } ${
+                      isToday && !(isSelectedStart || isSelectedEnd)
+                        ? 'ring-1 ring-dashed ring-offset-2 ring-purple-400'
+                        : ''
+                    }`}
+                  >
+                    {dateObj ? dateObj.getDate() : ''}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              <div className="text-xs text-gray-600 dark:text-gray-300">
+                <div className="uppercase font-semibold text-[10px] text-gray-500 dark:text-gray-400">Start Date</div>
+                <div className="text-sm font-bold text-gray-800 dark:text-gray-100">{formatDateLabel(filters.startDate)}</div>
+              </div>
+              <div className="text-xs text-gray-600 dark:text-gray-300 text-right">
+                <div className="uppercase font-semibold text-[10px] text-gray-500 dark:text-gray-400">End Date</div>
+                <div className="text-sm font-bold text-gray-800 dark:text-gray-100">{formatDateLabel(filters.endDate)}</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-600 p-4 shadow-sm flex items-center justify-center">
+            <div className="text-center">
+              <div className="text-xs text-gray-500 dark:text-gray-400 uppercase mb-2">Date Range Selected</div>
+              <div className="text-lg font-bold text-purple-600 dark:text-purple-400">{formatDateLabel(filters.startDate)} to {formatDateLabel(filters.endDate)}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="flex gap-2 mb-6 overflow-x-auto">
+        {[
+          { key: "overview", label: "Overview", icon: "📊" },
+          { key: "bouncing", label: "Bouncing Analysis", icon: "⚡" },
+          { key: "ftr-ftnr", label: "FTR & FTNR", icon: "✅" }
+        ].map(view => (
+          <button
+            key={view.key}
+            onClick={() => setActiveView(view.key)}
+            className={`px-4 py-2 rounded-lg text-sm font-semibold transition whitespace-nowrap ${
+              activeView === view.key 
+                ? "bg-purple-600 text-white shadow-lg" 
+                : "bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-600"
+            }`}
+          >
+            {view.icon} {view.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Content based on active view */}
+      {activeView === "overview" && <OpsOverview />}
+      {activeView === "bouncing" && <OpsBouncingPage />}
+      {activeView === "ftr-ftnr" && <OpsFTRFTNRPage />}
+    </div>
+  );
+}
+
+// Operations Overview Component
+function OpsOverview() {
+  return (
+    <div>
+      {/* KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 mb-6">
-        <KPI label="NACH Presentation" value="68%" tooltip="Percentage of cases with NACH presentation completed." />
-        <KPI label="eNACH Success" value="86%" tooltip="Percentage of cases where eNACH was successfully registered." />
-        <KPI label="FTR %" value="91%" tooltip="First Time Right: Files approved without any rework." />
-        <KPI label="FTNR %" value="9%" tooltip="First Time Not Right: Files requiring rework." />
-        <KPI label="Avg File Completion TAT" value="4.2 days" tooltip="Average TAT from file receiving to activity complete." />
-        <KPI label="File Dispatch TAT" value="2.8 days" tooltip="Average TAT from sanction to physical file dispatch." />
+        <KPI label="NACH Presentation" value="68%" tooltip="Percentage of cases with NACH presentation." />
+        <KPI label="eSign %" value="85%" tooltip="Percentage of cases with eSign completion." />
+        <KPI label="FTR %" value="92%" tooltip="First Time Right: Files approved without any rework." />
+        <KPI label="Avg TAT (File)" value="6.4 days" tooltip="Average file completion TAT." />
+        <KPI label="Bounce %" value="7.2%" tooltip="Percentage of bounced EMIs." />
+        <KPI label="PDC ≤3" value="29" tooltip="Cases with PDC cheque count ≤ 3." />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mb-6">
-        <KPI label="eSign %" value="78%" tooltip="Percentage of cases using eSign." />
-        <KPI label="Mandate Reg TAT" value="2.4 days" tooltip="Average TAT from NACH created to registered." />
-        <KPI label="PDC ≤3 Cases" value="187" tooltip="Count of cases with PDC cheque count 3 or less." />
-        <KPI label="Insurance Deducted" value="876" tooltip="Count of cases where insurance charge was deducted." />
-        <KPI label="Ops Hold Cases" value="35" tooltip="Cases not disbursed, pending approval." />
+      {/* Charts Row 1 */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <Card title="NACH Presentation vs eNACH">
+          <BarChart 
+            labels={["NACH", "eNACH", "PDC", "Cash"]}
+            datasets={[
+              {
+                label: 'Percentage',
+                data: [68, 21, 9, 2],
+                backgroundColor: '#9333ea'
+              }
+            ]}
+            height={280}
+          />
+        </Card>
+
+        <Card title="FTR vs FTNR Trend">
+          <LineChart 
+            labels={["Jul", "Aug", "Sep", "Oct", "Nov"]}
+            datasets={[
+              {
+                label: 'FTR %',
+                data: [89, 90, 91, 90, 92],
+                borderColor: '#10b981',
+                backgroundColor: '#10b981',
+                tension: 0.3
+              },
+              {
+                label: 'FTNR %',
+                data: [11, 10, 9, 10, 8],
+                borderColor: '#ef4444',
+                backgroundColor: '#ef4444',
+                tension: 0.3
+              }
+            ]}
+            height={280}
+          />
+        </Card>
       </div>
 
-      {/* FTR/FTNR Trend Graph */}
-      <Card title="FTR% & FTNR% Trend">
+      {/* Average TAT */}
+      <Card title="Average TAT (File Completion) – Trend">
         <LineChart 
-          labels={["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"]}
+          labels={["Jul-25", "Aug-25", "Sep-25", "Oct-25", "Nov-25"]}
           datasets={[
             {
-              label: 'FTR %',
-              data: [82, 86, 89, 91, 88, 92, 90, 91],
-              borderColor: '#10b981',
-              backgroundColor: '#10b981',
+              label: 'File Completion TAT (Days)',
+              data: [7.2, 6.9, 6.5, 6.8, 6.4],
+              borderColor: '#6366f1',
+              backgroundColor: '#6366f1',
               tension: 0.3
-            },
+            }
+          ]}
+          height={280}
+        />
+      </Card>
+
+      {/* TAT for File Dispatch */}
+      <Card title="Average TAT for File Dispatch – Trend">
+        <LineChart 
+          labels={["Jul-25", "Aug-25", "Sep-25", "Oct-25", "Nov-25"]}
+          datasets={[
             {
-              label: 'FTNR %',
-              data: [18, 14, 11, 9, 12, 8, 10, 9],
+              label: 'Sanction to Dispatch TAT (Days)',
+              data: [3.5, 3.2, 3.4, 3.1, 2.9],
+              borderColor: '#f59e0b',
+              backgroundColor: '#f59e0b',
+              tension: 0.3
+            }
+          ]}
+          height={280}
+        />
+      </Card>
+
+      {/* Disbursement Charges */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
+        <Card title="Disbursement Charges Summary">
+          <div className="space-y-3">
+            <div className="flex justify-between items-center p-3 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+              <span className="text-sm text-gray-700 dark:text-gray-200">Processing Fee</span>
+              <span className="text-lg font-bold text-blue-600 dark:text-blue-400">₹45.2 L</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+              <span className="text-sm text-gray-700 dark:text-gray-200">Documentation Charges</span>
+              <span className="text-lg font-bold text-green-600 dark:text-green-400">₹12.8 L</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-purple-50 dark:bg-purple-900/30 rounded-lg">
+              <span className="text-sm text-gray-700 dark:text-gray-200">Insurance Deducted (Count)</span>
+              <span className="text-lg font-bold text-purple-600 dark:text-purple-400">142 cases</span>
+            </div>
+            <div className="flex justify-between items-center p-3 bg-orange-50 dark:bg-orange-900/30 rounded-lg">
+              <span className="text-sm text-gray-700 dark:text-gray-200">Pre-EMI Cases</span>
+              <span className="text-lg font-bold text-orange-600 dark:text-orange-400">89 cases</span>
+            </div>
+          </div>
+        </Card>
+
+        <Card title="Mandate Registration TAT (Success over Days)">
+          <LineChart 
+            labels={["Day 1", "Day 2", "Day 3", "Day 4", "Day 5"]}
+            datasets={[
+              {
+                label: 'Success %',
+                data: [62, 74, 81, 87, 92],
+                borderColor: '#10b981',
+                backgroundColor: '#10b981',
+                tension: 0.3
+              }
+            ]}
+            height={280}
+          />
+        </Card>
+      </div>
+
+      {/* Compliance Counts */}
+      <Card title="Compliance Status">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">C-KYC Status</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                <span className="text-sm text-gray-700 dark:text-gray-200">Done</span>
+                <span className="text-lg font-bold text-green-600 dark:text-green-400">523</span>
+              </div>
+              <div className="flex justify-between items-center p-3 bg-red-50 dark:bg-red-900/30 rounded-lg">
+                <span className="text-sm text-gray-700 dark:text-gray-200">Pending</span>
+                <span className="text-lg font-bold text-red-600 dark:text-red-400">78</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-200 mb-4">CERSAI Status</h4>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center p-3 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                <span className="text-sm text-gray-700 dark:text-gray-200">Done</span>
+                <span className="text-lg font-bold text-green-600 dark:text-green-400">487</span>
+              </div>
+              <div className="flex justify-between items-center p-3 bg-red-50 dark:bg-red-900/30 rounded-lg">
+                <span className="text-sm text-gray-700 dark:text-gray-200">Not Done</span>
+                <span className="text-lg font-bold text-red-600 dark:text-red-400">114</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Ops Hold Cases */}
+      <Card title="Ops Hold Cases (Branch-wise)">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
+              <tr>
+                <th className="py-3 px-4 text-left">Branch</th>
+                <th className="py-3 px-4 text-center">Cases Initiated</th>
+                <th className="py-3 px-4 text-center">Not Approved</th>
+                <th className="py-3 px-4 text-center">Pending Days</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { branch: "Direct", initiated: 23, notApproved: 8, days: 3.2 },
+                { branch: "Dayanand Bhai", initiated: 45, notApproved: 12, days: 2.8 },
+                { branch: "Prakash Veer", initiated: 38, notApproved: 9, days: 3.5 },
+                { branch: "Jaipur Main", initiated: 12, notApproved: 3, days: 2.1 }
+              ].map((row, i) => (
+                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-4 font-semibold">{row.branch}</td>
+                  <td className="py-3 px-4 text-center">{row.initiated}</td>
+                  <td className="py-3 px-4 text-center font-bold text-red-600 dark:text-red-400">{row.notApproved}</td>
+                  <td className="py-3 px-4 text-center">{row.days} days</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+
+      {/* Payment Status */}
+      <Card title="Disbursement Payment Status">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
+            <div className="text-xs text-green-600 dark:text-green-400 uppercase mb-1">Payment Released</div>
+            <div className="text-3xl font-bold text-green-700 dark:text-green-300">487</div>
+          </div>
+          <div className="p-4 bg-red-50 dark:bg-red-900/30 rounded-lg">
+            <div className="text-xs text-red-600 dark:text-red-400 uppercase mb-1">Payment Not Released</div>
+            <div className="text-3xl font-bold text-red-700 dark:text-red-300">23</div>
+          </div>
+        </div>
+      </Card>
+
+      {/* Unreleased Tranche Cases */}
+      <Card title="Unreleased Tranche Cases">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
+              <tr>
+                <th className="py-3 px-4 text-left">File #</th>
+                <th className="py-3 px-4 text-center">Branch</th>
+                <th className="py-3 px-4 text-center">Tranche Amount</th>
+                <th className="py-3 px-4 text-center">Days Pending</th>
+                <th className="py-3 px-4 text-center">Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { file: "FILE-3421", branch: "Direct", amount: "8.5 L", days: 12, reason: "Document pending" },
+                { file: "FILE-3398", branch: "Prakash Veer", amount: "12.3 L", days: 8, reason: "Verification pending" },
+                { file: "FILE-3367", branch: "Dayanand Bhai", amount: "6.7 L", days: 15, reason: "Approval pending" }
+              ].map((row, i) => (
+                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-4 font-semibold">{row.file}</td>
+                  <td className="py-3 px-4 text-center">{row.branch}</td>
+                  <td className="py-3 px-4 text-center font-bold">₹{row.amount}</td>
+                  <td className="py-3 px-4 text-center text-red-600 dark:text-red-400">{row.days} days</td>
+                  <td className="py-3 px-4 text-center text-xs">{row.reason}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// Operations Bouncing Page Component
+function OpsBouncingPage() {
+  return (
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900 dark:to-red-800 rounded-xl p-5 border border-red-200 dark:border-red-700">
+          <div className="text-xs text-red-600 dark:text-red-300 uppercase mb-2 font-semibold">Overall Bounce %</div>
+          <div className="text-3xl font-bold text-red-900 dark:text-red-100">7.2%</div>
+        </div>
+        <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800 rounded-xl p-5 border border-orange-200 dark:border-orange-700">
+          <div className="text-xs text-orange-600 dark:text-orange-300 uppercase mb-2 font-semibold">Fresh Bounce %</div>
+          <div className="text-3xl font-bold text-orange-900 dark:text-orange-100">4.8%</div>
+        </div>
+        <div className="bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900 dark:to-yellow-800 rounded-xl p-5 border border-yellow-200 dark:border-yellow-700">
+          <div className="text-xs text-yellow-600 dark:text-yellow-300 uppercase mb-2 font-semibold">Total Bounced Cases</div>
+          <div className="text-3xl font-bold text-yellow-900 dark:text-yellow-100">156</div>
+        </div>
+        <div className="bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900 dark:to-purple-800 rounded-xl p-5 border border-purple-200 dark:border-purple-700">
+          <div className="text-xs text-purple-600 dark:text-purple-300 uppercase mb-2 font-semibold">Avg Bounce Amount</div>
+          <div className="text-3xl font-bold text-purple-900 dark:text-purple-100">₹42K</div>
+        </div>
+      </div>
+
+      {/* Bouncing Trend */}
+      <Card title="Bouncing % Trend Analysis">
+        <LineChart 
+          labels={["2022", "2023", "2024", "2025"]}
+          datasets={[
+            {
+              label: 'Bounce %',
+              data: [9.2, 8.5, 7.8, 7.2],
               borderColor: '#ef4444',
               backgroundColor: '#ef4444',
               tension: 0.3
             }
           ]}
+          height={280}
         />
       </Card>
 
-      {/* Bouncing Percentage */}
-      <Card title="Bouncing % (Year-wise & Band-wise)">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">Year</th>
-              <th className="py-2 text-left">Band</th>
-              <th className="py-2 text-center">Total Cases</th>
-              <th className="py-2 text-center">Bounced</th>
-              <th className="py-2 text-center">Bounce %</th>
-              <th className="py-2 text-left">Work Profile</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bounceData.map((b, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2">{b.year}</td>
-                <td className="py-2">{b.band}</td>
-                <td className="text-center">{b.totalCases}</td>
-                <td className="text-center">{b.bounced}</td>
-                <td className="text-center font-semibold text-red-600 dark:text-red-400">{b.bouncePercent}</td>
-                <td className="py-2">{b.workProfile}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-
-      {/* Financial Charges */}
-      <Card title="Disbursement Charges (Separate Tabs)">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">Charge Type</th>
-              <th className="py-2 text-right">Total Amount</th>
-              <th className="py-2 text-center">Case Count</th>
-            </tr>
-          </thead>
-          <tbody>
-            {chargesData.map((c, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2 font-semibold">{c.chargeType}</td>
-                <td className="text-right font-bold text-green-600 dark:text-green-400">{c.totalAmount}</td>
-                <td className="text-center">{c.caseCount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-
-      {/* Compliance Counts */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6">
-        <Card title="C-KYC & CERSAI Compliance">
-          <table className="w-full text-sm">
-            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-              <tr>
-                <th className="py-2 text-left">Type</th>
-                <th className="py-2 text-center">Done</th>
-                <th className="py-2 text-center">Pending/Not Done</th>
-                <th className="py-2 text-center">Compliance %</th>
-              </tr>
-            </thead>
-            <tbody>
-              {complianceData.map((c, i) => (
-                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                  <td className="py-2 font-semibold">{c.type}</td>
-                  <td className="text-center text-green-600 dark:text-green-400">{c.done}</td>
-                  <td className="text-center text-red-600 dark:text-red-400">{c.pending || c.notDone}</td>
-                  <td className="text-center font-bold">{c.compliance}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Card>
-
-        <Card title="Disbursement Payment Status">
-          <table className="w-full text-sm">
-            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-              <tr>
-                <th className="py-2 text-left">Status</th>
-                <th className="py-2 text-center">Count</th>
-                <th className="py-2 text-right">Amount</th>
-              </tr>
-            </thead>
-            <tbody>
-              {disbursementStatus.map((d, i) => (
-                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                  <td className="py-2 font-semibold">{d.status}</td>
-                  <td className="text-center">{d.count}</td>
-                  <td className="text-right font-bold text-indigo-600 dark:text-indigo-400">{d.amount}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Card>
-      </div>
-
-      {/* Ops Hold Cases */}
-      <Card title="Ops Hold Cases (Branch-wise)">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">Branch</th>
-              <th className="py-2 text-center">Initiated</th>
-              <th className="py-2 text-center">Not Approved</th>
-              <th className="py-2 text-left">Pending With</th>
-            </tr>
-          </thead>
-          <tbody>
-            {opsHoldCases.map((o, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2 font-semibold">{o.branch}</td>
-                <td className="text-center">{o.initiated}</td>
-                <td className="text-center text-red-600 dark:text-red-400 font-bold">{o.notApproved}</td>
-                <td className="py-2">{o.pendingWith}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-
-      {/* ENACH Tabular */}
-      <Card title="eNACH - Bank-wise Performance">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">Bank</th>
-              <th className="py-2 text-center">Registered</th>
-              <th className="py-2 text-center">Success</th>
-              <th className="py-2 text-center">Success Rate</th>
-            </tr>
-          </thead>
-          <tbody>
-            {enachData.map((e, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2 font-semibold">{e.bank}</td>
-                <td className="text-center">{e.registered}</td>
-                <td className="text-center text-green-600 dark:text-green-400">{e.success}</td>
-                <td className="text-center font-bold">{e.successRate}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-
-      {/* Mandate Registration TAT */}
-      <Card title="Mandate Registration TAT (NACH Created → Registered)">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">Branch</th>
-              <th className="py-2 text-center">NACH Created</th>
-              <th className="py-2 text-center">NACH Registered</th>
-              <th className="py-2 text-center">Avg TAT (Days)</th>
-              <th className="py-2 text-center">Success Rate</th>
-            </tr>
-          </thead>
-          <tbody>
-            {nachData.map((n, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2 font-semibold">{n.branch}</td>
-                <td className="text-center">{n.nachCreated}</td>
-                <td className="text-center text-green-600 dark:text-green-400">{n.nachRegistered}</td>
-                <td className="text-center font-bold">{n.tatDays}</td>
-                <td className="text-center">{n.successRate}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </Card>
-    </div>
-  );
-
-  const renderBouncingTab = () => (
-    <div>
-      <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-white">Bouncing Analysis</h3>
-      
-      {/* Bouncing Trend by Band */}
-      <Card title="Bouncing % Trend (Band-wise Maximum Count Highlight)">
+      {/* Band-wise Analysis */}
+      <Card title="Ticket Size Band-wise Bounce Analysis">
         <BarChart 
           labels={["0-10L", "10-20L", "20-30L", "30-40L", "40-50L"]}
           datasets={[
             {
-              label: '2023',
-              data: [7.0, 7.2, 6.8, 5.9, 5.5],
-              backgroundColor: '#3b82f6'
-            },
-            {
-              label: '2024',
-              data: [5.7, 5.9, 5.4, 5.1, 4.8],
-              backgroundColor: '#10b981'
-            },
-            {
-              label: '2025',
-              data: [4.7, 4.9, 4.5, 4.2, 4.0],
-              backgroundColor: '#8b5cf6'
+              label: 'Bounce Count',
+              data: [45, 38, 32, 25, 16],
+              backgroundColor: '#f59e0b'
             }
           ]}
+          height={280}
         />
       </Card>
 
-      {/* Full Tabular Data */}
-      <Card title="Complete Bouncing Data (All Years)">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">Year</th>
-              <th className="py-2 text-left">Ticket Size Band</th>
-              <th className="py-2 text-center">Total Cases</th>
-              <th className="py-2 text-center">Bounced</th>
-              <th className="py-2 text-center">Bounce %</th>
-              <th className="py-2 text-left">Customer Work Profile</th>
-            </tr>
-          </thead>
-          <tbody>
-            {bounceData.map((b, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2 font-semibold">{b.year}</td>
-                <td className="py-2">{b.band}</td>
-                <td className="text-center">{b.totalCases}</td>
-                <td className="text-center text-orange-600 dark:text-orange-400">{b.bounced}</td>
-                <td className="text-center font-bold text-red-600 dark:text-red-400">{b.bouncePercent}</td>
-                <td className="py-2">{b.workProfile}</td>
+      {/* Customer Work Profile Analysis */}
+      <Card title="Bouncing % by Customer Work Profile">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
+              <tr>
+                <th className="py-3 px-4 text-left">Work Profile</th>
+                <th className="py-3 px-4 text-center">Total Cases</th>
+                <th className="py-3 px-4 text-center">Bounced Cases</th>
+                <th className="py-3 px-4 text-center">Bounce %</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {[
+                { profile: "Salaried", total: 542, bounced: 32, percent: 5.9 },
+                { profile: "Self-Employed", total: 318, bounced: 28, percent: 8.8 },
+                { profile: "Business Owner", total: 245, bounced: 21, percent: 8.6 },
+                { profile: "Professional", total: 95, bounced: 5, percent: 5.3 }
+              ].map((row, i) => (
+                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-4 font-semibold">{row.profile}</td>
+                  <td className="py-3 px-4 text-center">{row.total}</td>
+                  <td className="py-3 px-4 text-center">{row.bounced}</td>
+                  <td className="py-3 px-4 text-center font-bold text-red-600 dark:text-red-400">{row.percent}%</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </Card>
+
+      {/* Detailed Bouncing Table */}
+      <Card title="Detailed Bouncing Data">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
+              <tr>
+                <th className="py-3 px-4 text-left">File #</th>
+                <th className="py-3 px-4 text-center">Branch</th>
+                <th className="py-3 px-4 text-center">Customer</th>
+                <th className="py-3 px-4 text-center">EMI Amount</th>
+                <th className="py-3 px-4 text-center">Bounce Type</th>
+                <th className="py-3 px-4 text-center">Year</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { file: "FILE-4521", branch: "Direct", customer: "John Doe", amount: "45K", type: "Fresh", year: "2025" },
+                { file: "FILE-4498", branch: "Prakash Veer", customer: "Jane Smith", amount: "52K", type: "Other", year: "2024" },
+                { file: "FILE-4467", branch: "Dayanand Bhai", customer: "Mike Johnson", amount: "38K", type: "Fresh", year: "2025" }
+              ].map((row, i) => (
+                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-4 font-semibold">{row.file}</td>
+                  <td className="py-3 px-4 text-center">{row.branch}</td>
+                  <td className="py-3 px-4 text-center">{row.customer}</td>
+                  <td className="py-3 px-4 text-center font-bold">₹{row.amount}</td>
+                  <td className="py-3 px-4 text-center">
+                    <span className={`px-2 py-1 rounded text-xs font-semibold ${row.type === 'Fresh' ? 'bg-red-100 dark:bg-red-900 text-red-900 dark:text-red-100' : 'bg-yellow-100 dark:bg-yellow-900 text-yellow-900 dark:text-yellow-100'}`}>
+                      {row.type}
+                    </span>
+                  </td>
+                  <td className="py-3 px-4 text-center">{row.year}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
     </div>
   );
+}
 
-  const renderFtrFtnrTab = () => (
+// Operations FTR & FTNR Page Component
+function OpsFTRFTNRPage() {
+  return (
     <div>
-      <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-white">FTR & FTNR Analysis</h3>
+      {/* KPIs */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900 dark:to-green-800 rounded-xl p-5 border border-green-200 dark:border-green-700">
+          <div className="text-xs text-green-600 dark:text-green-300 uppercase mb-2 font-semibold">FTR %</div>
+          <div className="text-3xl font-bold text-green-900 dark:text-green-100">92%</div>
+        </div>
+        <div className="bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900 dark:to-red-800 rounded-xl p-5 border border-red-200 dark:border-red-700">
+          <div className="text-xs text-red-600 dark:text-red-300 uppercase mb-2 font-semibold">FTNR %</div>
+          <div className="text-3xl font-bold text-red-900 dark:text-red-100">8%</div>
+        </div>
+        <div className="bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900 dark:to-blue-800 rounded-xl p-5 border border-blue-200 dark:border-blue-700">
+          <div className="text-xs text-blue-600 dark:text-blue-300 uppercase mb-2 font-semibold">Total FTR Cases</div>
+          <div className="text-3xl font-bold text-blue-900 dark:text-blue-100">678</div>
+        </div>
+        <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900 dark:to-orange-800 rounded-xl p-5 border border-orange-200 dark:border-orange-700">
+          <div className="text-xs text-orange-600 dark:text-orange-300 uppercase mb-2 font-semibold">Total FTNR Cases</div>
+          <div className="text-3xl font-bold text-orange-900 dark:text-orange-100">59</div>
+        </div>
+      </div>
 
-      {/* FTR vs FTNR Graph */}
-      <Card title="FTR vs FTNR Trend">
+      {/* FTR vs FTNR Trend Graph */}
+      <Card title="FTR vs FTNR % Trend Graph">
         <LineChart 
-          labels={["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"]}
+          labels={["Jul-25", "Aug-25", "Sep-25", "Oct-25", "Nov-25"]}
           datasets={[
             {
               label: 'FTR %',
-              data: [82, 86, 89, 91, 88, 92, 90, 91],
+              data: [89, 90, 91, 90, 92],
               borderColor: '#10b981',
               backgroundColor: '#10b981',
               tension: 0.3
             },
             {
               label: 'FTNR %',
-              data: [18, 14, 11, 9, 12, 8, 10, 9],
+              data: [11, 10, 9, 10, 8],
               borderColor: '#ef4444',
               backgroundColor: '#ef4444',
               tension: 0.3
             }
           ]}
+          height={300}
         />
       </Card>
 
-      {/* FTR Tabular */}
-      <Card title="FTR - Branch-wise Performance">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">Branch</th>
-              <th className="py-2 text-center">Total Files</th>
-              <th className="py-2 text-center">FTR</th>
-              <th className="py-2 text-center">FTR %</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ftrData.map((f, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2 font-semibold">{f.branch}</td>
-                <td className="text-center">{f.totalFiles}</td>
-                <td className="text-center text-green-600 dark:text-green-400">{f.ftr}</td>
-                <td className="text-center font-bold">{f.ftrPercent}</td>
+      {/* FTR Tabular Format */}
+      <Card title="FTR % – Detailed Table">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
+              <tr>
+                <th className="py-3 px-4 text-left">Branch</th>
+                <th className="py-3 px-4 text-center">Total Cases</th>
+                <th className="py-3 px-4 text-center">FTR Cases</th>
+                <th className="py-3 px-4 text-center">FTR %</th>
+                <th className="py-3 px-4 text-center">Rating</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {[
+                { branch: "Direct", total: 234, ftr: 218, percent: 93.2 },
+                { branch: "Dayanand Bhai", total: 312, ftr: 285, percent: 91.3 },
+                { branch: "Prakash Veer", total: 278, ftr: 252, percent: 90.6 },
+                { branch: "Jaipur Main", total: 98, ftr: 92, percent: 93.9 }
+              ].map((row, i) => (
+                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-4 font-semibold">{row.branch}</td>
+                  <td className="py-3 px-4 text-center">{row.total}</td>
+                  <td className="py-3 px-4 text-center">{row.ftr}</td>
+                  <td className="py-3 px-4 text-center font-bold text-green-600 dark:text-green-400">{row.percent}%</td>
+                  <td className="py-3 px-4 text-center">
+                    <span className="px-2 py-1 rounded text-xs font-semibold bg-green-100 dark:bg-green-900 text-green-900 dark:text-green-100">
+                      Excellent
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
 
-      {/* FTNR Tabular */}
-      <Card title="FTNR% - Branch-wise Performance">
-        <table className="w-full text-sm">
-          <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase font-semibold">
-            <tr>
-              <th className="py-2 text-left">Branch</th>
-              <th className="py-2 text-center">Total Files</th>
-              <th className="py-2 text-center">FTNR</th>
-              <th className="py-2 text-center">FTNR %</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ftrData.map((f, i) => (
-              <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100">
-                <td className="py-2 font-semibold">{f.branch}</td>
-                <td className="text-center">{f.totalFiles}</td>
-                <td className="text-center text-red-600 dark:text-red-400">{f.ftnr}</td>
-                <td className="text-center font-bold">{f.ftnrPercent}</td>
+      {/* FTNR Tab */}
+      <Card title="FTNR % – Detailed Table">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead className="text-gray-700 dark:text-gray-200 text-xs uppercase bg-gray-50 dark:bg-gray-700/50 font-semibold">
+              <tr>
+                <th className="py-3 px-4 text-left">Branch</th>
+                <th className="py-3 px-4 text-center">Total Cases</th>
+                <th className="py-3 px-4 text-center">FTNR Cases</th>
+                <th className="py-3 px-4 text-center">FTNR %</th>
+                <th className="py-3 px-4 text-center">Top Reason</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {[
+                { branch: "Direct", total: 234, ftnr: 16, percent: 6.8, reason: "Document Missing" },
+                { branch: "Dayanand Bhai", total: 312, ftnr: 27, percent: 8.7, reason: "KYC Mismatch" },
+                { branch: "Prakash Veer", total: 278, ftnr: 26, percent: 9.4, reason: "Banking Error" },
+                { branch: "Jaipur Main", total: 98, ftnr: 6, percent: 6.1, reason: "Signature Issue" }
+              ].map((row, i) => (
+                <tr key={i} className="border-t border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700/50 text-gray-800 dark:text-gray-100">
+                  <td className="py-3 px-4 font-semibold">{row.branch}</td>
+                  <td className="py-3 px-4 text-center">{row.total}</td>
+                  <td className="py-3 px-4 text-center">{row.ftnr}</td>
+                  <td className="py-3 px-4 text-center font-bold text-red-600 dark:text-red-400">{row.percent}%</td>
+                  <td className="py-3 px-4 text-center text-xs">{row.reason}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
-    </div>
-  );
 
-  return (
-    <div>
-      {/* Global Filters for Operations */}
-      <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-gray-800 dark:to-gray-700 rounded-xl p-4 mb-6 border border-purple-200 dark:border-gray-600">
-        <div className="flex items-center gap-2 mb-3">
-          <svg className="w-5 h-5 text-purple-700 dark:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-          </svg>
-          <span className="font-bold text-sm text-purple-900 dark:text-purple-200">Operations Filters</span>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-          <select value={opsFilters.state} onChange={(e) => setOpsFilters({...opsFilters, state: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-            {states.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-          <select value={opsFilters.businessState} onChange={(e) => setOpsFilters({...opsFilters, businessState: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-            {businessStates.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
-          <select value={opsFilters.cluster} onChange={(e) => setOpsFilters({...opsFilters, cluster: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-            {clusters.map(c => <option key={c} value={c}>{c}</option>)}
-          </select>
-          <select value={opsFilters.branch} onChange={(e) => setOpsFilters({...opsFilters, branch: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-            {branches.map(b => <option key={b} value={b}>{b}</option>)}
-          </select>
-          <select value={opsFilters.product} onChange={(e) => setOpsFilters({...opsFilters, product: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-            {products.map(p => <option key={p} value={p}>{p}</option>)}
-          </select>
-          <select value={opsFilters.ticketSizeBand} onChange={(e) => setOpsFilters({...opsFilters, ticketSizeBand: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-            {ticketSizeBands.map(t => <option key={t} value={t}>{t}</option>)}
-          </select>
-          <select value={opsFilters.loanCategory} onChange={(e) => setOpsFilters({...opsFilters, loanCategory: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-            {loanCategories.map(l => <option key={l} value={l}>{l}</option>)}
-          </select>
-          <input type="date" value={opsFilters.startDate} onChange={(e) => setOpsFilters({...opsFilters, startDate: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
-          <input type="date" value={opsFilters.endDate} onChange={(e) => setOpsFilters({...opsFilters, endDate: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100" />
-          <select value={opsFilters.userName} onChange={(e) => setOpsFilters({...opsFilters, userName: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-            {userNames.map(u => <option key={u} value={u}>{u}</option>)}
-          </select>
-          <select value={opsFilters.customerWorkProfile} onChange={(e) => setOpsFilters({...opsFilters, customerWorkProfile: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-            {customerWorkProfiles.map(w => <option key={w} value={w}>{w}</option>)}
-          </select>
-          {activeTab === "bouncing" && (
-            <select value={opsFilters.freshBounce} onChange={(e) => setOpsFilters({...opsFilters, freshBounce: e.target.value})} className="text-sm p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
-              {freshBounceOptions.map(f => <option key={f} value={f}>{f}</option>)}
-            </select>
-          )}
-        </div>
-      </div>
-
-      {/* Tab Navigation */}
-      <div className="flex gap-2 mb-6 overflow-x-auto">
-        <button onClick={() => setActiveTab("overview")} className={`px-4 py-2 rounded-lg text-sm font-semibold transition whitespace-nowrap ${activeTab === "overview" ? "bg-indigo-600 text-white shadow-md" : "bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"}`}>
-          Overview
-        </button>
-        <button onClick={() => setActiveTab("bouncing")} className={`px-4 py-2 rounded-lg text-sm font-semibold transition whitespace-nowrap ${activeTab === "bouncing" ? "bg-indigo-600 text-white shadow-md" : "bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"}`}>
-          Bouncing Analysis
-        </button>
-        <button onClick={() => setActiveTab("ftr-ftnr")} className={`px-4 py-2 rounded-lg text-sm font-semibold transition whitespace-nowrap ${activeTab === "ftr-ftnr" ? "bg-indigo-600 text-white shadow-md" : "bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"}`}>
-          FTR & FTNR
-        </button>
-      </div>
-
-      {/* Tab Content */}
-      {activeTab === "overview" && renderOverviewTab()}
-      {activeTab === "bouncing" && renderBouncingTab()}
-      {activeTab === "ftr-ftnr" && renderFtrFtnrTab()}
+      {/* FTNR Reasons */}
+      <Card title="Top FTNR Reasons">
+        <BarChart 
+          labels={["Document Missing", "KYC Mismatch", "Banking Error", "Signature Issue", "Other"]}
+          datasets={[
+            {
+              label: 'Count',
+              data: [28, 18, 15, 12, 8],
+              backgroundColor: '#f59e0b'
+            }
+          ]}
+          height={280}
+        />
+      </Card>
     </div>
   );
 }
